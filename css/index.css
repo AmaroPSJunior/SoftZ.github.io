@@ -1,0 +1,15 @@
+body{
+
+}
+
+div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 80vh;
+}
+
+div a {
+    margin: 2rem;
+}

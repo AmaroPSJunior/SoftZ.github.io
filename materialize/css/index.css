@@ -1,0 +1,12 @@
+.side-nav .collapsible-body .waves-effect {
+  width: 100%;
+  padding-left: 2rem;
+  border-bottom: 1px solid rgba(204, 204, 204, 0.25); }
+
+.side-nav .collapsible-header {
+  border-bottom: 1px solid rgba(204, 204, 204, 0.5); }
+
+nav {
+  background-color: #55bdb4; }
+  nav i {
+    padding-left: 1rem; }
