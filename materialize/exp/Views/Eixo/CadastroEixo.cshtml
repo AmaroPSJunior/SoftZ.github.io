@@ -1,0 +1,85 @@
+﻿@model SLCONSTRUCT.UI.WEB.ViewModels.CadastroEixoVModel
+
+@{
+    ViewBag.Title = "CadastrarEixo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section Styles {
+    <link href="~/Content/Eixo/CadastroEixo.min.css" rel="stylesheet" />
+}
+
+@section Scripts {
+
+    <script>
+        var urlSalvarCursos = "@Url.Action("SalvarCursos", "Eixo")";
+        var urlSalvarDisciplinas = "@Url.Action("SalvarDisciplinas", "Eixo")";
+        var urlSalvarHabilidades = "@Url.Action("SalvarHabilidades", "Eixo")";
+        var urlSalvarDescritores = "@Url.Action("SalvarDescritores", "Eixo")";
+        
+        var urlListagemCursosSelecionados = "@Url.Action("ListaCursosSelecionados", "Eixo")"; 
+        var urlListaCursos = "@Url.Action("ListaCursos", "Eixo")";
+        var urlListaDisciplina = "@Url.Action("ListaDisciplina", "Eixo")"; 
+        var urlListaHabilidade = "@Url.Action("ListaHabilidade", "Eixo")";
+        var urlListaDescritores = "@Url.Action("ListaDescritores", "Eixo")";
+    </script>
+
+    <script src="~/Scripts/Eixo/CadastroEixo.js"></script>
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div id="cadastro-eixo" data-codeixo="@Model.codeixo" class="row">
+        <div class="col l12 no-padding">
+            <i class="fas fa-home icon-padrao botao-home" aria-hidden="true"></i><h2 class="sl-titulo sl-navy-blue">Eixos Estruturantes</h2>
+            <i class="fas fa-angle-right" aria-hidden="true"></i><h2 class="sl-subtitulo sl-navy-blue">Cadastro de Eixo</h2>
+            <a href="@Url.Action("Index", "Eixo") " class="waves-effect waves-blue btn right ">Voltar</a>
+        </div>
+        <div class="input-field col s12 titulo-eixo">
+            @Html.LabelFor(m => m.nome_eixo)
+            @Html.TextBoxFor(m => m.nome_eixo, new { @class = "validate campoObrigatorio", @maxlength = "100", @placeholder = "Digite o nome do Eixo" })
+            @*<label for="nome_eixo">Nome do Eixo</label>
+                <input placeholder="Digite o nome do Eixo" id="nome_eixo" type="text" class="validate campoObrigatorio" value="Ciências da Natureza e suas" maxlength="100">*@
+        </div>
+        <div class="col s12 form-titulo"><span>Estrutura</span></div>
+        <div class="col s12 form-cadastro-eixo">
+            <div class="filtros">
+                <div><span>Curso </span>@*<span class="cont-curso" data-contcurso="@Model.countCursos"> @Model.countCursos</span>*@</div>
+                <input placeholder="Buscar" type="text" class="validate campoObrigatorio buscar" maxlength="100">
+                <i class="fas fa-search icone-buscar"></i>
+                <button class="waves-effect waves-light btn todos click">Todos</button>
+                <button class="waves-effect waves-blue btn selecionado">Selecionados</button>
+
+            </div>
+            <div class="grid-eixo-partial no-padding col s12">
+                @Html.Partial("~/Views/Eixo/Partial/GridEixoPartial.cshtml", Model.listaMatriz)
+            </div>
+            
+        </div>
+    </div>
+</body>
+</html>
+
+
+<div id="modal-disciplinas" class="modal default-sl-blue" data-codeixo="@Model.codeixo" data-urllistagem="/Eixo/CadastroDisciplina" data-url="/Eixo/SalvarDisciplinas">
+    <!--Modal disciplinas-->
+    @*@Html.Partial("~/Views/Eixo/Partial/ModalCadastroEixoPartial.cshtml", new SLCONSTRUCT.UI.WEB.ViewModels.ListagemMatrizVModel())*@
+</div>
+
+<div id="modal-habilidades" class="modal default-sl-blue modal-fixed-footer" data-codeixo="@Model.codeixo" data-urllistagem="/Eixo/CadastroHabilidades" data-url="/Eixo/SalvarHabilidades">
+    <!--Modal habilidades-->
+    @*@Html.Partial("~/Views/Eixo/Partial/ModalCadastroEixoPartial.cshtml", new SLCONSTRUCT.UI.WEB.ViewModels.ListagemMatrizVModel())*@
+</div>
+
+<div id="modal-descritores" class="modal default-sl-blue modal-fixed-footer" data-codeixo="@Model.codeixo" data-urllistagem="/Eixo/CadastroDescritores" data-url="/Eixo/SalvarDescritores">
+    <!--Modal descritores-->
+    @*@Html.Partial("~/Views/Eixo/Partial/ModalCadastroEixoPartial.cshtml", new SLCONSTRUCT.UI.WEB.ViewModels.ListagemMatrizVModel())*@
+</div>
+

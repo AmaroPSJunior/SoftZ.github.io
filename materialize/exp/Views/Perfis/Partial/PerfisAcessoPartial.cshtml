@@ -1,0 +1,40 @@
+﻿@model IEnumerable<SLCONSTRUCT.UI.WEB.ViewModels.ListagemPerfilVModel>
+
+<div id="listagem-perfis-partial-content" class="row">
+    <table class="striped">
+        <thead>
+            <tr>
+                <th>Perfil</th>
+                <th>Permissões</th>
+                <th>Cadastrado</th>
+                <th>ATUALIZADO</th>
+                <th class="acao">Ações</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @if (Model != null)
+            {
+                for (var i = 0; i < Model.Count(); i++)
+                {
+                    var item = Model.ToList()[i];
+                    var urlEditar = $"{@Url.Action("CadastroPerfil", "Perfis", new { codperfil = item.codperfil })}";
+                    <tr>
+                        <td>@item.descricao</td>
+                        <td>@item.permissoes</td>
+                        <td>@item.datacadastro</td>
+                        <td>@item.dataatualizacao</td>
+                        <td class="acao dropdown-button" data-activates='acao-user-table_@i' data-codperfil="@item.codperfil">
+                            <i class="fas fa-ellipsis-v"></i>
+                            <ul id="acao-user-table_@i" class='dropdown-content'>
+                                <li><a class="acao" href="@urlEditar">Editar</a></li>
+                                <li><a class="acao excluir" href="#!">Excluir</a></li>
+                            </ul>
+                        </td>
+                    </tr>
+                }
+            }
+
+        </tbody>
+    </table>
+</div>

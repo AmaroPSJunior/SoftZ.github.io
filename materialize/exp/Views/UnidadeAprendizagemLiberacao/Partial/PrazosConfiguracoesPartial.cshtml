@@ -1,0 +1,125 @@
+﻿@model SLCONSTRUCT.UI.WEB.ViewModels.UnidadeAprendizagemLiberacaoVModel
+
+    @{ 
+        var css = "";
+        var desabilitado = "";
+
+        if (ViewBag.somenteleitura)
+        {
+            css = "style=pointer-events:none;";
+            desabilitado = "disabled";
+        }
+        
+    }
+
+<div id="prazos-configuracoes-partial" @css >
+
+    <p class="center red white-text">As datas devem estar de acordo com o horário de Brasília.</p>
+
+    <div class="linha-subtitulo col s12">
+        <span class="subtitulo-partial col s2"><p>DISPONIBILIDADE</p></span>
+        <pre class="col s9"> </pre>
+    </div>
+
+
+    <div class="linha col s12 no-padding">
+
+        <div class="col s2">
+            <label for="LiberacaoDataInicio"><p>Exibir</p><p>depois de</p></label>
+        </div>
+        <input @desabilitado value="@Model.codUnidadeAprendizagem" type="hidden" id="codUnidadeAprendizagem" />
+        <input @desabilitado value="@Model.codempresacollege" type="hidden" id="codempresacollege" />
+        <input @desabilitado value="@Model.codunidadecollege" type="hidden" id="codunidadecollege" />
+        <input @desabilitado value="@Model.codcursocollege" type="hidden" id="codcursocollege" />
+        <input @desabilitado value="@Model.coddisciplinacollege" type="hidden" id="coddisciplinacollege" />
+        <input @desabilitado value="@Model.codturmacollege" type="hidden" id="codturmacollege" />
+
+        <input @desabilitado value="@Model.codunidadeaprendizagemturmadisciplinaliberacao" type="hidden" id="codunidadeaprendizagemturmadisciplinaliberacao" />
+        <input @desabilitado value="@Model.codunidadeaprendizagemturmadisciplina" type="hidden" id="codunidadeaprendizagemturmadisciplina" />
+        <div class="col s5">
+            <label for="dataInicio">dia</label>
+            <input @desabilitado id="dataInicio" value="@(Model.datahorainicio != null ? Convert.ToDateTime(Model.datahorainicio).ToShortDateString() : string.Empty)" placeholder="dd/mm/aaaa" class="datepicker" name="dataInicio" required="required" type="text">
+        </div>
+        <div class="col s4">
+            <label for="horarioInicio">ás</label>
+            <input @desabilitado id="horarioInicio" value="@Model.horainicio" placeholder="00:00" class="timepicker" name="horarioInicio" required="required" type="text">
+        </div>
+    </div>
+
+    <div class="linha-subtitulo col s12">
+        <span class="subtitulo-partial col s2"><p>Prazos</p></span>
+        <pre class="col s9"> </pre>
+    </div>
+
+
+    <div class="linha col s12 no-padding marginCol">
+        <div class="col s2">
+            <label for="LiberacaoDataFim"><p>No prazo</p></label>
+        </div>
+        <div class="col s5">
+            <label for="dataFim">dia</label>
+            <input @desabilitado id="dataFim" value="@(Model.datahorafim != null ? Convert.ToDateTime(Model.datahorafim).ToShortDateString() : string.Empty)" placeholder="dd/mm/aaaa" class="datepicker" name="dataFim" required="required" type="text">
+        </div>
+        <div class="col s4">
+            <label for="horarioFim">ás</label>
+            <input @desabilitado id="horarioFim" value="@Model.horafim" placeholder="00:00" class="timepicker" name="horarioFim" required="required" type="text">
+        </div>
+    </div>
+
+    <div class="linha col s12 no-padding marginCol">
+        <div class="col s2">
+            <input @desabilitado id="LiberacaoAtraso" name="LiberacaoAtraso" type="checkbox" @(Convert.ToBoolean(Model.liberacaoatrasadostatus) == true ? "checked='checked' data-status=true" : "data-status=false") class="filled-in">
+            <label for="LiberacaoAtraso">Atrasado</label>
+        </div>
+        <div class="col s5">
+            <label for="dataAtraso">dia</label>
+            <input @desabilitado id="dataAtraso" @(Convert.ToBoolean(Model.liberacaoatrasadostatus) == false ? "disabled" : string.Empty) placeholder="dd/mm/aaaa" class="datepicker" value="@(Model.dataatraso.HasValue ? Model.dataatraso.Value.ToShortDateString() : string.Empty)" maxlength="11" name="dataAtraso" required="required" type="text">
+        </div>
+        <div class="col s4">
+            <label for="horarioAtraso">ás</label>
+            <input @desabilitado id="horarioAtraso" @(Convert.ToBoolean(Model.liberacaoatrasadostatus) == false ? "disabled" : string.Empty) placeholder="00:00" value="@Model.horaatraso" class="timepicker" name="horarioAtraso" required="required" type="text">
+        </div>
+    </div>
+
+
+
+    <div class="center botao-salvar col s12">
+        @*<button type="button" class="btn waves-effect waves-light salvar acaoSalvarPrazo" id="SalvarSair">enviar e sair</button>*@
+        <button type="button" class="btn waves-effect waves-light salvar acaoSalvarPrazo" id="salvarAvancar" @desabilitado>Salvar</button>
+    </div>
+</div>
+
+
+
+<script>
+    $('.datepicker').pickadate({
+        monthsFull: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+        monthsShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+        weekdaysFull: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabádo'],
+        weekdaysShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+        today: 'Hoje',
+        clear: 'Limpar',
+        close: 'Pronto',
+        labelMonthNext: 'Próximo mês',
+        labelMonthPrev: 'Mês anterior',
+        labelMonthSelect: 'Selecione um mês',
+        labelYearSelect: 'Selecione um ano',
+        selectMonths: true,
+        selectYears: 15,
+        format: 'dd/mm/yyyy' 
+    });
+
+    $('.timepicker').pickatime({
+        default: 'now', // Set default time: 'now', '1:30AM', '16:30'
+        fromnow: 0,       // set default time to * milliseconds from now (using with default = 'now')
+        twelvehour: false, // Use AM/PM or 24-hour format
+        donetext: 'OK', // text for done-button
+        cleartext: 'Limpar', // text for clear-button
+        canceltext: 'Cancelar', // Text for cancel-button,
+        container: undefined, // ex. 'body' will append picker to body
+        autoclose: false, // automatic close timepicker
+        ampmclickable: true, // make AM PM clickable
+        aftershow: function () { } //Function for after opening timepicker
+    });
+
+</script>

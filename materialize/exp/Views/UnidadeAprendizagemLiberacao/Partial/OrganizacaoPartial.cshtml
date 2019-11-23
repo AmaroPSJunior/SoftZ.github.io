@@ -1,0 +1,101 @@
+﻿@model bool
+
+@{
+    var css = "";
+    var desabilitado = "";
+
+    if (Model)
+    {
+        css = "style=pointer-events:none;";
+        desabilitado = "disabled";
+    }
+
+}
+
+<div id="organizacao-partial" class="bloco-conteudo-padrao" @css>
+
+    <div id="excluirModal" class="modal modal-confirmation modal-aviso">
+        <div class="modal-content center">
+            <section>
+                <i class="fas fa-exclamation-triangle icon-msg dissatisfaction" aria-hidden="true"></i>
+            </section>
+            <section>
+                <span class="--semi-bold -capitalize title-msg font-vermelho-claro">Atenção</span>
+            </section>
+            <section class="msg">Tem certeza que deseja excluir o ítem "<strong id="nomeItemAExcluir"></strong>"?</section>
+        </div>
+        <div class="modal-footer col s6">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Não</a>
+        </div>
+        <div class="modal-footer col s6">
+            <a id="excluirWidgetBtn" class="modal-action modal-close waves-effect waves-green btn-flat">Excluir</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s12 titulo-organizacao">
+            <h4>Organize os itens de aprendizagem dos cards abaixo:</h4>
+            <button class="btn waves-effect waves-light right btn-addItem" @desabilitado>Adicionar Item</button>
+        </div>
+    </div>
+    <div class="row sortable" id="organizacao-container" @css></div>
+
+    <div class="center">
+        <button id="btnSalvarOrganizacaoAnoSemestre" class="btn waves-effect waves-light avancar salvarorganizacao" @desabilitado>Salvar organização</button>
+    </div>
+
+
+
+    <div id="widget-modal" class="modal default-sl-blue modal-fixed-footer">
+        <input type="hidden" id="extensaoimagemCkeditor" />
+        <input type="hidden" id="base64imagemCkeditor" />
+
+        <div class="modal-header">
+            <h4 class="titulo-modal-default-sl">Widget</h4>
+            <span class="modal-close-default-sl modal-close">fechar <i class="fas fa-times"></i></span>
+        </div>
+
+        <div class="widget-content">
+            <div class="row titulo-widget">
+                <div class="col m2 s12">
+                    <label>TÍTULO</label>
+                </div>
+                <div class="col m10 s12">
+                    <div class="input-field">
+                        <input placeholder="Informe o título" id="titulo-widget" name="titulo-widget" type="text" class="validate" maxlength="50" data-length="50">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <input type="hidden" id="codunidadeaprendizagemturmadisciplinatrilha" />
+                <input type="hidden" id="codunidadeaprendizagemturmadisciplinatrilhaorientacao" />
+                <div class="col m2 s12">
+                    <label>TEXTO</label>
+                </div>
+                <div class="col m10 s12">
+                    <textarea id="texto-widget" name="texto-widget"></textarea>
+                    <script>
+                        CKEDITOR.replace('texto-widget');
+                    </script>
+
+                    <div class="file-field input-field col l12" style="text-align:right;">
+                        <div class="btn">
+                            <span>Anexar Imagem</span>
+                            <input id="caminhoimagemCkeditor" class="validate anexa-img" accept="image/jpeg" type="file" />
+                        </div>
+                        <div class="file-path-wrapper">
+                            <label><input id="caminhoimagemCkeditor" class="active file-path validate" placeholder="Anexar imagem" /></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col s12 marginTop">
+                    <button id="salvar-widget" class="btn waves-effect waves-light avancar right">Adicionar</button>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+</div>

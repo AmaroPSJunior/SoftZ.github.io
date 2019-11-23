@@ -1,0 +1,32 @@
+﻿@model IEnumerable<SLCONSTRUCT.CORE.Entidades.PeriodoLetivo>
+
+<div id="organizacao-partial" class="bloco-conteudo-padrao">
+    <div class="row">
+        <div class="col s12 titulo-organizacao">
+            <h4>Organize os itens de aprendizagem dos cards abaixo:</h4>
+        </div>
+    </div>
+
+
+    <div class="row abas-vertical">
+        <div class="col s2" style="margin-left: 0!important;">
+            <ul class="tabs tabs-vertical">
+                @foreach (var item in Model)
+                {
+                    <li class="tab col s3"><a data-ano="@item.ano" data-semestre="@item.semestre" href="@string.Format("#{0}_{1}", item.ano, item.semestre)">@item.ano/@item.semestre</a></li>
+                }
+            </ul>
+        </div>
+        <div class="col s10 divs-abas z-depth-1">
+            @foreach (var item in Model)
+            {
+                <div id="@string.Format("{0}_{1}", item.ano, item.semestre)" class="col s12"></div>
+            }
+        </div>
+    </div>
+
+    <div class="center">
+        <button id="btnSalvarOrganizacao" class="btn waves-effect waves-light avancar salvarorganizacao">Avançar</button>
+    </div>
+
+</div>

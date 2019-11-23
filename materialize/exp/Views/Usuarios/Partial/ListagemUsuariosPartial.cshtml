@@ -1,0 +1,62 @@
+﻿@model IEnumerable<SLCONSTRUCT.UI.WEB.ViewModels.ListagemUsuarioVModel>
+
+<div id="listagem-usuarios-partial-content" class="row">
+    <div id="perfis-modal" class="modal default-sl-blue modal-fixed-footer">
+        <div class="row">
+            <div class="col s12">
+                <div class="modal-header">
+                    <h4 class="titulo-modal-default-sl">Perfis do Usuário</h4>
+                    <span class="modal-close-default-sl modal-close">fechar <i class="fas fa-times"></i></span>
+                </div>
+            </div>
+            <div class="col s12 modal-perfil-acesso">
+
+
+
+            </div>
+        </div>
+    </div>
+    <table class="striped">
+        <thead>
+            <tr>
+                <th>Usuário</th>
+                <th>E-mail</th>
+                <th>Perfil</th>
+                <th class="acao">Ações</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @if (Model != null)
+            {
+                for (var i = 0; i < Model.Count(); i++)
+                {
+                    var item = Model.ToList()[i];
+                    var urlEditar = $"{@Url.Action("CadastrarUsuario", "Usuarios", new { codpessoa = item.codpessoa })}";
+                    <tr>
+                        <td>@item.login</td>
+                        <td>@item.email</td>
+                        <td>@item.descricao</td>
+
+                        <td class="acao dropdown-button" data-activates='acao-user-table_@i' data-codpessoa="@item.codpessoa">
+                            <i class="fas fa-ellipsis-v"></i>
+                            <ul id='acao-user-table_@i' class='dropdown-content editar'>
+                                <li><a href="@urlEditar">Editar Perfil</a></li>
+                                <li><a class="editar-perfis-acesso" data-user-id="1">Perfis de Acesso</a></li>
+                            </ul>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <!--<div class="pagination botoes-paginacao ">
+        <button class="disabled btn inicio hide-on-small-only shadow"><i class="fas fa-angle-double-left black-text" aria-hidden="true"></i></button>
+        <button class="disabled btn anterior shadow"><i class="fas fa-angle-left black-text" aria-hidden="true"></i></button>
+
+        <span>1/1</span>
+
+        <button class="disabled btn hide-on-small-only waves-effect paginacao shadow" data-pagina="2"><i class="fas fa-angle-right black-text" aria-hidden="true"></i></button>
+        <button class="disabled btn hide-on-small-only waves-effect paginacao proximo shadow" data-pagina="4"><i class="fas fa-angle-double-right black-text" aria-hidden="true"></i></button>
+    </div>-->
+</div>

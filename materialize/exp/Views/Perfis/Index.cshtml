@@ -1,0 +1,41 @@
+﻿@model IEnumerable<SLCONSTRUCT.UI.WEB.ViewModels.ListagemPerfilVModel>
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <link href="~/Content/Perfis/PerfisAcesso.min.css" rel="stylesheet" />
+}
+
+@section Scripts {
+
+    <script>
+        var urlListagemPerfis = "@Url.Action("index", "Perfis")";
+        var urlExcluirPerfil = "@Url.Action("Excluir", "Perfis")";
+    </script>
+
+    <script src="~/Scripts/Perfis/PerfisAcesso.js"></script>
+}
+
+    <div id="listagem-perfis-principal">
+        <div id="listagem-perfis-header" class="row">
+
+            <div class="col l12 no-padding">
+                <div>
+                    <i class="fas fa-home icon-padrao botao-home" aria-hidden="true"></i><h2 class="sl-titulo sl-navy-blue">Perfis</h2>
+                    <i class="fas fa-angle-right" aria-hidden="true"></i><h2 class="sl-subtitulo sl-navy-blue">Listagem</h2>
+                </div>
+            </div>
+
+            <div class="col l12">
+                <a href="@Url.Action("CadastroPerfil","Perfis")" class="waves-effect waves-light btn"><i class="material-icons right">add</i>Novo Perfil</a>
+            </div>
+            
+        </div>
+        <div id="listagem-perfis-partial-table">
+            @Html.Partial("~/Views/Perfis/Partial/PerfisAcessoPartial.cshtml", Model)
+        </div>
+    </div>
+
+   

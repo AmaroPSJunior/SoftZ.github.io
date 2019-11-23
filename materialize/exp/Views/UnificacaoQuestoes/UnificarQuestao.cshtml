@@ -1,0 +1,104 @@
+﻿@model SLCONSTRUCT.UI.WEB.ViewModels.UnificarResultadosVModel
+
+@{
+    ViewBag.Title = "UnificarQuesta";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <link href="~/Content/UnificacaoQuestoes/telaUnificaQuestao.min.css" rel="stylesheet" />
+    <link href="~/Content/UnificacaoQuestoes/Animate.min.css" rel="stylesheet" />
+}
+
+
+@section Scripts {
+
+    <script>
+        var urlObterInformacoesGeraisQuestao = "@Url.Action("ObterInformacoesGeraisQuestao", "UnificacaoQuestoes")";
+        var urlObterQuestao = "@Url.Action("ObterQuestao", "UnificacaoQuestoes")";
+        var urlObterMatrizesAssociadas = "@Url.Action("ObterMatrizesAssociadas", "UnificacaoQuestoes")";
+        var urlSalvarUnificacao = "@Url.Action("SalvarUnificacao", "UnificacaoQuestoes")";
+    </script>
+
+    <script src="~/Scripts/UnificacaoQuestoes/UnificarQuestaoTemplates.js"></script>
+    <script src="~/Scripts/UnificacaoQuestoes/UnificarQuestao.js"></script>
+}
+
+<div id="unificacaoquestao" class="principal">
+    <div class="row">
+        <div class="col l12 no-padding">
+            <div>
+                <i class="fas fa-home icon-padrao botao-home" aria-hidden="true"></i><h2 class="sl-titulo sl-navy-blue">Banco de questões</h2>
+                <i class="fas fa-angle-right" aria-hidden="true"></i><h2 class="sl-subtitulo sl-navy-blue">Unificação</h2>
+                <i class="fas fa-angle-right" aria-hidden="true"></i><h2 class="sl-subtitulo sl-navy-blue">Unificar resultados</h2>
+            </div>
+        </div>
+        <div class="col s12 no-padding">
+            <div class="bloco-conteudo-padrao">
+                <div class="unifica-content">
+                    <div class="unifica-content__div1">
+                        <section class="unifica-content__letter">
+                            <p>Q</p>
+                        </section>
+                        <div class="unifica-content__title-question">
+                            <div>
+                                <p>Id questão: @Model.QuestaoPrincipal.CodItem</p>
+                                <p class="main-question" data-coditem="@Model.QuestaoPrincipal.CodItem">@Model.QuestaoPrincipal.Titulo</p>
+                            </div>
+                            <i class="fas fa-info-circle modal-open"></i>
+                        </div>
+                        <ul class="tabs">
+                            <li class="tab"><a class="active">Enunciado</a></li>
+                            @if (Model.TipoQuestao.ToString() == "QuestaoObjetiva")
+                            {
+                                <li class="tab alternativas"><a>Alternativas</a></li>
+                            }
+                        </ul>
+                        <div id="Enunciado">
+                            <div class="unifica-content__content-question">
+                                <h3>enunciado</h3>
+                                @Html.Raw(Model.QuestaoPrincipal.Enunciado)
+                            </div>
+                            <div class="line"></div>
+                            @if (Model.TipoQuestao.ToString() == "QuestaoObjetiva")
+                            {
+                                <div class="unifica-content__content-question-alternatives">
+                                    <h3>alternativas</h3>
+                                    @foreach (var item in Model.QuestaoPrincipal.Alternativas)
+                                    {
+                                        var correta = "unifica-content__alternative--correct";
+                                        var errada = "unifica-content__alternative--wrong";
+                                        var class_ = item.Correta ? correta : errada;
+                                        <div class="@class_">@Html.Raw(item.Descricao)</div>
+                                    }
+
+                                </div>
+                            }
+
+                        </div>
+
+                    </div>
+
+                    @Html.Partial("~/Views/UnificacaoQuestoes/Partial/UnificarQuestaoListagemQuestoesIguaisPartial.cshtml", Model)
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Modal unificar de questões -->
+<div id="modal-unificar-questao" class="modal default-sl-blue modal-fixed-footer" data-atual="0">
+    @*@Html.Partial("~/Views/UnificacaoQuestoes/Partial/ModalUnificacaoQuestoesPartial.cshtml")*@
+</div>
+
+<!--Modal Unificando questões selecionadas -->
+<div id="modal-unificando" class="modal default-sl-blue modal-fixed-footer">
+    @Html.Partial("~/Views/UnificacaoQuestoes/Partial/ModalUnifiandoPartial.cshtml")
+</div>
+
+<!--Modal Load unificação -->
+<div id="modal-load-unificacao" class="modal default-sl-blue modal-fixed-footer">
+    @Html.Partial("~/Views/UnificacaoQuestoes/Partial/ModalLoadPartial.cshtml")
+</div>

@@ -1,0 +1,98 @@
+﻿
+@{
+    ViewBag.Title = "BancoQuestao";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    @Styles.Render("~/bundles/BancoQuestoes")
+
+}
+
+<script>
+    var permissaoGravacao = "@ViewBag.PossuiPermissaoGravacao";
+</script>
+
+@section Scripts{
+    <script>
+
+        var urlBuscaDadosTabela = "@Url.Action("BuscarQuestoes", "BancoQuestao")";
+
+        // Macrodesafio
+        var urlCriaMacro = "@Url.Action("Cadastro", "MacroDesafio")";
+        var urlEditarMacro = "@Url.Action("EditarItem", "MacroDesafio")";
+        var urlChangeHabilidadeMacro = "@Url.Action("GetHabilidadesDisciplinaMatriz", "MacroDesafio")";
+        var urlSalvaMacro = "@Url.Action("Salvar", "MacroDesafio")";
+        var urlSalvarMatriz = "@Url.Action("SalvarMatriz", "MacroDesafio")"; 
+        var urlChangeEixoMacro = "@Url.Action("GetCursosMatriz", "MacroDesafio")";
+        var urlGetMatrizes = "@Url.Action("GetMatrizes", "MacroDesafio")";
+        var urlExcluirDesafioMatriz = "@Url.Action("ExcluirDesafioMatriz", "MacroDesafio")";
+        var urlChangeCursoMacro = "@Url.Action("GetCursoDisciplinaMatriz", "MacroDesafio")";
+
+        // Microdesafio
+        var urlCriaMicro = "@Url.Action("Cadastro", "MicroDesafio")";
+        var urlEditarMicro = "@Url.Action("EditarItem", "MicroDesafio")";
+        var urlChangeEixoMicro = "@Url.Action("GetCursosMatriz", "MicroDesafio")";
+        var urlChangeHabilidadeMicro = "@Url.Action("GetHabilidadesDisciplinaMatriz", "MicroDesafio")";
+        var urlChangeCursoMicro = "@Url.Action("GetCursoDisciplinaMatriz", "MicroDesafio")";
+        var urlChangeDescritorMicro = "@Url.Action("GetDescritoresHabilidadeMatriz", "MicroDesafio")"; 
+        var urlSalvaMicro = "@Url.Action("Salvar", "MicroDesafio")";
+        var urlSalvarMatrizMicro = "@Url.Action("SalvarMatriz", "MicroDesafio")";
+        var urlExcluirDesafioMatrizMicro = "@Url.Action("ExcluirDesafioMatriz", "MicroDesafio")";
+        var urlGetMatrizesMicro = "@Url.Action("GetMatrizes", "MicroDesafio")";
+        
+
+
+        var urlGetCursos = "@Url.Action("GetCursos", "BancoQuestao")";
+        var urlGetHabilidades = "@Url.Action("GetHabilidades", "BancoQuestao")";
+        var urlGetDisciplinas = "@Url.Action("GetDisciplinas", "BancoQuestao")"; 
+        var urlGetDescritor = "@Url.Action("GetDescritor", "BancoQuestao")";
+        var urlAtualizaStatusQuestao = "@Url.Action("AtualizaStatusQuestao", "BancoQuestao")";
+
+
+    </script>
+
+    <script src="~/Scripts/BancoDeUa/unidadesAvaliativas.js"></script>
+    <script src="~/Scripts/BancoDeQuestoes/bancodequestoes.js"></script>
+}
+
+
+
+<div id="bancoQuestao" class="principal">
+    <div class="row">
+        <div class="col l12 no-padding">
+            <div>
+                <i class="fas fa-home icon-padrao botao-home" aria-hidden="true"></i><h2 class="sl-titulo sl-navy-blue">Banco de Questões</h2>
+                <!-- Dropdown Trigger -->
+                @if (ViewBag.PossuiPermissaoGravacao)
+                {
+                    <a class='dropdown-button btn right verde-aqua' href='#' data-activates='criar-questao-drop'>criar questão</a>
+                }
+
+                <!-- Dropdown Structure -->
+                <ul id='criar-questao-drop' class='dropdown-content'>
+                    <li><a class="criar-questao-macro" href="#!">Macrodesafio</a></li>
+                    <li><a class="criar-questao-micro" href="#!">Microdesafio</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col l12 no-padding">
+            @Html.Partial("~/Views/BancoQuestao/Partial/FiltroPartial.cshtml")
+        </div>
+
+        <div class="col l12 no-padding">
+            <div class="divPartial">
+                @Html.Partial("~/Views/BancoQuestao/Partial/ListagemQuestoes.cshtml")
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="cria-macro-" class="modal default-sl-blue modal-fixed-footer">
+    <!--MACRO-->
+</div>
+
+<div id="cria-micro-" class="modal default-sl-blue modal-fixed-footer">
+    <!--MICRO-->
+</div>
+

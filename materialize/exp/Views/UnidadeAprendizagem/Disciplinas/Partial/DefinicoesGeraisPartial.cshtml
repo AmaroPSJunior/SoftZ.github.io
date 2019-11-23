@@ -1,0 +1,128 @@
+﻿@model SLCONSTRUCT.UI.WEB.ViewModels.DefinicoesGeraisVModel
+
+
+<div id="definicoes-gerais" class="bloco-conteudo-padrao">
+    <div class="aviso center hide">
+        <h6 class="aviso--msg">
+            Nesta Unidade existem itens de aprendizagem que necessitam ser finalizados.
+            Para continuar clique em editar. Para iniciar um novo, volte a página inicial.
+        </h6>
+        <button class="btn">Editar</button>
+    </div>
+    @using (Html.BeginForm("DefinicoesGeraisSalvar", "UA", FormMethod.Post, new { data_js = "form-validate", id = "frmCadastroUnidadeAprendizagem", data_url = Url.Action("DefinicoesGeraisSalvar", "UA") }))
+    {
+        @*@Html.HiddenFor(m => Model.streamcapacaminho)*@
+        @*@Html.HiddenFor(m => Model.capacaminhonome)*@
+        <input type="hidden" id="conteudoBase64Completa" value="" />
+        @Html.HiddenFor(m => Model.base64capa)
+        @Html.HiddenFor(m => Model.codbaseunidadeaprendizagem)
+        @Html.HiddenFor(m => Model.codunidadeaprendizagem)
+        @Html.HiddenFor(m => Model.editar)
+
+        @*@Html.HiddenFor(m => Model.Pacote)*@
+
+        <div class="row formulario">
+            <div class="col s2">
+                <label class="formulario--label">TÍTULO</label>
+            </div>
+            <div class="col s10">
+                @Html.TextBoxFor(x => x.titulo, new { @required = "required", @maxlength = 150 })
+            </div>
+            <div class="col s2">
+                <label class="formulario--label">CAPA (OPCIONAL)</label>
+            </div>
+            <div class="file-field input-field col s10">
+                <img id="ttt" style="position: absolute;z-index:-1; opacity:0" src="" alt="Alternate Text" />
+                <div class="btn anexa">
+                    <span><i class="fas fa-paperclip" title="Anexar"></i></span>
+                    @Html.TextBoxFor(x => x.capacaminhonome, new { @class = "validate anexa-imgcapa", @accept = "*image/png", @type = "file", maxlength = 1000 })
+                </div>
+                <div class="btn visualiza">
+                    <span><i class="fas fa-eye" title="Visualizar"></i></span>
+                </div>
+                <div class="file-path-wrapper">
+                    <label>@Html.TextBoxFor(x => x.capacaminhonome, new { @class = "file-path validate", @placeholder = "Tamanha da imagem 250 x 350" })</label>
+                </div>
+            </div>
+            <div class="col s2">
+                <label class="formulario--label">PACOTE DE APRENDIZAGEM</label>
+            </div>
+            <div class="col s10">
+                @*@Html.DropDownListFor(m => m.Pacote, Model.PacoteList, "Selecionar", new { required = "required", @class = "dropbase" })*@
+                @Html.DropDownList("Pacote", Model.PacoteList, "Selecione", new { required = "required", @class = "dropbase" })
+            </div>
+            <div class="col s2">
+                <label class="formulario--label">HABILIDADE</label>
+            </div>
+            <div class="col s8">
+                @*<--!-->Aqui vai ser carregado o select via JS</--!-->*@
+                <select id="habilidades">
+
+                    @*<option value="15">tththtr</option>
+                        <option value="13">tshbcxfghtext</option>
+                        <option value="12">trtjjyjytjtyjkutext</option>*@
+
+                </select>
+            </div>
+            <div class="col s2">
+                <button type="button" class="btn associar">associar</button>
+            </div>
+        </div>
+        <div class="listagem-habilidades row">
+            @if (Model.habilidadelist != null && Model.habilidadelist.Count() > 0)
+            {
+                foreach (var itemX in Model.habilidadelist)
+                {
+                    <div class="col s12">
+                        <div class="chip" data-codhabilidade="@itemX.codhabilidade" data-habilidado-exclusao="@itemX.habilidadoExclusao">
+                            @itemX.habilidade <i class="fas fa-times"></i>
+                        </div>
+                    </div>
+                    <input type="hidden" name="habilidadelist[0].codhabilidade" value="@itemX.codhabilidade">
+                }
+            }
+        </div>
+    }
+    <div class="center botao-salvar">
+        <button class="btn waves-effect waves-light salvar">salvar</button>
+    </div>
+
+
+    <!-- Modal Structure -->
+    <div id="modal-imagem-capa" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <div class="">
+                <div class="imageBox">
+                    <div class="thumbBox"></div>
+                    <div class="spinner" style="display: none">Loading...</div>
+                </div>
+                <div class="action">
+                    @*<input class="" type="file" id="file" style="float:left; width: 250px">*@
+                    @*<input class="" type="button" id="btnCrop" value="Recortar" style="float: right">*@
+                    <button class="btn" type="button" id="btnZoomIn"><i class="fas fa-search-plus"></i></button>
+                    <button class="btn" type="button" id="btnZoomOut"><i class="fas fa-search-minus"></i></button>
+                    <button class="btn" type="button" id="btnSave">Salvar</button>
+                </div>
+                <div class="cropped">
+
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Fechar</a>
+        </div>
+    </div>
+
+    <div id="modal-imagem-capa-visualiza"  class="modal modal-fixed-footer">
+        <div class="modal-content" style="display:flex;align-items:center;justify-content:center">
+            
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Fechar</a>
+        </div>
+    </div>
+
+</div>
+
+
+

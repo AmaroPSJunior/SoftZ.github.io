@@ -1,0 +1,33 @@
+﻿@model SLCONSTRUCT.UI.WEB.ViewModels.ImportacaoDemoViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@section Styles {
+    <style>
+        pre {
+            display: block;
+            padding: 9.5px;
+            margin: 0 0 10px;
+            font-size: 13px;
+            line-height: 1.428571429;
+            color: #333333;
+            word-break: break-all;
+            word-wrap: break-word;
+            background-color: #f5f5f5;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+            white-space: pre-wrap;
+        }
+    </style>
+}
+
+@using (Html.BeginForm("Importar", "ImportacaoDemo", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.TextBoxFor(m => m.arquivo, new { @type = "file" })
+    <button>Enviar</button>
+}
+
+<pre>@ViewBag.Response</pre>

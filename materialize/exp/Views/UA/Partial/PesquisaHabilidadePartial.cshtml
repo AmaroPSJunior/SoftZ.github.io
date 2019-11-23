@@ -1,0 +1,22 @@
+﻿@model IEnumerable<SLCONSTRUCT.CORE.Entidades.BaseUnidadeAprendizagemHabilidade>
+
+
+
+@foreach (var item in Model)
+{
+<tr data-codhabilidade="@item.codunidadeensinohabilidadecollege"
+    data-coddisciplina="@item.coddisciplinacollege"
+    data-codunidadeensino="@item.codunidadeensinocollege"
+    data-codbasecurricular="@item.codbasecurricularcollege"
+    data-codcurriculo="@item.codcurriculocollege"
+    data-codbaseunidadeaprendizagem="@item.codbaseunidadeaprendizagem"
+    data-codbaseunidadeaprendizagemhabilidade="@item.codbaseunidadeaprendizagemhabilidade"
+    data-codcurso="@item.codcursocollege">
+
+    <td class="-habilidade"><input type="checkbox" class="filled-in checkSingle" id="filled-in-box-@item.codigohabilidade" /><label for="filled-in-box-@item.codigohabilidade">@item.habilidadecollege</label></td>
+    <td class="-cursos">@item.cursocollege</td>
+    <td class="-disciplina">@item.disciplinacollege</td>
+</tr>
+}
+
+

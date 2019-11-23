@@ -1,0 +1,33 @@
+﻿@model  List<SLCONSTRUCT.UI.WEB.ViewModels.UnidadeAprendizagemListaDisciplinaVModel>
+
+<div class="bloco-conteudo-padrao lista-disciplina">
+
+    @if (Model != null && Model.Count() > 0)
+    {
+        <ul class="collapsible lista-disciplina--collapsible" data-collapsible="accordion">
+            @foreach (var item in Model)
+            {
+                <li>
+                    <div class="collapsible-header" data-coddisciplinacollege="@item.coddisciplinacollege" data-codcursocollege="@item.codcursocollege" data-codturmacollege="@item.codturmacollege">
+                        @string.Concat(/*"T", @item.codturmacollege, "D", @item.coddisciplinacollege, "CURR", item.codcurriculocollege, " - ",*/ @item.periodoletivocollege, " - ", @item.turmacollege, " - ", @item.disciplinacollege)
+                        <div><i class="far fa-eye visualizar"></i><i class="fas fa-chevron-down expandir"></i></div>
+                    </div>
+                    <div class="collapsible-body">
+                        @*@Html.Partial("~/Views/UnidadeAprendizagem/Disciplinas/Partial/GridDisciplinaPartial.cshtml", item.lista)*@
+                    </div>
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <h2 class="aviso--msg">Sem nenhuma disciplina cadastrada.</h2>
+    }
+
+</div>
+
+
+<!--Modal Justificativa de cancelamento de UA-->
+<div id="modal-justificativa-cancelamento" class="modal modal-fixed-footer default-sl-blue">
+    @Html.Partial("~/Views/UnidadeAprendizagem/Disciplinas/Partial/ModalJustificativaCancelamentoPartial.cshtml")
+</div>

@@ -1,0 +1,177 @@
+﻿@model SLCONSTRUCT.UI.WEB.ViewModels.MacroDesafioVModel
+
+@{
+    var textoUaVinculada = Model.uavinculada ? "(Questão Vinculada À Uma Unidade de Aprendizagem)" : "";
+}
+
+@using (Html.BeginForm("SalvarComMatriz", "MacroDesafio", FormMethod.Post, new { data_js = "form-validate", id = "frmCadastroMacro" }))
+{
+    @Html.HiddenFor(x => x.codbaseunidadeaprendizagem)
+    @Html.HiddenFor(x => x.Enunciado)
+    @Html.HiddenFor(x => x.coditem)
+    @Html.HiddenFor(x => x.JustificativaTexto)
+
+    @Html.HiddenFor(x => x.caminhoTemplateCkeditor)
+    @Html.HiddenFor(x => x.base64imagemTemplateCkeditor)
+    @Html.HiddenFor(x => x.extensaoTemplateCkeditor)
+
+    @Html.HiddenFor(x => x.caminhoimagemCkeditor)
+    @Html.HiddenFor(x => x.base64imagemCkeditor)
+    @Html.HiddenFor(x => x.extensaoimagemCkeditor)
+    @Html.Hidden("uavinculada", Model.uavinculada)
+
+
+    <div class="modal-header">
+        <p class="titulo-modal">Banco de Questões <i class="fas fa-angle-right" aria-hidden="true"></i> Criar Macro Desafio @textoUaVinculada</p>
+        <span class="id-questao">
+            @{var idQuestao = "Id questão: ";}
+            
+            @if (Model.coditem > 0)
+            {
+                @idQuestao @Model.coditem
+            }
+        </span>
+        <span class="modal-close-default-sl modal-close">fechar <i class="fas fa-window-close" aria-hidden="true"></i></span>
+    </div>
+    <div class="modal-content">
+        <div class="row">
+            <div class="col s12">
+                <ul class="tabs">
+                    <li class="tab col s3"><a class="active" href="#cadastro-">Geral</a></li>
+                    <li class="tab col s3 disabled"><a href="#listagem-">Classificação</a></li>
+                    <button type="button" class="btn waves-effect waves-light criar-novo-macro hide">Criar novo</button>
+                </ul>
+            </div>
+            <div id="cadastro-" class="col s12 cadastro">
+                @Html.HiddenFor(x => x.desativado)
+                <div class="somente-bq hide">
+                    <div class="input-field col l6">
+                        @Html.DropDownListFor(x => x.Banca, Model.BancaList, new { @required = "required" })
+                        <label>Banca</label>
+                    </div>
+                    <div class="input-field col l6">
+                        @Html.DropDownListFor(x => x.Autor, Model.AutorList, new { @required = "required" })
+                        <label>Autor</label>
+                    </div>
+                </div>
+
+                <div class="input-field col l12">
+                    @Html.TextBoxFor(x => x.TituloQuestao, new { @required = "required", @class = "validate" })
+                    <label>Título Questão</label>
+                </div>
+
+                <div class="input-field col l12">
+                    <span class="input-title-div">Enunciado</span>
+                    @Html.TextAreaFor(x => x.Enunciado, new { @required = "required", @cols = 80, @rows = 50, id = "editormacro", name = "editormacro" })
+                    @Html.ValidationMessageFor(x => x.Enunciado)
+                    <script>
+                        CKEDITOR.replace('editormacro');
+                    </script>
+                </div>
+                <div class="file-field input-field col l12" style="text-align:right;">
+                    <div class="btn waves-effect waves-light">
+                        <span>Anexar Imagem</span>
+                        @Html.TextBoxFor(x => x.caminhoimagemCkeditor, new { @class = "validate anexa-img", @accept = "image/jpeg", @type = "file" })
+                    </div>
+                    <div class="file-path-wrapper">
+                        <label>@Html.TextBoxFor(x => x.caminhoimagemCkeditor, new { @class = "active file-path validate", @placeholder = "Anexar imagem" })</label>
+                    </div>
+                </div>
+                <div class="file-field input-field col l12" style="text-align:right;">
+                    <div class="btn waves-effect waves-light">
+                        <span>Anexar</span>
+                        @Html.TextBoxFor(x => x.caminhoTemplateCkeditor, new { @class = "validate", @accept = ".xlsx,.xls,.doc,.docx,.ppt,.pptx,.pdf,.odt,.ods,.ots,.odp,.ott,.sxw,.stw", @type = "file" })
+                    </div>
+                    <div class="file-path-wrapper">
+                        <label>@Html.TextBoxFor(x => x.caminhoTemplateCkeditor, new { @class = "active file-path validate laranja", @placeholder = "Template de Resposta" })</label>
+                    </div>
+                </div>
+                <div class="input-field col l12">
+                    @Html.DropDownListFor(x => x.Dificuldade, Model.DificuldadeList, new { @required = "required" })
+                    <label>Nível de dificuldade</label>
+                </div>
+            </div>
+            <div id="listagem-" class="listagem col s12">
+                <div class="input-field col l6">
+                    @*<select>
+                        <option value="0">São Lucas</option>
+                    </select>*@
+                    @Html.DropDownListFor(x => x.Eixo, Model.EixoList, "São Lucas", new { @required = "required" })
+                    <label>Eixo</label>
+                </div>
+                <div class="input-field col l6">
+                    @Html.DropDownListFor(x => x.Curso, Model.CursoList, "Selecione")
+                    <label>Curso</label>
+                </div>
+                <div class="input-field col l6">
+                    @Html.DropDownListFor(x => x.Disciplina, Model.DisciplinaList, "Selecione")
+                    <label>Disciplinas</label>
+                </div>
+                <div class="input-field col l6 select-habilidade">
+
+                    @Html.DropDownListFor(x => x.Habilidade, Model.HabilidadeList)
+                    <label>Habilidade</label>
+                </div>
+                <div class="col l12">
+                    <button type="button" class="btn waves-effect waves-light right salva-item-matriz">Salvar</button>
+                </div>
+                <div class="col l12 listItemMatriz">
+                    @* Local onde será injetada esta parcial via método AJAX *@
+                   @*@Html.Partial("~/Views/BaseItens/Partial/ListagemMatrizModalPartial.cshtml")*@
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+
+        <div class="status-desativado hide" data-status="@Model.desativado">
+
+            <label for="dropdown1" class="left">Status:</label>
+
+            @if (@Model.desativado)
+            {
+                <a class='dropdown-button inativa' href='#' data-activates='dropdown1'>
+                    <i class="fas fa-circle"></i>
+                    Inativo
+                </a>
+            }
+            else
+            {
+                <a class='dropdown-button ativa' href='#' data-activates='dropdown1'>
+                    <i class="fas fa-circle"></i>
+                    Ativo
+                </a>
+            }
+
+            <ul id='dropdown1' class='dropdown-content'>
+                <li class="ativa"><i class="fas fa-circle"></i>Ativa</li>
+                <li class="inativa"><i class="fas fa-circle"></i>Inativo</li>
+            </ul>
+        </div>
+
+        <button class="btn waves-effect waves-light btn-salva-default salvar" type="button" onclick="Helper.validateCKEditor('editormacro'); $('#frmCadastroMacro').valid()">Adicionar</button>
+    </div>
+}
+
+<script type="text/javascript">
+    setTimeout(() => {
+        if (($("#frmCadastroMacro #uavinculada") && $("#frmCadastroMacro #uavinculada").val() && JSON.parse($("#frmCadastroMacro #uavinculada").val().toLowerCase())) || !JSON.parse(permissaoGravacao.toLowerCase())) {
+            $(".cadastro div *").prop('disabled', true);
+            $(".btn-salva-default").prop('disabled', true);
+
+            for (var instance in CKEDITOR.instances) {
+                if (instance.toUpperCase().indexOf("MACRO") > -1) {
+                    CKEDITOR.instances[instance].document.getBody().setAttribute('contenteditable', false);
+                }
+            }
+        } else {
+            $(".cadastro div *").prop('disabled', false);
+            $(".excluir-item-matriz").show();
+            for (var instance in CKEDITOR.instances) {
+                if (instance.toUpperCase().indexOf("MACRO") > -1) {
+                    CKEDITOR.instances[instance].document.getBody().setAttribute('contenteditable', true);
+                }
+            }
+        }
+    }, 1500);
+</script>

@@ -1,0 +1,51 @@
+﻿<form>
+<input type="hidden" name="base64" id="base64" value=""/>
+<div class="modal-header">
+    <h4 class="titulo-modal-default-sl">Adicionar video</h4>
+    <span class="modal-close-default-sl modal-close">fechar <i class="fas fa-window-close" aria-hidden="true"></i></span>
+</div>
+<div class="modal-content">
+    <input type="hidden" id="codvideo" name="codvideo"/>
+    <input type="hidden" id="extensao" name="extensao"/>
+    <input type="hidden" id="baseunidadeaprendizagem" name="baseunidadeaprendizagem"/>
+
+    <div class="col s12 input-title">
+        <div>
+            <i class="fas fa-file-video icon-padrao circular items" aria-hidden="true"></i><h2 class="sl-titulo-default sl-navy-blue">VIDEOS</h2>
+        </div>
+    </div>
+
+    <div class="col s12 input-title">
+        <div class="input-field s10 offset-s1">
+            <input type="text" id="titulo" name="titulo" value="" maxlength="250" />
+            <label for="titulo">Titulo</label>
+        </div>
+    </div>
+
+    <div class="col s12 input-title">
+        <div class="input-field s10 offset-s1">
+            <input type="text" id="url" name="url" value="" maxlength="1000" />
+            <label>Cole a url do vídeo</label>
+        </div>
+    </div>
+
+    <div class="col l12 s12">
+        <div class="file-field input-field">
+            <div class="btn" style="top: 55%;height: 3rem;line-height: 3rem;">
+                <span>Anexar</span>
+                <input accept=".doc,.docx,.xls,.xlsx,.ppt,.pptx,.pdf" class="validate arquivo-anexo" id="anexo" name="anexo" type="file" value="">
+            </div>
+            <div class="file-path-wrapper">
+                <label><input class="active file-path validate" id="anexo" name="anexo" placeholder="Anexar arquivo" type="text" value=""></label>
+            </div>
+        </div>
+    </div>
+
+    <div class="center">
+        <div id="video-vimeo">Carregue o link para visualizar o vídeo..</div>
+    </div>
+</div>
+<button class="btn btn-salva-default salva-url-video" type="button" disabled>Adicionar</button>
+
+
+</form>

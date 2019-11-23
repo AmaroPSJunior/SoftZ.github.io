@@ -1,0 +1,80 @@
+﻿
+<div class="bloco-conteudo-padrao-pesquisa">
+    <div class="row">
+        <div class="col l12">
+            <i class="fas fa-search icon-padrao circular items" aria-hidden="true"></i><h2 class="sl-titulo-default sl-navy-blue">Pesquisar</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col l6">
+            <div id="divTipoQuestao">
+                <span class="title-radio-button exibicao-label">Tipo de Questão</span>
+
+                <input name="tipoQuestao" type="radio" id="tipoQuestaoMicroDesafio" value="1" checked/>
+                <label for="tipoQuestaoMicroDesafio">Microdesafio</label>
+
+                <input name="tipoQuestao" type="radio" id="tipoQuestaoMacroDesafio" value="2"/>
+                <label for="tipoQuestaoMacroDesafio">Macrodesafio</label>
+            </div>
+        </div>
+        <div class="col l6 component-right">
+            <div id="divDificuldade" class="div-checkbox dificuldade-desabilitado">
+                <div class="altura-linha">
+                    <span class="title-radio-button exibicao-label">Dificuldade</span>
+                </div>
+                <div class="div-checkbox">
+                    <div>
+                        <input name="dificuldadeBaixo" type="checkbox" id="dificuldadeBaixo" value="1" />
+                        <label class="altura-linha" for="dificuldadeBaixo">Fácil</label>
+                    </div>
+                    <div>
+                        <input name="dificuldadeMedio" type="checkbox" id="dificuldadeMedio" value="2" />
+                        <label class="altura-linha" for="dificuldadeMedio">Intermediário</label>
+                    </div>
+                    <div>
+                        <input name="dificuldadeAlto" type="checkbox" id="dificuldadeAlto" value="3" />
+                        <label class="altura-linha" for="dificuldadeAlto">Difícil</label>
+                    </div>
+                </div>
+             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col l12">
+            <select id="ddlCursoFiltro">
+                <option value="" disabled selected>Escolha uma opção</option>
+            </select>
+            <label>Curso</label>
+
+        </div>
+        <div class="input-field col l12">
+            <select id="ddlDisciplinaFiltro">
+                <option value="" disabled selected>Escolha uma opção</option>
+            </select>
+            <label>Disciplina</label>
+        </div>
+        <div class="input-field col l12">
+            <select id="ddlHabilidadeFiltro">
+                <option value="" disabled selected>Escolha uma opção</option>
+            </select>
+            <label>Habilidade</label>
+        </div>
+        <div class="input-field col l12" id="divDescritorBuscaBancoQuestoes">
+            <select id="descritor">
+                <option value="" disabled selected>Escolha uma opção</option>
+            </select>
+            <label>Descritor</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col l12">
+            <input placeholder="Ex: CodigoDoPacote, status" id="texto" type="text" class="validate">
+            <label for="texto">Campo de busca</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="center col l12">
+            <button class="btn" id="btnPesquisar" type="button">Pesquisar</button>
+        </div>
+    </div>
+</div>

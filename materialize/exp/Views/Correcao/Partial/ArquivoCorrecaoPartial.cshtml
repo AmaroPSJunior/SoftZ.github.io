@@ -1,0 +1,93 @@
+﻿@model SLCONSTRUCT.UI.WEB.ViewModels.TrabalhoCorrecao
+
+
+<div class="row correcaoMacro-conteudo">
+    @Html.HiddenFor(x => x.codpessoadesafiotentativa)
+    <div class="col l8 s12 arquivo-aluno">
+        <iframe src="@string.Format("https://docs.google.com/viewer?url={0}&embedded=true", Model.caminho)" style="width:100%; height:560px;" frameborder="0"></iframe>
+    </div>
+    <div class="col l4 s12 atribuicao-professor">
+        <input type="hidden" value="@Model.dataenvio" id="data-envio" />
+        <input type="hidden" value="@Model.nomearquivo" id="nome-arquivo" />
+        <div class="row notas">
+            @if (Model.listatentativascanceladas != null && Model.listatentativascanceladas.Count() > 0)
+            {
+                <div class="col s12 list-tentativas">
+                    <h5>Tentativas</h5>
+                    <ul>
+                        @foreach (var item in Model.listatentativascanceladas)
+                        {
+                            var nomenclatura = item.Text.Split(';')[0] == "False" ? "Tentativa Atual" : "tentativa cancelada";
+                            <li data-codpessoa="@item.codpessoa" data-codpessoadesafiotentativaresposta="@item.Value" class="@nomenclatura">@nomenclatura <span class="data-ignorada">@item.Text.Split(';')[1]</span></li>
+                        }
+                    </ul>
+                </div>
+            }
+
+            <div class="col s12">
+                <h5>NOTAS</h5>
+                @Html.TextBox("nota-correcao", Model.nota, new { @id= "nota-correcao", @placeholder = "00.00", @class = "nota-avaliacao" })
+                @*<input id="nota-correcao" placeholder="00.00" value="@Model.nota" type="text" />*@
+                <script>
+                    $('document').ready(function () {
+                        //$("#nota-correcao").mask("99.99");
+                        $("#nota-correcao").on("focus click", function () {
+                            if ($(this).val().indexOf('_') > -1) {
+                                $(this)[0].setSelectionRange(0, 0);
+                            }
+                        });
+                    });
+                </script>
+            </div>
+            <div class="col s12">
+                <span id="status-nota"></span>
+            </div>
+        </div>
+        <div class="row feedback">
+            <div class="col s12">
+                <h5>FEEDBACK</h5>
+                <textarea id="feedback-textarea">@Model.feedback</textarea>
+                <span id="status-feedback"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 arquivo-feedback-professor">
+
+                @if (string.IsNullOrEmpty(Model.documentoobservacao))
+                {
+                    <div class="input-arquivo">
+                        <span id="attachment-feedback"><i class="fas fa-cloud-upload-alt"></i></span>Procurar Arquivo de Correção
+                        <span id="nome-arquivo-feedback"></span>
+                    </div>
+                    <input type="file" id="arquivo-feedback" class="transparent-input" />
+                }
+                else
+                {
+                    <div class="arquivo-feedback">
+                        <span><i class="fas fa-file-alt"></i></span>
+                        <div>
+                            <span>Arquivo de Feedback</span>
+                            <span><a target="_blank" href="@Model.documentoobservacaourl">Visualizar documento</a></span>
+                        </div>
+                        <span><i class="fas fa-times excluir-arquivo-feedback" data-codpessoadesafiocorrecao="@Model.codpessoadesafiocorrecao"></i></span>
+                    </div>
+                }
+
+            </div>
+        </div>
+
+        @*<div class="col s10">
+                @if (!string.IsNullOrEmpty(Model.caminho))
+                {
+                    <a href="@Model.caminho">Visualizar Documento</a>
+                }
+            </div>*@
+
+        <div class="row">
+            <div class="col s12">
+                <br />
+                <button class="btn waves-effect waves-light salvar-correcao right">ENVIAR</button>
+            </div>
+        </div>
+    </div>
+</div>

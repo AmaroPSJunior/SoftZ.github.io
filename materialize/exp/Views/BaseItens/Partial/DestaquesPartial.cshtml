@@ -1,0 +1,49 @@
+﻿@model SLCONSTRUCT.UI.WEB.ViewModels.UnidadeAvaliativaVModel
+
+<div class="modal-header small">
+    <h4 class="titulo-modal-default-sl">Adicionar Destaques</h4>
+    <span class="modal-close-default-sl modal-close">fechar <i class="fas fa-window-close" aria-hidden="true"></i></span>
+</div>
+<div class="modal-content">
+    <div class="col s12 input-title">
+        <div>
+            <i class="fas fa-image icon-padrao circular items" aria-hidden="true"></i><h2 class="sl-titulo-default sl-navy-blue">DESTAQUES</h2>
+        </div>
+    </div>
+    <div class="row">
+        @using (Html.BeginForm("Salvar", "Destaques", FormMethod.Post, new { data_js = "form-validate", id = "frmCadastroDestaques" }))
+        {
+
+            @Html.HiddenFor(x => x.caminhodestaques)
+            @Html.HiddenFor(x => x.base64destaques)
+            @Html.HiddenFor(x => x.extensaodestaques)
+            @Html.HiddenFor(x => x.codbaseunidadeaprendizagem)
+            <div class="col l12 s12">
+                <div class="col l2 titulo-item default">
+                    <p>Nome</p>
+                </div>
+                <div class="input-field col l10">
+                    @Html.TextBoxFor(x => x.nome, new { @class = "active validate", @placeholder = "Nome do Destaque", @required = "required", maxlength = 250 })
+                </div>
+            </div>
+            <div class="col l12 s12">
+                <div class="col l2 titulo-item default">
+                    <p>Destaque</p>
+                    <p>(.pdf)</p>
+                </div>
+                <div class="file-field input-field col l10">
+                    <div class="btn">
+                        <span>Anexar</span>
+                        @Html.TextBoxFor(x => x.caminhodestaques, new { @class = "validate destaques", @accept = ".pdf", @type = "file" })
+                    </div>
+                    <div class="file-path-wrapper">
+                        <label>@Html.TextBoxFor(x => x.caminhodestaques, new { @class = "active file-path validate", @placeholder = "Anexar arquivo" })</label>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<button class="btn btn-salva-default salvar-destaques" type="button">Adicionar</button>
+@*<button class="btn btn-salva-default-2" type="button">Cancelar</button>*@
+

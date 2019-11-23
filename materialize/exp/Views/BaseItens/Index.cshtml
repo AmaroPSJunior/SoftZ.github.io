@@ -1,0 +1,47 @@
+﻿@model IEnumerable<SLCONSTRUCT.UI.WEB.ViewModels.UnidadeAvaliativaVModel>
+@{
+    ViewBag.Title = "BancoUa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts {
+
+    <script src="~/Scripts/FiltroAvancado.js"></script>
+    <script src="~/Scripts/BancoDeUa/BancoDeUa.js"></script>
+}
+
+@section Styles {
+    <link href="~/Content/filtroAvancado.min.css" rel="stylesheet" />
+    <link href="~/Content/unidadesAvaliativas/estilogrid.min.css" rel="stylesheet" />
+}
+
+<div id="bancoUas">
+    <header class="col s12 no-padding">
+        <div class="cabecalho">
+            <h1 class="titulo">Unidades Avaliativas <i class="fas fa-angle-right" aria-hidden="true"></i> <span class="subtitulo">Unidades</span></h1>
+            <a class="waves-effect waves-light btn-large right blue" href="@Url.Action("UnidadeAprendizagem", "UA")">Criar Ua <i class="fas fa-plus" aria-hidden="true"></i></a>
+        </div>
+    </header>
+
+    <div class="filtro-avancado-desktop">
+        @Html.Partial("~/Views/Shared/Partial/FiltroAvancadoPartial.cshtml")
+    </div>
+
+    <div id="filtro-mobile" class="modal bottom-sheet filtro-avancado-mobile">
+        @Html.Partial("~/Views/Shared/Partial/FiltroAvancadoPartial.cshtml")
+    </div>
+
+
+    <!-- Modal Structure Menu Mobile-->
+    <div id="modalBottomAcoesUnidades" class="modal bottom-sheet">
+        <div class="modal-content">
+            <h4 class="title-form">Ações</h4>
+            <hr />
+            <ul>
+                <li><a href="#" data-url="@Url.Action("","")"><i class="fas fa-pen-square" aria-hidden="true"></i> Editar</a></li>
+                <li><a href="#" class="excluir" data-url="@Url.Action("","")"><i class="fas fa-trash-alt" aria-hidden="true"></i> Excluir</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+

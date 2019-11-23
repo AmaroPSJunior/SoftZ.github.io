@@ -1,0 +1,136 @@
+﻿
+#listagem-perfis-principal {
+    padding: 1.5rem;
+
+    #listagem-perfis-header {
+        div {
+            h1 {
+                font-size: 25px;
+                float: left;
+            }
+
+            a {
+                float: right;
+                margin: 10px 0;
+            }
+        }
+
+        #filtro-listagem-perfis {
+            background: #fff;
+            float: left;
+            width: 100%;
+            margin-top: 20px;
+            margin-bottom: 0;
+            padding: 10px 20px;
+            border-top: 1px solid #ddd;
+            border-right: 1px solid #ddd;
+            border-left: 1px solid #ddd;
+            min-height: 200px;
+
+
+            .listagem-perfis-filtro-select {
+                padding: 0;
+
+                input {
+                    border: 1px solid #ddd;
+                }
+
+                label {
+                    color: #989b9d;
+                    left: 0px;
+                    font-weight: normal;
+                    text-transform: inherit;
+                }
+            }
+
+            .listagem-perfis-filtro-select:nth-child(2) {
+                input {
+                    border-left: none;
+                }
+            }
+
+            .listagem-perfis-filtro-input {
+                padding: 0;
+
+                input {
+                    border: 1px solid #ddd;
+                    border-left: none;
+                }
+
+                label {
+                    color: #989b9d;
+                    left: 0px;
+                    font-weight: normal;
+                    text-transform: inherit;
+                }
+            }
+
+            .btn-adicionar-filtro {
+                span {
+                    float: right;
+                    text-transform: uppercase;
+                    font-weight: bold;
+                    color: #3d7ae8;
+                    cursor: pointer;
+
+                    i {
+                        margin-left: 0;
+                    }
+                }
+            }
+
+            .btn-pesquisa-perfis {
+                padding-top: 20px;
+            }
+        }
+    }
+
+    .redclass {
+        background-colo: red; 
+    }
+
+    #listagem-perfis-partial-table {
+        #listagem-perfis-partial-content {
+            background: #fff;
+            padding: 10px 20px;
+            border-top: 1px solid #ddd;
+            border-right: 1px solid #ddd;
+            border-left: 1px solid #ddd;
+            min-height: 200px;
+
+            table {
+                th {
+                    background: #dedede;
+                }
+
+                td {
+                    text-transform: inherit !important;
+                }
+
+                th.acao {
+                    text-align: center;
+                }
+
+                td.acao {
+                    text-align: center;
+
+                    i {
+                        font-size: 15px;
+                        cursor: pointer;
+                    }
+                }
+            }
+
+            .pagination{
+                float: right;
+                .btn {
+                    padding: 0;
+                    width: 40px;
+                    height: 40px;
+                    background-color: red;
+                    margin: 0 2px;
+                }
+            }
+        }
+    }
+}

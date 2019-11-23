@@ -1,0 +1,111 @@
+﻿@model SLCONSTRUCT.UI.WEB.ViewModels.ListagemCorrecaoVModel
+
+@{
+                /**/
+
+                /**/
+
+                ViewBag.Title = "Listagem";
+                Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section Styles {
+    <link href="~/Content/unidadeAprendizagem/Catalogo/listagem.min.css" rel="stylesheet" />
+    <link href="~/Content/Correcao/CorrecaoMacrodesafio.min.css" rel="stylesheet" />
+}
+
+@section Scripts {
+    <script>
+        var indexUrl = "@Url.Action("Index", "CorrecaoMacrodesafio")";
+        var VerificaCorrecaoPendente = "@Url.Action("VerificaCorrecaoPendente", "CorrecaoMacrodesafio")";
+        var urlListaTentativas = "@Url.Action("ListaTentativas", "TentativaMicrodesafio")";
+        var urlListaTentativasCancelado = "@Url.Action("ListaTentativasCancelado", "TentativaMicrodesafio")";
+        var urlCarregaItemTentativaCancelado = "@Url.Action("CarregaItemTentativaCancelado", "TentativaMicrodesafio")";
+        var urlCarregaItemTentativa = "@Url.Action("CarregaItemTentativa", "TentativaMicrodesafio")";
+        var SalvarPrazosNovaTentativa = "@Url.Action("SalvarPrazosNovaTentativa", "CorrecaoMacrodesafio")";
+        var urlReabreCorrecaomacro = "@Url.Action("ReabreCorrecaomacro", "CorrecaoMacrodesafio")";
+        var urlEnviarNotaAluno = "@Url.Action("EnviarNotaBlueAluno", "CorrecaoMacrodesafio")";
+        var urlEnviarTodosAlunosBlue = "@Url.Action("EnviarTodosAlunosBlue", "CorrecaoMacrodesafio")";
+        var LoadModalIgnorarTentativaUrl = "@Url.Action("LoadModalIgnorarTentativa", "CorrecaoMacrodesafio")";
+        var urlCriarTentativas = "@Url.Action("CriarTentativas", "TentativaMicrodesafio")";
+        var urlObterSeNenhumDesafioFoiRealizado = "@Url.Action("ObterSeNenhumDesafioFoiRealizado", "CorrecaoMacrodesafio")";
+        var urlAtribuirNovaTentativaParaDesafios = "@Url.Action("AtribuirNovaTentativaParaDesafios", "CorrecaoMacrodesafio")";
+        var urlObterMacroDesafiosCancelados = "@Url.Action("ObterMacroDesafiosCancelados", "CorrecaoMacrodesafio")";
+        
+    </script>
+    <script src="~/Scripts/Correcao/Listagem.js"></script>
+}
+
+@Html.Hidden("codunidadeaprendizagem", Model.codunidadeaprendizagem)
+@Html.Hidden("codcursocollege", Model.codcursocollege)
+@Html.Hidden("coddisciplinacollege", Model.coddisciplinacollege)
+@Html.Hidden("codturmacollege", Model.codturmacollege)
+
+
+<div id="listagem-correcao" class="principal">
+    <div class="row">
+        <div class="col l12 no-padding">
+            <div>
+                <i class="fas fa-home icon-padrao botao-home" aria-hidden="true"></i><h2 class="sl-titulo sl-navy-blue">Disciplinas</h2>
+                <i class="fas fa-angle-right" aria-hidden="true"></i><h2 class="sl-subtitulo sl-navy-blue">Correção</h2>
+                <i class="fas fa-angle-right" aria-hidden="true"></i><h2 class="sl-subtitulo sl-navy-blue">@Model.titulo</h2>
+                <button type="button" id="btncorrecoespendentes" class="btn right">CORRIGIR ENVIOS PENDENTES</button>
+            </div>
+        </div>
+        <div class="col l12 no-padding">
+            <div class="bloco-conteudo-padrao">
+                <div class="row no-margin alinhaaltura">
+                    <div class="filtros col l12 no-padding">
+                        <button type="button" data-filtro="todos" class="btn paginacao">Todos</button>
+                        <button type="button" data-filtro="não entregue" class="btn paginacao">Não entregue</button>
+                        <button type="button" data-filtro="entregue" class="btn paginacao">Entregue</button>
+                        <button type="button" data-filtro="rascunho" class="btn paginacao">Rascunho</button>
+                        <button type="button" data-filtro="corrigido" class="btn paginacao">Corrigido</button>
+                        <button type="button" data-filtro="aberto para envio" class="btn paginacao">Aberto para Envio</button>
+                    </div>
+
+                    <div class="input-field col l10">
+                        <input placeholder="Pesquisar" id="pesquisar" type="text" class="validate">
+                        <label for="pesquisar">Pesquisar</label>
+                    </div>
+                    <div class="input-field col l2 relative">
+                        <button id="search" type="button" class="btn">Pesquisar</button>
+                    </div>
+                </div>
+                <div class="row no-margin grid-resultados">
+                    @Html.Partial("~/Views/Correcao/Partial/GridCorrecaoPartial.cshtml")
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal liberar nova tentativa-->
+<div id="Modal-liberar-nova-tentativa" class="modal modal-fixed-footer default-sl-blue">
+    @Html.Partial("~/Views/Correcao/Partial/ModalLiberarNovaTentativaPartial.cshtml")
+</div>
+
+<!--Modal Tentativas Ignoradas Microdesafio-->
+<div id="modal-tentativas-ignoradas-microdesafio" class="modal modal-fixed-footer default-sl-blue">
+    @*@Html.Partial("~/Views/Correcao/Partial/ModalTentativasIgnoradasMicrodesafioPartial.cshtml")*@
+</div>
+
+<!--Modal Tentativas Microdesafio-->
+<div id="modal-tentativas-microdesafio" class="modal modal-fixed-footer default-sl-blue">
+    @*@Html.Partial("~/Views/Correcao/Partial/ModalTentativasMicrodesafioPartial.cshtml")*@
+</div>
+
+<!--Modal configuracao novas Tentativas Microdesafio-->
+<div id="modal-configuracao-tentativas-microdesafio" class="modal modal-fixed-footer default-sl-blue">
+    @Html.Partial("~/Views/Correcao/Partial/ModalConfiguracaoNovaTentativasMicrodesafioPartial.cshtml")
+</div>
+
+<!--Modal ignorar tentativa Tela Correcao-->
+<div id="modal-ignorar-tentativa-tela-correcao" class="modal modal-fixed-footer default-sl-blue">
+    @Html.Partial("~/Views/Correcao/Partial/ModalIgnorarTentativaPartial.cshtml")
+</div>
+<!--Modal Configurar Nova Tentativas Tela Correcao-->
+<div id="modal-conf-tentativas-tela-correcao" class="modal modal-fixed-footer default-sl-blue">
+    @Html.Partial("~/Views/Correcao/Partial/ModalConfiguracaoNovaTentativasMacrodesafioPartial.cshtml")
+</div>

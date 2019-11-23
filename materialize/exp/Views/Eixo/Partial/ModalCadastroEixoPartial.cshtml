@@ -1,0 +1,35 @@
+﻿@model SLCONSTRUCT.UI.WEB.ViewModels.ListagemMatrizVModel
+    
+    <div class="row modal-" data-codeixo="@Model.codeixo" data-codcurso="@Model.codcurso" data-coddisciplina="@Model.coddisciplina" data-codhabilidade="@Model.codhabilidade">
+        <div class="header">
+            <div class="col s12 no-padding local">
+                <span>@Model.nomeprincipal</span>
+                <i class="fas fa-times fechar modal-close"></i>
+            </div>
+
+            <div class="container-modal">
+
+                <div class="sidebar">
+                    @Html.Partial("~/Views/Eixo/Partial/SidebarModalCadastroEixoPartial.cshtml",Model)
+                </div>
+
+                <div class="partial-modal">
+                    <div class="filtros">
+                        <div>
+                            <span class="title-modal">@Model.nomeprincipal</span>
+                            @*<span class="cont-item" data-contitem="8"> 01/08</span>*@
+                        </div>
+                        <input placeholder="Buscar" type="text" class="validate campoObrigatorio buscar" maxlength="100">
+                        <i class="fas fa-search icone-buscar" data-codcurso="@Model.codcurso" data-coddisciplina="@Model.coddisciplina"></i>
+                        <button class="waves-effect waves-light btn todos click">Todos</button>
+                        <button class="waves-effect waves-blue btn selecionado">Selecionados</button>
+                    </div>
+
+                    <div class="grid no-padding col s12">
+                        @Html.Partial("~/Views/Eixo/Partial/GridModalCadastroEixoPartial.cshtml", Model)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+

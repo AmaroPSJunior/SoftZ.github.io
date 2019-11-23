@@ -1,0 +1,59 @@
+﻿@model  IEnumerable<SLCONSTRUCT.UI.WEB.ViewModels.ConteudoVModel>
+
+<div class="col l2 titulo-item">
+    <p>Guia de estudos</p>
+    <P>(.Pdf)</P>
+    @if (ViewBag.PossuiPermissaoGravacao)
+    {
+        if (Model.Count() > 0)
+        {
+            <i class="fa fa-check checado" aria-hidden="true"></i>
+            <i class="fa fa-plus adicionar-item abre-modal-guia-estudo-online" aria-hidden="true"></i>
+        }
+        else
+        {
+            <i class="fa fa-plus adicionar-item icons-plus-checked-align abre-modal-guia-estudo-online" aria-hidden="true"></i>
+        }
+    }
+
+</div>
+<div class="col l10">
+    <table class="bordered">
+        <thead>
+            <tr>
+                <th class="alinhaguia-first">Nome</th>
+                <th class="alinhaguia">Descrição</th>
+                <th class="-acoes alinhaguia-last">Ações</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @if (Model.Count() > 0)
+            { 
+
+                foreach (var item in Model)
+                {
+                    <tr data-codconteudo="@item.codconteudo" data-codbaseunidadeaprendizagem="@item.codbaseunidadeaprendizagem" data-codtipoconteudo="@item.codtipoconteudo">
+                        <td>@item.titulo</td>
+                        <td>@item.conteudo</td>
+                        <td class="-acoes">
+                            @if (ViewBag.PossuiPermissaoGravacao)
+                            {
+                                <i class="fa fa-trash-o fas fa-trash-alt excluir-unidade-online" aria-hidden="true"></i>
+                            }
+                            <!--<i class="fas fa-pen-square" aria-hidden="true"></i>-->
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+
+                <tr>
+                    <td>Nenhum guia cadastrado</td>
+                    <td class="right"></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

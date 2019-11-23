@@ -1,0 +1,179 @@
+﻿@model int
+@{
+    ViewBag.Title = "CadastroUsuario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <link href="~/Content/Usuarios/CadastroUsuario.min.css" rel="stylesheet" />
+}
+
+@section Scripts {
+    <script>
+        var ObterEnderecoPeloCEP = "@Url.Action("ObterEnderecoPeloCEP", "Usuarios")";
+        var ExisteUsuario = "@Url.Action("ExisteUsuario", "Usuarios")";
+        var SalvarDadosUsuario = "@Url.Action("SalvarDadosUsuario", "Usuarios")";
+        var SalvarDadosLogin = "@Url.Action("SalvarDadosLogin", "Usuarios")";
+        var LoadDadosUsuario = "@Url.Action("LoadDadosUsuario", "Usuarios")";
+        var LoadDadosLogin = "@Url.Action("LoadDadosLogin", "Usuarios")";
+
+    </script>
+    <script src="~/Scripts/Usuarios/CadastroUsuario.js"></script>
+    <script src="~/Scripts/maskedinput.min.js"></script>
+}
+
+<div id="cadastro-usuario-formulario" data-codpessoa="@Model">
+    <input type="hidden" value="@ViewBag.MeuPerfil" id="meuperfil"/>
+    <div class="row">
+        <div class="col l12 no-padding">
+            <div>
+                <i class="fas fa-home icon-padrao botao-home" aria-hidden="true"></i><h2 class="sl-titulo sl-navy-blue">Usuários</h2>
+                <i class="fas fa-angle-right" aria-hidden="true"></i><h2 class="sl-subtitulo sl-navy-blue">Cadastro</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="cadastro-header-wizard">
+        <div id="col-wizard-usuario" class="col s6 wizard-col">
+            <div class="header-content-wizard">
+                <i class="fas fa-user"></i>
+                <h4>Dados do usuário</h4>
+            </div>
+            <div class="wizard-progress progress-dados-usuario"></div>
+            <div class="center-wizard-btn">
+                <span class="wizard-btn dados-usuario-wizard-btn"></span>
+            </div>
+        </div>
+        <div id="col-wizard-login" class="col s6 wizard-col col-wizard-login-color">
+            <div class="header-content-wizard">
+                <i class="fas fa-lock"></i>
+                <h4>Dados de login</h4>
+            </div>
+            <div class="wizard-progress progress-dados-login"></div>
+            <div class="center-wizard-btn">
+                <span class="wizard-btn dados-login-wizard-btn wizard-btn-disabled acao-avancar-toLogin"></span>
+            </div>
+        </div>
+    </div>
+    <div id="cadastro-usuario-dados-usuario" class="row wizard-content wizard-cadastro-status wizard-active">
+        <div class="col s12">
+            <div class="image-input-wrapper">
+                <div class="image-input">
+                    <i id="remover-foto-perfil" class="fas fa-times"></i>
+                    <i id="alterar-foto-perfil" class="fas fa-undo-alt"></i>
+                    <input accept=".jpg,.png,.jpeg" type="file" id="foto-perfil" /><i id="cam-i-foto-perfil" class="fas fa-camera"></i>
+                </div>
+                <label class="image-input-label">Foto de perfil</label>
+            </div>
+        </div>
+        <div class="col l12 dados-pessoais">
+            <h5>DADOS PESSOAIS</h5>
+            <div class="input-field col s4">
+                <input placeholder="___.___.___-__" id="cpf" type="text" class="masked-inputs validate campoObrigatorio">
+                <label class="active" for="cpf">CPF*</label>
+            </div>
+            <div class="input-field col s8">
+                <input placeholder="Digite o nome completo" id="nome" type="text" class="validate campoObrigatorio" maxlength="100">
+                <label class="active" for="nome">Nome Completo*</label>
+            </div>
+            <div class="input-field col s4">
+                <input placeholder="Digite o nome social" id="nomesocial" type="text" class="masked-inputs validate " maxlength="100">
+                <label class="active" for="nomesocial">Nome Social</label>
+            </div>
+            <div class="input-field col s4">
+                <input placeholder="_______" id="rg" type="text" class="masked-inputs validate" maxlength="15">
+                <label class="active" for="rg">RG</label>
+            </div>
+            <div class="input-field col s4">
+                <input placeholder="__/__/____" id="nascimento" type="text" class="masked-inputs validate campoObrigatorio">
+                <label class="active" for="nascimento">Nascimento*</label>
+            </div>
+            <div class="input-sexo col s12">
+                <h5>SEXO*</h5>
+                <input value="M" class="with-gap" name="sexo" type="radio" id="masculino" checked />
+                <label for="masculino">Masculino</label>
+                <input value="F" class="with-gap" name="sexo" type="radio" id="feminino" />
+                <label for="feminino">Feminino</label>
+            </div>
+            <div class="input-field col s6">
+                <input placeholder="Digite o e-mail" id="email" type="text" class="validate campoObrigatorio" maxlength="80">
+                <label class="active" for="email">E-mail*</label>
+            </div>
+            <div class="input-field col s3">
+                <input placeholder="( __ ) ____-____" id="telefone" type="text" class="masked-inputs validate">
+                <label class="active" for="telefone">Telefone</label>
+            </div>
+            <div class="input-field col s3">
+                <input placeholder="( __ ) _____-____" id="celular" type="text" class="masked-inputs validate campoObrigatorio">
+                <label class="active" for="celular">Celular*</label>
+            </div>
+            <div class="input-endereco col s12">
+                <h5>ENDEREÇO</h5>
+                <div class="input-field col s3">
+                    <input placeholder="_____-___" id="cep" type="text" class="masked-inputs validate campoObrigatorio">
+                    <label class="active" for="cep">CEP*</label>
+                </div>
+                <div class="input-field col s9">
+                    <input placeholder="Nome da rua" disabled id="rua" type="text" class="validate campoObrigatorio" maxlength="255">
+                    <label class="active" for="rua">Rua</label>
+                </div>
+
+                <input disabled id="codCidade" type="hidden">
+
+                <div class="input-field col s2">
+                    <input placeholder="___" id="numero" type="text" class="validate campoObrigatorio" maxlength="10">
+                    <label class="active" for="numero">Nº*</label>
+                </div>
+                <div class="input-field col s4">
+                    <input placeholder="Digite o complemento" id="complemento" type="text" class="validate" maxlength="50">
+                    <label class="active" for="complemento">Complemento</label>
+                </div>
+                <div class="input-field col s6">
+                    <input placeholder="Bairro" id="bairro" disabled type="text" class="validate campoObrigatorio" maxlength="100">
+                    <label class="active" for="bairro">Bairro</label>
+                </div>
+                <div class="input-field col s2">
+                    <input placeholder="__" id="uf" disabled type="text" class="validate campoObrigatorio" maxlength="2">
+                    <label class="active" for="uf">UF</label>
+                </div>
+                <div class="input-field col s4">
+                    <input placeholder="Cidade" disabled id="cidade" type="text" class="validate campoObrigatorio">
+                    <label class="active" for="cidade">Cidade</label>
+                </div>
+            </div>
+            <!--<div class="input-token col s12">
+                <h5>INTEGRAÇÃO</h5>
+                <div class="input-field col s4">
+                    <input placeholder="token" id="token" type="text" class="validate" maxlength="30">
+                    <label class="active" for="token">Token</label>
+                </div>
+            </div>-->
+            <div class="col s12">
+                <button id="salvar-dados" class="waves-effect waves-light btn btn-avancar-cadastro-usuario acao-avancar-toLogin"><i class="material-icons right">chevron_right</i>Avançar</button>
+            </div>
+        </div>
+    </div>
+    <div id="cadastro-usuario-dados-login" class="row wizard-content wizard-cadastro-status">
+        <div class="cadastro-login-wrapper">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input placeholder="Digite o usuário" id="usuario" type="text" class="validate">
+                    <label for="usuario">Usuário</label>
+                </div>
+                <div class="input-field col s12">
+                    <input placeholder="" id="nova-senha" type="password" class="validate">
+                    <div data-type="password" class="eye-senha"><i class="far fa-eye"></i></div>
+                    <label for="nova-senha">Nova Senha</label>
+                </div>
+                <div class="input-field col s12">
+                    <input placeholder="" id="confirmar-senha" type="password" class="validate">
+                    <div data-type="password" class="eye-senha"><i class="far fa-eye"></i></div>
+                    <label for="confirmar-senha">Confirmar Senha</label>
+                </div>
+                <div class="col s12 btn-salvar-login-senha">
+                    <button id="salvar-usuario" class="waves-effect waves-light btn btn-avancar-cadastro-usuario"><i class="material-icons right">check</i>Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

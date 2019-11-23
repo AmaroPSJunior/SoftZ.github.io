@@ -1,0 +1,116 @@
+﻿@model SLCONSTRUCT.UI.WEB.ViewModels.PerfilVModel
+@{
+    ViewBag.Title = "CadastroPerfil";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <link href="~/Content/Perfis/CadastroPerfil.min.css" rel="stylesheet" />
+}
+
+@section Scripts {
+    <script>
+        var urlSalvarNovoPerfil = "@Url.Action("SalvarCadastroPerfil", "Perfis")";
+        var urlCadastroPerfil =  "@Url.Action("CadastroPerfil", "Perfis")";
+    </script>
+
+    <script src="~/Scripts/Perfis/CadastroPerfil.js"></script>
+}
+
+@{ 
+    var formularioFuncaoSomenteGravacao = new Dictionary<string, string>()
+    {
+        {"BASE DE ITENS", "NOVO CADASTRO"},
+        {"PERFIS DE ACESSO", "CADASTRAR PERFIL" },
+        {"USUÁRIOS", "CADASTRAR USUÁRIO" }
+    };
+}
+
+<div id="formulario" class="row">
+    <div class=" col s12 header-formulario">
+        <div class="envolve">
+            <div class="col l12 no-padding">
+                <div>
+                    <i class="fas fa-home icon-padrao botao-home" aria-hidden="true"></i><h2 class="sl-titulo sl-navy-blue">Perfis</h2>
+                    <i class="fas fa-angle-right" aria-hidden="true"></i><h2 class="sl-subtitulo sl-navy-blue">Cadastro</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="backgrond-perfil-div">
+        <div class="col s12 formulario-nome-perfil" data-codperfil="@Model.codperfil">
+            <label for="last_name">Nome do Perfil*</label>
+            <input class="validate" data-val="true" data-val-required="O campo Perfil é obrigatório." id="nomeperfil" name="descricao" placeholder="Novo Perfil" required="required" type="text" value="@Model.perfil" aria-required="true" maxlength="99">
+        </div>
+    </div>
+    <div class="backgrond-perfil-div">
+        <div class="envolve">
+            <div class="col s12">
+                <h5 class="title-form">Permissões de Perfil</h5>
+            </div>
+            <div class="col s12">
+                <div>
+                    <ul class="collapsible" data-collapsible="accordion">
+                        @for (var i = 0; i < Model.formularioPai.Count(); i++)
+                        {
+                            var perfil = Model.formularioPai[i];
+                            
+                            <li>
+                                <div class="collapsible-header">
+                                    <input data-val="true" data-val-number="O campo codfuncaoformularioperfil deve ser um número." data-val-required="O campo codfuncaoformularioperfil é obrigatório." id="FormulariosFuncaoPerfil_0__codfuncaoformularioperfil" name="FormulariosFuncaoPerfil[0].codfuncaoformularioperfil" type="hidden" value="0">
+                                    <input data-val="true" data-val-number="O campo codformulariofuncao deve ser um número." data-val-required="O campo codformulariofuncao é obrigatório." id="FormulariosFuncaoPerfil_0__codformulariofuncao" name="FormulariosFuncaoPerfil[0].codformulariofuncao" type="hidden" value="38">
+                                    <input data-val="true" data-val-number="O campo codperfil deve ser um número." data-val-required="O campo codperfil é obrigatório." id="FormulariosFuncaoPerfil_0__codperfil" name="FormulariosFuncaoPerfil[0].codperfil" type="hidden" value="0">
+                                    <div class="formulario-header" data-codformulariopai="@perfil.codformulariopai">
+                                        <i class="fa fa-angle-down" aria-hidden="true"></i>@perfil.formulariopai
+                                        <input type="checkbox" class="filled-in" id="check_title_@i" name="check_title_@i" value="true">
+                                        <label for="check_title_@i"></label>
+                                    </div>
+                                </div>
+                                <div class="collapsible-body" style="display: none;">
+                                    <ul class="collapsible" data-collapsible="accordion">
+                                        @for (var ia = 0; ia < perfil.perfilPermissao.Count; ia++)
+                                        {
+                                            var perfilPermissao = perfil.perfilPermissao[ia];
+                                        <li>
+                                            <div class="collapsible-header filho" data-codformulario="@perfilPermissao.codformulario">
+                                                <i class="fa fa-angle-down" aria-hidden="true"></i>@perfilPermissao.formulario
+                                            </div>
+                                            @for (var ib = 0; ib < perfilPermissao.funcaoFormularioVModel.Count(); ib++)
+                                            {
+                                                var funcaoFormulario = perfilPermissao.funcaoFormularioVModel[ib];
+                                                var seleciondo = funcaoFormulario.selecionado ? "checked" : "";
+                                                var visivel = "hide";
+
+                                                if (!formularioFuncaoSomenteGravacao.ContainsKey(Model.formularioPai[i].formulariopai.ToUpper())
+                                                    || formularioFuncaoSomenteGravacao[Model.formularioPai[i].formulariopai.ToUpper()] != perfil.perfilPermissao[ia].formulario.ToUpper()
+                                                    || !(perfilPermissao.funcaoFormularioVModel[ib].funcao.ToUpper() == "LEITURA" || perfilPermissao.funcaoFormularioVModel[ib].funcao.ToUpper() == "EXCLUSÃO")
+                                                    )
+                                                {
+                                                    visivel = "";
+                                                }
+
+                                                <div class="collapsible-body @visivel" style="display: none;" data-codfuncao="@funcaoFormulario.codfuncao">
+                                                    <span>@funcaoFormulario.funcao</span>
+                                                    <input data-val="true" data-val-number="O campo codfuncaoformularioperfil deve ser um número." data-val-required="O campo codfuncaoformularioperfil é obrigatório." id="FormulariosFuncaoPerfil_0__Filhos_1__codfuncaoformularioperfil" name="FormulariosFuncaoPerfil[0].Filhos[1].codfuncaoformularioperfil" type="hidden" value="0"><input data-val="true" data-val-number="O campo codformulariofuncao deve ser um número." data-val-required="O campo codformulariofuncao é obrigatório." id="FormulariosFuncaoPerfil_0__Filhos_1__codformulariofuncao" name="FormulariosFuncaoPerfil[0].Filhos[1].codformulariofuncao" type="hidden" value="41">
+                                                    <input data-val="true" data-val-number="O campo codperfil deve ser um número." data-val-required="O campo codperfil é obrigatório." id="FormulariosFuncaoPerfil_0__Filhos_1__codperfil" name="FormulariosFuncaoPerfil[0].Filhos[1].codperfil" type="hidden" value="0">
+                                                    <input type="checkbox" class="filled-in" id="check_item_@ib@ia@i" name="check_item_@ib@ia@i" value="true" @seleciondo>
+                                                    <label for="check_item_@ib@ia@i"></label>
+                                                </div>
+
+                                            }
+                                        </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <button class="waves-effect waves-light btn unisl">Criar Perfil <i class="fa fa-check-circle" aria-hidden="true"></i></button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+﻿@model SLCONSTRUCT.UI.WEB.ViewModels.TentativaMicrodesafioVModel
+<div class="modal-nome">
+    <div class="modal-header">
+        <span class="modal-close-default-sl modal-close">fechar <i class="fas fa-window-close" aria-hidden="true"></i></span>
+    </div>
+    <div class="modal-content">
+        @if (Model.tentativasMicrodesafio.Count() > 0)
+        {
+            foreach (var coddesafio in Model.tentativasMicrodesafio.Select(x => x.coddesafio).Distinct())
+            {
+                var indice = 0;
+                <div class="tentativa-microdesafio">
+                    <div>
+                        <div>
+                            <span class="aluno hide"></span>
+                            <span class="tentativa">@Model.tentativasMicrodesafio.Where(y => y.coddesafio == coddesafio).FirstOrDefault().descricao</span>
+                        </div>
+                        <a class="dropdown-button btn right ver-tentativas hide" href="#" data-activates="criar-questao-drop">VER TENTATIVAS IGNORADAS</a>
+                    </div>
+                    <ul class="collapsible" data-collapsible="accordion">
+
+
+                        @foreach (var tentativa in Model.tentativasMicrodesafio.Where(y => y.coddesafio == coddesafio))
+                        {
+
+                            <li data-indice="@indice">
+                                <div class="collapsible-header" data-codpessoadesafiotentativa="@tentativa.codPessoaDesafioTentativa" data-numerotentativa="@tentativa.numerotentativa" data-datahorafim="@tentativa.datahorafim" data-datahoralimiteatraso="@tentativa.datahoralimiteatraso" data-uafinalizada="@tentativa.uafinalizada">
+                                    <span class="subtitulo-tentativa">Tentativa @tentativa.numerotentativa</span>
+                                    <div class="col-nota">Nota<span class="nota"> @tentativa.nota</span></div>
+                                    <div>Data de Entrega</div>
+                                    <span class="data">@tentativa.dataatualizacao</span>
+                                    <button class="ignorar-tentativa dropdown-button btn" data-codpessoadesafiotentativa="@tentativa.codPessoaDesafioTentativa"> Ignorar Tentativa</button>
+
+                                </div>
+
+                                <div class="collapsible-body">
+                                    @*@Html.Partial("~/Views/Correcao/Partial/ModalTentativasMicrodesafioRespostasPartial.cshtml")*@
+                                </div>
+                            </li>
+                            indice += 1;
+                        }
+                    </ul>
+
+
+
+                </div>
+            }
+        }
+        else
+        {
+            <a class="dropdown-button btn right criar-tentativas" href="#" data-activates="criar-questao-drop">Criar Tentativas</a>
+            <p style="margin-top: 0;font-weight:600;color: #333;font-size: 1.3rem;text-transform: uppercase;">Não foi encontrada nenhuma tentativa.</p>
+            <p style="font-weight:600;color: #333;margin-top: -20px;">Para criar as tentativas para o aluno clique no botão ao lado</p>
+        }
+    </div>
+</div>

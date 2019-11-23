@@ -1,0 +1,85 @@
+﻿<div id="modal-confirm" class="modal  modal-confirmation modal-aviso">
+    <div class="modal-content center">
+        <section>
+            <i class="fas icon-msg satisfaction" aria-hidden="true"></i>
+        </section>
+        <section>
+            <span class="--semi-bold -capitalize title-msg"></span>
+        </section>
+        <section class="msg">
+            
+        </section>
+    </div>
+    <div class="modal-footer">
+        <div class="row">
+            <div class="col s6">
+                <a href="#!" class="btn btn-no modal-close waves-effect" cinzaEscuro waves-effect font-preto">não</a>
+            </div>
+            <div class="col s6">
+                <a href="#!" class="btn btn-yes waves-effect">sim</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modal-alert" class="modal modal-confirmation modal-aviso">
+    <div class="modal-content center">
+        <section>
+            <i class="fa icon-msg satisfaction" aria-hidden="true"></i>
+        </section>
+        <section>
+            <span class="--semi-bold -capitalize title-msg"></span>
+        </section>
+        <section class="msg">
+        
+        </section>
+    </div>
+    <div class="modal-footer">
+        <div class="row">
+            <div class="col s12">
+                <a href="#!" class="btn modal-close waves-effect">fechar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modal-error" class="modal modal-confirmation modal-aviso">
+    <div class="modal-content center">
+        <section>
+            <i class="fa fa-frown-o icon-msg dissatisfaction" aria-hidden="true"></i>
+        </section>
+        <section>
+            <span class="--semi-bold -capitalize font-vermelho-claro title-msg">Ops!</span>
+        </section>
+        <section class="msg">
+            @Html.ValidationSummary(true, "")
+        </section>
+    </div>
+    <div class="modal-footer">
+        <div class="row">
+            <div class="col s12">
+                <a href="#!" class="btn modal-close waves-effect">fechar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modal-load" class="modal modal-confirmation modal-aviso">
+    <div class="modal-content center">
+        <section>
+            <i class="fa icon-msg satisfaction" aria-hidden="true"></i>
+        </section>
+        <section>
+            <span class="--semi-bold -capitalize title-msg"></span>
+        </section>
+        <section class="msg"></section>
+        <section class="progress">
+            <div class="indeterminate impre"></div>
+        </section>
+    </div>    
+</div>
+
+<div id="modal-generic" class="modal modal-confirmation modal-aviso">
+    <div class="modal-content center"></div>
+    <div class="modal-footer"></div>
+</div>

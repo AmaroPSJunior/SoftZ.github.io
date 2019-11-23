@@ -1,0 +1,91 @@
+﻿@model SLCONSTRUCT.UI.WEB.ViewModels.UnificarResultadosVModel
+
+@if (Model.QuestoesDuplicadas != null && Model.QuestoesDuplicadas.Count() > 0)
+{
+
+
+
+    <div id="alternativasdiv2" class="unifica-content__div2">
+        <div class="unifica-content__title-equals">
+            <p class="unifica-content__title">Selecione as questões iguais</p>
+        </div>
+
+        <div class="unifica-content__list">
+            @{ var index = 1;}
+            @foreach (var item in Model.QuestoesDuplicadas)
+            {
+                <div data-coditem="@item.CodItem" data-codindice="@index" class="unifica-content__question-active">
+                    <div class="unifica-content__card-content">
+                        <div class="unifica-content__card-border"><span>@index</span></div>
+                        <div class="unifica-content__title-question-active">
+                            <p>ID QUESTÃO: @item.CodItem</p>
+                            <p class="duplicate-question" data-coditem="@item.CodItem">@item.Titulo</p>
+                        </div>
+                        <div class="unifica-content__options">
+                            <div><i class="fas fa-info-circle modal-open"></i></div>
+                            <div><i data-nextorprev="prev" class="fas fa-angle-left"></i><i data-nextorprev="next" class="fas fa-angle-right"></i></div>
+                        </div>
+                    </div>
+                    <div class="content-button "><button type="button" class="btn">selecionar</button></div>
+                    <div class="content-button selected hide"><button type="button" class="btn">@*<i class="fas fa-check"></i>*@ selecionada</button></div>
+
+                    <div class="unifica-content__question-equal-description">
+                        <div class="unifica-content__text">
+                            <h3>enunciado</h3>
+                            @Html.Raw(item.Enunciado)
+                        </div>
+                    </div>
+                    @if (item.Alternativas.Count() > 0)
+                    {
+
+                        <div class="unifica-content__question-equal-alternatives">
+                            <h3>alternativas</h3>
+                            @foreach (var alternativa in item.Alternativas)
+                            {
+                                var correta = "unifica-content__alternative--correct";
+                                var errada = "unifica-content__alternative--wrong";
+                                var class_ = alternativa.Correta ? correta : errada;
+
+                                <div class="@class_">
+                                    @Html.Raw(alternativa.Descricao)
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+                index = index + 1;
+            }
+
+            <div class="unifica-content__list-questions">
+                <ul>
+                    @{ var indice = 1;}
+                    @foreach (var item2 in Model.QuestoesDuplicadas)
+                    {
+                        <li data-coditem="@item2.CodItem" data-codindice="@indice">
+                            <input type="checkbox" class="filled-in" id="filled-in-box-@item2.CodItem" />
+                            <label for="filled-in-box-@item2.CodItem">
+                                <p>Questão <span class="indice-question">@indice</span></p>
+                                <p>@item2.Titulo</p>
+                            </label>
+                            <div class="block--"></div>
+                            <div class="border-li-custom"></div>
+                        </li>
+                        indice = indice + 1;
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="unifica-content__save">
+            <div>
+                <p>selecionanda: 0/6</p>
+                <button type="button" class="btn"><i class="fas fa-check-circle"></i> unificar questões</button>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="unifica-content__div2 no-duplicity">
+        <h5>Não há questões duplicadas</h5>
+    </div>
+}

@@ -1,0 +1,143 @@
+﻿@model List<SLCONSTRUCT.UI.WEB.ViewModels.ListaAlunoFaelVModel>
+
+@{
+    var updown = ViewBag.ascdesc == "desc" ? "sort-asc fa-angle-up" : "sort-desc fa-angle-down";
+    int qtdresgistros = ViewBag.qtdresgistros;
+    int paginaatual = ViewBag.paginaatual;
+    int qtdpaginas = ViewBag.qtdpaginas;
+    bool seanterior = ViewBag.seanterior;
+    bool seproximo = ViewBag.seproximo;
+}
+
+
+@Html.Hidden("qtdresgistros", qtdresgistros)
+@Html.Hidden("paginaatual", paginaatual)
+@Html.Hidden("qtdpaginas", qtdpaginas)
+@Html.Hidden("seanterior", seanterior)
+@Html.Hidden("seproximo", seproximo)
+
+@Html.Hidden("Url")
+
+<div class="grid integ">
+    <table class="bordered highlight">
+        <thead>
+            <tr>
+                <th class="ordena" data-campo="AlunoNome">
+                    Aluno Nome <i class="fa @(ViewBag.orderby == "AlunoNome" ? updown : "")" aria-hidden="true"></i>
+                </th>
+                <th class="ordena" data-campo="AlunoTipoIngresso">
+                    Ingresso <i class="fa @(ViewBag.orderby == "AlunoTipoIngresso" ? updown : "")" aria-hidden="true"></i>
+                </th>
+                <th class="ordena" data-campo="NotaVestibular">
+                    Nota Vestibular<i class="fa @(ViewBag.orderby == "NotaVestibular" ? updown : "")" aria-hidden="true"></i>
+                </th>
+                <th class="ordena" data-campo="CursoHabilitacao">
+                    Habilitação <i class="fa @(ViewBag.orderby == "CursoHabilitacao" ? updown : "")" aria-hidden="true"></i>
+                </th>
+                <th class="ordena" data-campo="CursoNome">
+                    Curso <i class="fa @(ViewBag.orderby == "CursoNome" ? updown : "")" aria-hidden="true"></i>
+                </th>
+                <th class="ordena" data-campo="exportado">
+                    Exportado <i class="fa @(ViewBag.orderby == "exportado" ? updown : "")" aria-hidden="true"></i>
+                </th>
+                <th class="ordena" data-campo="AnoConclusao">
+                    Conclusão <i class="fa @(ViewBag.orderby == "AnoConclusao" ? updown : "")" aria-hidden="true"></i>
+                </th>
+                <th class="ordena" data-campo="criticas">
+                    Críticas <i class="fa @(ViewBag.orderby == "criticas" ? updown : "")" aria-hidden="true"></i>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                if (Model.Count() > 0)
+                {
+                    foreach (var item in Model)
+                    {
+                        var dicCriticaCampo = new Dictionary<string, List<string>>();
+                        var exportadoText = item.exportado == 1 ? "Sim" : "Não";
+                        if (!string.IsNullOrEmpty(@item.criticas))
+                        {
+
+                            foreach(var criticaCampo in @item.criticas.Split(';').ToList())
+                            {
+                                var critica = criticaCampo.Split(':')[1];
+                                var campo = criticaCampo.Split(':')[0];
+
+                                if (!dicCriticaCampo.ContainsKey(critica))
+                                {
+                                    dicCriticaCampo.Add(critica, new List<string>() { campo } );
+                                }
+                                else
+                                {
+                                    dicCriticaCampo[critica].Add(campo);
+                                }
+                            }
+                        }
+                        <tr>
+                            <td>@item.AlunoNome</td>
+                            <td>@item.AlunoTipoIngresso</td>
+                            <td>@item.NotaVestibular</td>
+                            <td>@item.CursoHabilitacao</td>
+                            <td>@item.CursoNome</td>
+                            <td>@exportadoText</td>
+                            <td>@item.AnoConclusao</td>
+                            <td>
+                                @if (!string.IsNullOrEmpty(@item.criticas))
+                                {
+                                    foreach (var critica in dicCriticaCampo.Keys)
+                                    {
+                                        var dataTooltip = string.Join("<br/>", dicCriticaCampo[critica].Select(x => x));
+                                        <a class="btn tooltipped red" style="padding:0px 3px 0px 3px;" data-html="true" data-position="bottom" data-tooltip="@dataTooltip">@critica</a>
+                                    }
+                                }
+
+
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr><td colspan="8">Nenhum registro encontrado</td></tr>
+                }
+            }
+
+        </tbody>
+    </table>
+
+    <div class="row cmp-filtro-avancado no-margin right filtro-avancado ">
+        <div class="col s12 pagination botoes-paginacao ">
+            @if (!seanterior)
+            {
+                <button class="disabled btn inicio hide-on-small-only shadow"><i class="fas fa-angle-double-left black-text" aria-hidden="true"></i></button>
+                <button class="disabled btn anterior shadow"><i class="fas fa-angle-left black-text" aria-hidden="true"></i></button>
+            }
+            else
+            {
+                <button class="btn waves-effect inicio hide-on-small-only paginacao shadow" data-pagina="1"><i class="fas fa-angle-double-left black-text" aria-hidden="true"></i></button>
+                <button class="btn waves-effect paginacao anterior shadow" data-pagina="@(paginaatual - 1)"><i class="fas fa-angle-left black-text" aria-hidden="true"></i></button>
+            }
+
+            <span>@(paginaatual)/@(qtdpaginas)</span>
+
+            @if (!seproximo)
+            {
+                <button class="disabled btn hide-on-small-only proximo shadow"><i class="fas fa-angle-right black-text" aria-hidden="true"></i></button>
+                <button class="disabled btn hide-on-small-only shadow "><i class="fas fa-angle-double-right black-text" aria-hidden="true"></i></button>
+            }
+            else
+            {
+                <button class="btn hide-on-small-only waves-effect paginacao shadow" data-pagina="@(paginaatual + 1)"><i class="fas fa-angle-right black-text" aria-hidden="true"></i></button>
+                <button class="btn hide-on-small-only waves-effect paginacao proximo shadow" data-pagina="@(qtdpaginas)"><i class="fas fa-angle-double-right black-text" aria-hidden="true"></i></button>
+            }
+        </div>
+    </div>
+
+
+</div>
+<script>
+    $(document).ready(function(){
+    $('.tooltipped').tooltip();
+    });
+</script>

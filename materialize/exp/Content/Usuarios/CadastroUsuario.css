@@ -1,0 +1,159 @@
+﻿#cadastro-usuario-formulario {
+  padding: 20px; }
+  #cadastro-usuario-formulario #cadastro-header-wizard {
+    height: 150px;
+    padding-top: 20px;
+    margin-bottom: 0; }
+    #cadastro-usuario-formulario #cadastro-header-wizard .wizard-col {
+      position: relative;
+      text-align: center;
+      padding: 0;
+      height: 100%; }
+      #cadastro-usuario-formulario #cadastro-header-wizard .wizard-col i {
+        border: 1px solid #044dd1;
+        padding: 10px;
+        border-radius: 50%;
+        color: #044dd1;
+        transition: all 0.5s ease; }
+      #cadastro-usuario-formulario #cadastro-header-wizard .wizard-col h4 {
+        font-size: 20px;
+        color: #044dd1;
+        transition: all 0.5s ease; }
+      #cadastro-usuario-formulario #cadastro-header-wizard .wizard-col .wizard-progress {
+        position: absolute;
+        bottom: 0;
+        width: 0;
+        height: 10px;
+        background: #3d7ae8;
+        transition: all 0.5s ease; }
+      #cadastro-usuario-formulario #cadastro-header-wizard .wizard-col .center-wizard-btn {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        bottom: -13px; }
+        #cadastro-usuario-formulario #cadastro-header-wizard .wizard-col .center-wizard-btn .wizard-btn {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          background: #3d7ae8;
+          border: 10px solid #fff;
+          transition: all 0.5s ease;
+          cursor: pointer; }
+        #cadastro-usuario-formulario #cadastro-header-wizard .wizard-col .center-wizard-btn .wizard-btn-disabled {
+          background: #ccc; }
+      #cadastro-usuario-formulario #cadastro-header-wizard .wizard-col .progress-dados-usuario {
+        width: 50%; }
+    #cadastro-usuario-formulario #cadastro-header-wizard .col-wizard-login-color i {
+      color: #ccc;
+      border-color: #ccc; }
+    #cadastro-usuario-formulario #cadastro-header-wizard .col-wizard-login-color h4 {
+      color: #ccc; }
+    #cadastro-usuario-formulario #cadastro-header-wizard .col-wizard-usuario-color i {
+      color: #00cbb5;
+      border-color: #00cbb5; }
+    #cadastro-usuario-formulario #cadastro-header-wizard .col-wizard-usuario-color h4 {
+      color: #00cbb5; }
+  #cadastro-usuario-formulario .wizard-cadastro-status {
+    display: none; }
+  #cadastro-usuario-formulario .wizard-cadastro-status.wizard-active {
+    display: block; }
+  #cadastro-usuario-formulario .wizard-content {
+    min-height: 200px;
+    padding: 20px;
+    background: #fff; }
+    #cadastro-usuario-formulario .wizard-content .image-input-wrapper {
+      float: left; }
+      #cadastro-usuario-formulario .wizard-content .image-input-wrapper .image-input {
+        width: 100px;
+        height: 100px;
+        background: #eff3f6;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #3d7ae8;
+        cursor: pointer;
+        position: relative; }
+        #cadastro-usuario-formulario .wizard-content .image-input-wrapper .image-input input {
+          width: 100%;
+          height: 100%;
+          opacity: 0;
+          position: absolute;
+          cursor: pointer; }
+        #cadastro-usuario-formulario .wizard-content .image-input-wrapper .image-input #remover-foto-perfil {
+          position: absolute;
+          top: 0;
+          right: -10px;
+          cursor: pointer;
+          display: none; }
+        #cadastro-usuario-formulario .wizard-content .image-input-wrapper .image-input #alterar-foto-perfil {
+          position: absolute;
+          color: #fff;
+          display: none;
+          text-shadow: 1px 3px 0px #000; }
+      #cadastro-usuario-formulario .wizard-content .image-input-wrapper .image-input-label {
+        float: left;
+        width: 100px;
+        text-align: center; }
+    #cadastro-usuario-formulario .wizard-content .dados-pessoais {
+      margin-top: 20px;
+      border-top: 1px solid #ccc; }
+      #cadastro-usuario-formulario .wizard-content .dados-pessoais h5 {
+        font-size: 12px;
+        font-weight: bold;
+        color: #b3b3b3; }
+      #cadastro-usuario-formulario .wizard-content .dados-pessoais .input-field input {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 0; }
+      #cadastro-usuario-formulario .wizard-content .dados-pessoais .input-field label {
+        color: #a2a2a2; }
+      #cadastro-usuario-formulario .wizard-content .dados-pessoais .input-sexo {
+        padding: 15px; }
+        #cadastro-usuario-formulario .wizard-content .dados-pessoais .input-sexo h5 {
+          font-size: 12px;
+          font-weight: bold;
+          color: #b3b3b3; }
+      #cadastro-usuario-formulario .wizard-content .dados-pessoais .input-endereco {
+        padding: 15px 0; }
+        #cadastro-usuario-formulario .wizard-content .dados-pessoais .input-endereco h5 {
+          font-size: 12px;
+          font-weight: bold;
+          color: #b3b3b3;
+          padding-left: 12px; }
+      #cadastro-usuario-formulario .wizard-content .dados-pessoais .btn-avancar-cadastro-usuario {
+        float: right; }
+      #cadastro-usuario-formulario .wizard-content .dados-pessoais .input-token {
+        padding: 15px 0; }
+        #cadastro-usuario-formulario .wizard-content .dados-pessoais .input-token h5 {
+          font-size: 12px;
+          font-weight: bold;
+          color: #b3b3b3;
+          padding-left: 12px; }
+  #cadastro-usuario-formulario #cadastro-usuario-dados-login .cadastro-login-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%; }
+    #cadastro-usuario-formulario #cadastro-usuario-dados-login .cadastro-login-wrapper .row {
+      width: 400px;
+      max-width: 500px;
+      border: 1px solid #e9eced;
+      padding: 20px; }
+      #cadastro-usuario-formulario #cadastro-usuario-dados-login .cadastro-login-wrapper .row .input-field {
+        margin-bottom: 0; }
+      #cadastro-usuario-formulario #cadastro-usuario-dados-login .cadastro-login-wrapper .row .eye-senha {
+        position: absolute;
+        top: 33px;
+        right: 20px;
+        color: #777;
+        cursor: pointer; }
+      #cadastro-usuario-formulario #cadastro-usuario-dados-login .cadastro-login-wrapper .row input {
+        border: 1px solid #ccc;
+        border-radius: 5px; }
+      #cadastro-usuario-formulario #cadastro-usuario-dados-login .cadastro-login-wrapper .row .btn-salvar-login-senha {
+        display: flex;
+        justify-content: center;
+        align-items: center; }

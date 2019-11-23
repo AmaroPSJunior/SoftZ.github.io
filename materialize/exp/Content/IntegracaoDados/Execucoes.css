@@ -1,0 +1,174 @@
+﻿@charset "UTF-8";
+#btnExecutar {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  display: block; }
+  #btnExecutar .executando {
+    display: none; }
+  #btnExecutar.executando .executar {
+    display: none; }
+  #btnExecutar.executando .executando {
+    display: inline; }
+  #btnExecutar.executando i {
+    animation: spin 1.5s infinite linear;
+    margin-right: 8px; }
+
+/*
+    Execuções
+*/
+.etapa input.select-dropdown {
+  width: 170px;
+  max-width: 170px; }
+
+#execucoes .select-dropdown li.disabled, #execucoes .select-dropdown li.disabled > span {
+  display: block; }
+
+#execucoes h2 {
+  margin-top: 42px; }
+
+#execucoes .btn-flat.btn-floating {
+  margin-left: 40px; }
+
+#execucoes .arquivos {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly; }
+  #execucoes .arquivos .select-wrapper {
+    background-color: #dee7ed;
+    border-radius: 3px; }
+    #execucoes .arquivos .select-wrapper.done {
+      background-color: #007EFF; }
+      #execucoes .arquivos .select-wrapper.done input {
+        color: #fff; }
+    #execucoes .arquivos .select-wrapper .caret {
+      display: none; }
+    #execucoes .arquivos .select-wrapper input {
+      color: #a8c0d0;
+      margin-top: 0;
+      text-align: center;
+      padding: 0;
+      border: none; }
+  #execucoes .arquivos .dropdown-content li > a {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 14px; }
+  #execucoes .arquivos .dropdown-content.select-dropdown:not(.browser-default) {
+    top: 53.5px !important; }
+
+#execucoes .btn-floating i {
+  color: #131a1d;
+  font-size: .9rem; }
+
+#colErros {
+  width: 180px; }
+
+.etapa {
+  display: inline-block;
+  margin: 20px 10px; }
+  .etapa:first-child {
+    margin-left: 0; }
+  .etapa :last-child {
+    margin-right: 0; }
+  .etapa .label {
+    font-size: 13.5px;
+    color: #666;
+    margin-bottom: 30px;
+    text-align: left;
+    font-weight: 600; }
+    .etapa .label i {
+      margin-right: 18px; }
+  .etapa .select-dropdown.active_btn {
+    background-color: #007eff !important;
+    color: #fff !important; }
+
+.select-dropdown .dropdown-button {
+  padding: 0 10px;
+  width: 100%; }
+
+.select-dropdown .select-wrapper input.select-dropdown.selected {
+  color: #007eff; }
+
+/*
+    Steps
+*/
+.steps {
+  margin: 20px 0;
+  margin-bottom: 60px;
+  position: relative; }
+  .steps .steps-list {
+    font-size: 0; }
+    .steps .steps-list .steps-item {
+      display: inline-block;
+      width: 170px;
+      position: relative; }
+      .steps .steps-list .steps-item:first-child {
+        margin-left: 0; }
+        .steps .steps-list .steps-item:first-child:before {
+          margin-left: 40px; }
+      .steps .steps-list .steps-item:last-child {
+        margin-left: 0; }
+        .steps .steps-list .steps-item:last-child:before {
+          width: calc(100% + 1px);
+          margin-left: -70px; }
+      .steps .steps-list .steps-item:before {
+        content: '';
+        width: calc(100% + 120px);
+        top: 13px;
+        background-color: #dee7ed;
+        height: 4px;
+        display: block;
+        position: absolute;
+        z-index: 0;
+        margin-left: 0;
+        margin-right: 0; }
+  .steps .marcador {
+    width: 31px;
+    height: 31px;
+    border: 1px solid #dee7ed;
+    border-radius: 50%;
+    margin: 0 auto;
+    position: relative;
+    z-index: 0;
+    border: 5px solid #fff;
+    background-color: #dee7ed; }
+  .steps .-done .marcador {
+    background-color: #00CBB5;
+    border: 6px solid #FFF; }
+  .steps .-done .icon-wrapper i.done {
+    display: block;
+    color: #00CBB5; }
+  .steps .-error .marcador {
+    background-color: #fc1746;
+    border: 6px solid #FFF; }
+  .steps .-error .icon-wrapper i.error {
+    display: block;
+    color: #fc1746; }
+  .steps .-doing .icon-wrapper i.doing {
+    display: block;
+    color: #ccc;
+    animation: spin 1.5s infinite linear; }
+  .steps .-active {
+    /*.icon-wrapper {
+            i { 
+                &.error {
+                    display: block;
+                    color: #fc1746;
+                }
+            }
+        }*/ }
+    .steps .-active .marcador {
+      background-color: #007eff;
+      border: 6px solid #FFF; }
+  .steps .icon-wrapper {
+    margin-top: 10px;
+    height: 18px; }
+    .steps .icon-wrapper i {
+      font-size: 21px;
+      display: none; }
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg); } }

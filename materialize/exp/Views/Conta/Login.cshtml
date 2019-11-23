@@ -1,0 +1,75 @@
+﻿@model SLCONSTRUCT.UI.WEB.ViewModels.LoginVModel
+
+@{
+    Layout = "~/Views/Shared/_Login.cshtml";
+}
+
+<body>
+    <div class="row" id="pwd-container">
+        <div id="bgLogin" class="col s12 m6">
+            <section>
+                <img src="~/Content/img/login/logo-login.svg" alt="São Lucas" />
+            </section>
+        </div>
+        <div id="box" class="col s12 m6">
+            <section id="divFormularioLogin">
+                <div id="boxForm">
+                    <span>SL Construct</span>
+                    <span id="italico">Entre com seu usuário e senha</span>
+                    @using (Html.BeginForm("Login", "Conta", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @id = "frmLogin" }))
+                    {
+                        @*@Html.AntiForgeryToken()*@
+                        <div class="" role="alert" id="mensagem">
+                            @Html.ValidationSummary(true, "")
+                        </div>
+
+                        <div id="divInputUser" class="row">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix fas fa-user-circle" aria-hidden="true"></i>
+                                @Html.TextBoxFor(m => m.Usuario, new { required = "required" })
+                                @Html.LabelFor(m => m.Usuario)
+                            </div>
+                        </div>
+                        <div id="divInputPassword" class="row">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix fas fa-lock" aria-hidden="true"></i>
+                                @*<input id="txtpsw" type="text" required="required" autocomplete="off" />*@
+                                @Html.TextBoxFor(m => m.Password, new { @type = "password", required = "required" })
+                                @Html.LabelFor(m => m.Password)
+                            </div>
+                        </div>
+                        @*<div id="divInputLembre" class="row">
+                            <div class="col s12">
+                                <input type="checkbox" class="filled-in" id="lembrar" name="LembrarLogin" value="true" />
+                                @Html.LabelFor(m => m.LembrarLogin, new { @for = "lembrar" })
+                            </div>
+                        </div>*@
+                        <div>
+                            <button type="submit" id="go" name="go" class="btn">Entrar</button>
+                        </div>
+                    }
+                </div>
+            </section>
+        </div>
+    </div>
+    @section Scripts{
+        <script>
+        $(function () {
+            $('#UserName').focus();
+        });
+
+        //Para evitar que o label da senha fique por cima do campo ao auto preencher
+        $(window).on("load", function () {
+            setTimeout(function () {
+                $('input:-webkit-autofill').each(function () {
+                    if ($(this).val().length !== "") {
+                        $(this).siblings('label').addClass('active');
+                    }
+                });
+
+            }, 100);
+        });
+        </script>
+        <script src="~/Scripts/Conta/Login.js"></script>
+    }
+</body>

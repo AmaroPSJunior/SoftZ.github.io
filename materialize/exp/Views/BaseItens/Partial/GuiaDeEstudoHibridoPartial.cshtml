@@ -1,0 +1,79 @@
+﻿@model SLCONSTRUCT.UI.WEB.ViewModels.GuiaEstudoHibridoVModel
+   
+    <div class="modal-header">
+        <p class="titulo-modal">Guia de Estudo</p>
+    </div>
+    
+    <div class="modal-content">
+        <div class="row">
+            @using (Html.BeginForm("Salvar", "GuiaEstudoHibrido", FormMethod.Post, new { data_js = "form-validate", id = "frmCadastroGuiaHibrido" }))
+            {
+
+
+                @Html.HiddenFor(x => x.codbaseunidadeaprendizagem)
+                @Html.HiddenFor(x => x.codconteudo)
+                @Html.HiddenFor(x => x.Texto)
+               
+                <div class="input-field col l6 no-padding bloco-unidades-hibrido" style="position:relative">
+                    <div class="bloco-refatora-hibrido">
+                        <span class="label-nome-unidade"></span>
+                        <input type="hidden" name="codconteudounidade" value="" />
+                        <input type="hidden" name="NomeUnidade" value="" class="refatora-nome-hibrido" />
+                        <input class="input-title-div nome-unidade" value="" placeholder="Nome da Unidade"/>
+                        <textarea name="editorguiaestudohibrido0" id="editorguiaestudohibrido0" class="refatora-nome-hibrido" rows="10" cols="80"></textarea>
+                        <script>
+                            CKEDITOR.replace('editorguiaestudohibrido0');
+                        </script>
+                    </div>
+                </div>
+                <div class="col l6" style="display: flex;justify-content: center;margin-top: 20px;">
+                    <table id="tabela-de-guias-hibrido" class="striped z-depth-1" style="width:80%">
+                        <thead>
+                            <tr>
+                                <th>Unidade</th>
+                                <th>Nome</th>
+                                <th class="right">Editar/Excluir</th>
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @if (Model.Unidades != null && Model.Unidades.Count() > 0)
+                            {
+                                var i = 1;
+                                foreach (var item in Model.Unidades)
+                                {
+
+                                    <tr data-codconteudounidade="@item.codconteudounidade" data-codconteudo="@item.codconteudo">
+                                        <td>Unidade @i</td>
+                                        <td>@item.NomeUnidade</td>
+                                        <td class="right" data-texto="@item.Texto" data-nomeunidade="@item.NomeUnidade" ><i class="fas fa-trash-alt right excluir-unidade-hibrido" aria-hidden="true"></i><i class="fas fa-pen-square right editar-unidade-hibrido" aria-hidden="true"></i></td>
+                                    </tr>
+                                    i++;
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td>Nada cadastrado</td>
+                                    <td>0</td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <div class="col s6">
+            <a href="#!" class="modal-action modal-close waves-effect btn-flat">Fechar</a>
+        </div>
+        <div class="col s6">
+            <a href="#!" class="modal-action waves-effect btn-flat salvar-guia-hibrido">Salvar</a>
+        </div>
+    </div>
+
+

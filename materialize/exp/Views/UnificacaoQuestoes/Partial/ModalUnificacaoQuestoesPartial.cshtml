@@ -1,0 +1,70 @@
+﻿@model SLCONSTRUCT.UI.WEB.ViewModels.InformacoesGeraisUnificacaoVModel
+
+<div class="row">
+    <div class="header col s12">
+        <div>
+            <i class="fas fa-angle-left prev"></i>
+            <i class="fas fa-angle-right next"></i>
+        </div>
+        <p>Informações gerais: Questão principal</p>
+        <i class="fas fa-times fechar"></i>
+    </div>
+
+
+    <div class="sidebar">
+
+        <div class="item" data-coditem="@Model.Coditem">
+            <section class="numero"><p>@*Q*@</p></section>
+            <span class="title">Titulo</span>
+            <span class="descricao">@Model.Titulo</span>
+            <div class="nivel"><i class="fas fa-circle"></i>@Model.Nivel</div>
+        </div>
+
+        <div>
+            <div class="totais center">
+                <p>@Model.TotalQuestoesUnificadas</p>
+                <p>questões unificadas</p>
+            </div>
+
+            <div class="totais center">
+                <p>@Model.TotalDesafios</p>
+                <p>total de desafios</p>
+            </div>
+
+            <div class="totais center">
+                <p>@Model.TotalRespostasAlunos</p>
+                <p>total de respostas dos alunos</p>
+            </div>
+        </div>
+
+        <div class="sidebar-footer">
+            <div class="dados">
+                <p>Banca</p>
+                <p>@Model.Banca</p>
+            </div>
+
+            <div class="dados">
+                <p>Autor</p>
+                <p>@Model.Autor</p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="content">
+        <div class="row">
+            <div class="col s12">
+                <ul class="tabs">
+                    <li class="tab col s3"><a class="active" href="#questao-unificada">Questão</a></li>
+                    <li class="tab col s3"><a href="#matriz-unificada">Matriz</a></li>
+                </ul>
+            </div>
+            <div id="questao-unificada" class="content-tab col s12">
+                @*@Html.Partial("~/Views/UnificacaoQuestoes/Partial/ListagemQuestaoModalPartial.cshtml")*@
+            </div>
+            <div id="matriz-unificada" class="content-tab col s12">
+                @*@Html.Partial("~/Views/UnificacaoQuestoes/Partial/ListagemMatrizModalPartial.cshtml")*@
+            </div>
+        </div>
+    </div>
+</div>

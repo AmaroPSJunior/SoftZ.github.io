@@ -1,0 +1,240 @@
+﻿@model SLCONSTRUCT.UI.WEB.ViewModels.UnidadeAvaliativaVModel
+
+@using (Html.BeginForm("UnidadeAprendizagemSalvar", "UA", FormMethod.Post, new { data_js = "form-validate", id = "frmCadastroUnidade", data_url = Url.Action("UnidadeAprendizagemSalvar", "UA") }))
+{
+    @Html.HiddenFor(x => x.codeixo, new { @Value = "0" })
+    @Html.HiddenFor(x => x.codbaseunidadeaprendizagem)
+
+    <div class="bloco-conteudo-padrao">
+
+        <input type="hidden" id="hfnumpage" name="hfnumpage" value="1" />
+
+        <div class="row">
+
+            <div class="input-field-title">
+                <div class="col l12">
+
+                    <div class="col l2 titulo-item itemdrop">
+                        <b>TÍTULO</b>
+                    </div>
+
+                    <div class="col l9 itemdrop">
+                        @Html.TextBoxFor(m => m.titulo, new { @required = "required", @class = "alinhatext", maxlength=150 })
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="col l12 ">
+
+                <div class="col l2 titulo-item">
+                    <i class="fa fa-pencil-square-o icon-padrao circular items" aria-hidden="true"></i><h2 class="sl-titulo-default sl-navy-blue">MODO</h2>
+                </div>
+
+                <div class="col l10 blocoradio">
+
+                    <div>
+                        @Html.RadioButtonFor(m => m.codmodalidade, "1", new { @name = "codmodalidade", @id = "hibrido", @class = "required" })
+                        <label for="hibrido">Híbrido</label>
+                    </div>
+
+                    <div>
+                        @Html.RadioButtonFor(m => m.codmodalidade, "2", new { @name = "codmodalidade", @id = "online", @class = "required" })
+                        <label for="online">Online</label>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col l12 bloco">
+
+                <div class="col l12">
+
+                    <div class="col l2 titulo-item">
+                        <b>EIXO</b>
+                    </div>
+
+                    <div class="col l9">
+                        <select>
+                            <option value="" disabled selected>Selecione</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="col l12">
+
+                    <div class="col l2 titulo-item">
+                        <b>AUTOR</b>
+                    </div>
+
+                    <div class="col l9">
+                        @Html.DropDownListFor(x => x.codautor, Model.listaautor, new { @required = "required" })
+                    </div>
+
+                </div>
+
+                <div class="col l12">
+
+                    <div class="col l2 titulo-item">
+                        <b>BANCA</b>
+                    </div>
+
+                    <div class="col l9">
+                        @Html.DropDownListFor(x => x.codbanca, Model.listabanca, new { @required = "required" })
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col l12 pontilhado"></div>
+
+            <div class="col l12 m12 bloco">
+                <div class="col l3 left titulo-item">
+                    <i class="fa fa-pencil-square-o icon-padrao circular items" aria-hidden="true"></i><h2 class="sl-titulo-default sl-navy-blue">HABILIDADE</h2>
+                    <i class="fa fa-plus adicionar-item titulo-item left edit-modal" aria-hidden="true"></i>
+                </div>
+
+                <div class="col s8">
+                    <table id="table-pesq-habilidades" class="striped">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <input type="checkbox" class="filled-in" id="checkedAllTable">
+                                    <label for="checkedAllTable">Habilidades</label>
+                                </th>
+                                <th>Curso</th>
+                                <th>Disciplina</th>
+                                <th class="-acoes">Ações</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var item in Model.listamatriz)
+                            {
+                                <tr data-codhabilidade="@item.codunidadeensinohabilidadecollege"
+                                    data-coddisciplina="@item.coddisciplinacollege"
+                                    data-codunidadeensino="@item.codunidadeensinocollege"
+                                    data-codbasecurricular="@item.codbasecurricularcollege"
+                                    data-codcurriculo="@item.codcurriculocollege"
+                                    data-codbaseunidadeaprendizagem="@item.codbaseunidadeaprendizagem"
+                                    data-codbaseunidadeaprendizagemhabilidade="@item.codbaseunidadeaprendizagemhabilidade"
+                                    data-codcurso="@item.codcursocollege">
+
+                                    <td>
+                                        <input type="checkbox" class="filled-in checkSingleTable" id="filled-in-box-@item.codunidadeensinohabilidadecollege">
+                                        <label for="filled-in-box-@item.codunidadeensinohabilidadecollege">@item.habilidadecollege</label>
+                                    </td>
+                                    <td>@item.cursocollege</td>
+                                    <td>@item.disciplinacollege</td>
+                                    <td class="center"><i class="fa fa-trash-o exclui-habilidade" aria-hidden="true" title="Excluir"></i></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                    <div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="center">
+            @if (Model.listamatriz.Count > 0)
+            {
+                <button class="btn cadastrar-unidades" type="button">avançar</button>
+                <button class="btn excluir-habilidades-multi hide sl-red" type="button">Excluir habilidades</button>
+            }
+            else
+            {
+                <button class="btn cadastrar-unidades" type="button" disabled>avançar</button>
+                <button class="btn excluir-habilidades-multi hide sl-red" type="button">Excluir habilidades</button>
+            }
+        </div>
+
+    </div>
+}
+
+@using (Html.BeginForm("", "", FormMethod.Post, new { data_js = "form-validate", id = "frmCadastroUnidadeAdicionarHabilidade" }))
+{ 
+    <!-- Modal Structure -->
+    <div id="modal-cdastro-habilidade" class="modal modal-fixed-footer default-sl-blue">
+        <div class="modal-header">
+            <h4 class="titulo-modal-default-sl">ADICIONAR HABILIDADES</h4>
+            <span class="modal-close-default-sl modal-close">fechar <i class="fa fa-window-close-o" aria-hidden="true"></i></span>
+        </div>
+        <div class="modal-content">
+            <div class="row">
+                <div class="col l3 bloco">
+                    <i class="fa fa-search icon-padrao circular items" aria-hidden="true"></i><h2 class="sl-titulo-default sl-navy-blue">PESQUISA</h2>
+                </div>
+                <div class="col l12">
+                    <div class="col l12 blocodrop">
+                        <div class="col l2 titulo-item itemdrop">
+                            <b>CURSO</b>
+                        </div>
+                        <div class="col l9 itemdrop">
+                            <select id="codcursocollege" required="required" data-url="@Url.Action("GetDisciplinasCursos", "UA")">
+                                <option disabled selected value="">Selecione</option>
+                                @{
+                                    foreach (var curso in Model.listacurso)
+                                    {
+                                        <option value="@curso.Value">@curso.Text</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col l12 blocodrop">
+                        <div class="col l2 titulo-item itemdrop">
+                            <b>DISCIPLINA</b>
+                        </div>
+                        <div class="col l9 itemdrop">
+                            <select id="ddlDisciplina" data-url="@Url.Action("GetUnidadesDisciplina", "UA")">
+                                <option disabled value="">Selecione</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col l12 blocodrop">
+                        <div class="col l2 titulo-item itemdrop">
+                            <b>TEXTO</b>
+                        </div>
+                        <div class="col l9 itemdrop">
+                            <input type="text" id="txtfiltro" class="input-pesquisa" name="txtfiltro" value="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col l11">
+                    <div class="right">
+                        <button type="button" class="btn buscar -buscahabilidade" data-url="@Url.Action("CarregarListaPesquisaHabilidades", "UA")">BUSCAR</button>
+                    </div>
+                </div>
+                <div class="col l12 titulo-item">
+                    <div class="left">
+                        <b>RESULTADOS</b>
+                    </div>
+                </div>
+                <div class="col l12">
+                    <table id="table-pesq-habilidades-modal" class="striped">
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox" class="filled-in" id="checkedAll" /><label for="checkedAll">Habilidades</label></th>
+                                <th>Curso</th>
+                                <th>Disciplina</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-salva-default waves-effect modal-action salva-habilidade">Enviar</button>
+    </div>
+}

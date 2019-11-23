@@ -1,0 +1,49 @@
+﻿@model  IEnumerable<SLCONSTRUCT.UI.WEB.ViewModels.MacroDesafioUAItemVModel>
+
+
+@if (Model.ToList().Count() > 0)
+{
+    for (var i = 0; i < Model.ToList().Count(); i++)
+    {
+        var qtd = (i + 1).ToString("D2");
+
+        var cssNotification = "";
+        var htmlNotification = "";
+        if (@Model.ToList()[i].possuiMaisDeUmaQuestaoSelecionada)
+        {
+            cssNotification = "color: red;margin-left: 1rem;";
+            htmlNotification = "(Existe mais de uma questão selecionada para uma habilidade!)";
+        }
+
+
+        <div class="row">
+            <div class="list-macrodesafios" data-coddesafio="@Model.ToList()[i].coddesafio" data-codunidadeaprendizagemtrilha="@Model.ToList()[i].codunidadeaprendizagemtrilha" data-codunidadeaprendizagem="@Model.ToList()[i].codunidadeaprendizagem">
+                <span class="text-microdesafios">
+                    Macrodesafio @qtd <strong style="@cssNotification">@htmlNotification</strong>
+                </span>
+                <div class="acoes">
+                    <a href="#"><i class="fas fa-edit editar"></i></a>
+                    <a href="#"><i class="fas fa-trash-alt excluir"></i></a>
+                </div>
+            </div>
+        </div>
+
+    }
+    <div class="row no-margin">
+        <div class="col s12">
+            <a class="btn-addMicro btn right"><i class="fas fa-plus left"></i>ADICIONAR MACRODESAFIO</a>
+        </div>
+    </div>
+}
+else
+{
+    <h4 class="aviso--msg">Nenhum item cadastrado</h4>
+    <div class="row no-margin">
+        <div class="col s12">
+            <a class="btn-addMicro btn right"><i class="fas fa-plus left"></i>ADICIONAR MACRODESAFIO</a>
+        </div>
+    </div>
+}
+
+
+

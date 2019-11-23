@@ -1,0 +1,117 @@
+﻿@model SLCONSTRUCT.UI.WEB.ViewModels.UnidadeAvaliativaVModel
+
+@using (Html.BeginForm("UnidadeAprendizagemSalvar", "UA", FormMethod.Post, new { data_js = "form-validate", id = "frmCadastroUnidade", data_url = Url.Action("UnidadeAprendizagemSalvar", "UA") }))
+{
+    @Html.HiddenFor(x => x.codeixo, new { @Value = "0" })
+    @Html.HiddenFor(x => x.codbaseunidadeaprendizagem)
+
+    <input type="hidden" id="hfnumpage" name="hfnumpage" value="1" />
+
+    <section>
+        <div class="input-field col s6">
+            @Html.DropDownListFor(x => x.codmodalidade, Model.listamodalidade, new { @required = "required" })
+            @Html.LabelFor(x => x.codmodalidade)
+        </div>
+        <div class="input-field col s6">
+            <select>
+                <option selected value="null">Nulo</option>
+            </select>
+            <label>Eixo</label>
+        </div>
+        <div class="input-field col s6">
+            @Html.DropDownListFor(x => x.codautor, Model.listaautor, new { @required = "required" })
+            @Html.LabelFor(x => x.codautor)
+        </div>
+        <div class="input-field col s6">
+            @Html.DropDownListFor(x => x.codbanca, Model.listabanca, new { @required = "required" })
+            @Html.LabelFor(x => x.codbanca)
+        </div>
+        <div class="col s12">
+            <table id="table-pesq-habilidades" class="striped">
+                <thead>
+                    <tr>
+                        <th>Habilidade</th>
+                        <th>Disciplina</th>
+                        <th class="center edit-modal"><i class="fas fa-plus" aria-hidden="true" data-url="@Url.Action("CarregarPesquisa", "UA")" title="Editar"></i></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model.listamatriz)
+                    {
+                        <tr data-codhabilidade="@item.codunidadeensinohabilidadecollege"
+                            data-coddisciplina="@item.coddisciplinacollege"
+                            data-codunidadeensino="@item.codunidadeensinocollege"
+                            data-codbasecurricular="@item.codbasecurricularcollege"
+                            data-codcurriculo="@item.codcurriculocollege"
+                            data-codunidadeaprendizagem="@item.codigohabilidade"
+                            data-codbaseunidadeaprendizagemhabilidade="@item.codbaseunidadeaprendizagemhabilidade">
+
+                            <td>@item.habilidadecollege</td>
+                            <td>@item.disciplinacollege</td>
+                            <td class="center"><i class="fas fa-trash-alt exclui-habilidade" aria-hidden="true" title="Excluir"></i></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div id="" class="col s12 footer-avancar center">
+            <button type="button" class="waves-effect waves-light btn cadastrar-unidades">Avançar <i class="fas fa-arrow-right" aria-hidden="true"></i></button>
+        </div>
+    </section>
+
+    <!-- Modal Structure -->
+    <div id="modal-cdastro-habilidade" class="modal modal-fixed-footer">
+        <div class="modal-header">
+            <p class="titulo-modal">Pesquisa de Habilidades</p>
+        </div>
+        <div class="modal-content">
+            <div class="row">
+                <div class="input-field col l6">
+                    @Html.DropDownListFor(x => x.codcursocollege, Model.listacurso, new { @required = "required", @data_url = Url.Action("GetDisciplinasCursos", "UA") })
+                    @Html.LabelFor(x => x.codcursocollege)
+                </div>
+                <div class="input-field col l6">
+                    <select id="ddlDisciplina" data-url="@Url.Action("GetUnidadesDisciplina", "UA")">
+                        <option value="">Selecione</option>
+                    </select>
+                    <label>Disciplina</label>
+                </div>
+                @*<div class="input-field col l6">
+                        <select id="ddlUnidade">
+                            <option value="">Selecione</option>
+                        </select>
+                        <label>Unidade Ensino</label>
+                    </div>*@
+                <div class="input-field col l9">
+                    <input class="input-pesquisa" type="text" name="" value="" placeholder="Pesquise aqui..." />
+                </div>
+                <div class="input-field col l3">
+                    <button type="button" class="waves-effect waves-light btn-large right -busca" data-url="@Url.Action("CarregarListaPesquisaHabilidades", "UA")"><i class="fas fa-search" aria-hidden="true"></i> Buscar</button>
+                </div>
+
+                <div class="col s12 left no-padding"><p class="results">Resultados:</p></div>
+                <table id="table-pesq-habilidades-modal" class="striped">
+                    <thead>
+                        <tr>
+                            <th>Habilidades</th>
+                            <th>Disciplina</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="col s6">
+                <a href="#!" class="modal-action modal-close waves-effect btn-flat">Fechar</a>
+            </div>
+            <div class="col s6">
+                <a href="#!" class="modal-action waves-effect btn-flat salva-habilidade">Enviar</a>
+            </div>
+        </div>
+    </div>
+
+}

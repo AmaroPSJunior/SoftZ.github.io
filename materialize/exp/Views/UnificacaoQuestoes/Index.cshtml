@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <link href="~/Content/UnificacaoQuestoes/UnificacaoQuestoes.min.css" rel="stylesheet" />
+}
+
+
+@section Scripts {
+    <script src="~/Scripts/UnificacaoQuestoes/ListagemQuestoesTemplates.js"></script>
+    <script src="~/Scripts/UnificacaoQuestoes/ListagemQuestoes.js"></script>
+
+}
+
+<script>
+    var urlPesquisarQuestoes = "@Url.Action("PesquisarQuestoes", "UnificacaoQuestoes")";
+    var urlVerificarDuplicidadeQuestao = "@Url.Action("VerificarDuplicidadeQuestao", "UnificacaoQuestoes")";
+    var urlObterCursos = "@Url.Action("ObterCursos", "UnificacaoQuestoes")";
+    var urlUnificarQuestao = "@Url.Action("UnificarQuestao", "UnificacaoQuestoes")";
+</script>
+
+<div class="main" id="unificacao-wrapper">
+    <div class="row">
+        <div class="col l12 no-padding">
+            <div>
+                <i class="fas fa-home icon-padrao botao-home" aria-hidden="true"></i><h2 class="sl-titulo sl-navy-blue">Unificação de questões</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col l12 unificacao-box">
+            <h5>Pesquisar Questões</h5>
+            <div class="col l12 no-padding">
+                <h5 class="label_search_unificacao">Cursos</h5>
+            </div>
+            <div class="col l12 search-unificacao-wrapper no-padding">
+                <i id="search-icon-unificacao" class="fas fa-search"></i>
+                <input type="text" class="input-text-unuficacao autocomplete" maxlength="150" />
+                <a class='dropdown-button filtro-btn' href='#' data-activates='filtro-btn'><span><i class="fas fa-sliders-h"></i> Filtro</span></a>
+                <ul id='filtro-btn' class='dropdown-content'>
+                    <div class="padding-filtro">
+                        <label>TIPO</label>
+                        <li>
+                            <input type="checkbox" class="filled-in" id="microdesafio-check" />
+                            <label for="microdesafio-check">Microdesafio</label>
+                        </li>
+
+                        <li>
+                            <input type="checkbox" class="filled-in" id="macrodesafio-check" />
+                            <label for="macrodesafio-check">Macrodesafio</label>
+                        </li>
+                        <label>STATUS</label>
+                        <li>
+                            <input type="checkbox" class="filled-in" id="naounificadas-check" />
+                            <label for="naounificadas-check">Não unificadas</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" class="filled-in" id="unificadas-check" />
+                            <label for="unificadas-check">Unificadas</label>
+                        </li>
+                    </div>
+                </ul>
+            </div>
+            <div class="col l12 no-padding filtros-tags">
+                <span>Filtros:</span>
+            </div>
+            <div class="col s12 btn-pesquiasr-unificacao">
+                <button class="btn" id="pesquisar" type="button">Pesquisar</button>
+            </div>
+        </div>
+    </div>
+    <div id="partial-unificacao-pesquisa">
+        @*@Html.Partial("~/Views/UnificacaoQuestoes/Partial/ListagemQuestoesPartial.cshtml")*@
+    </div>
+</div>
+
+<!--Modal Load unificação -->
+<div id="modal-load-unificacao" class="modal default-sl-blue modal-fixed-footer">
+    @Html.Partial("~/Views/UnificacaoQuestoes/Partial/ModalLoadPartial.cshtml")
+</div> 

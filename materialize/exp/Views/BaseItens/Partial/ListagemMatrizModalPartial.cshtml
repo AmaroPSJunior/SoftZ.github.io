@@ -1,0 +1,52 @@
+﻿@model IEnumerable<SLCONSTRUCT.UI.WEB.ViewModels.ListagemMatrizModalVModel>
+
+<h4 class="listagem__title">Matrizes associadas</h4>
+<div class="content-list-card">
+    @if (Model.Count() > 0)
+    {
+        var indice = 1;
+        foreach (var item in Model)
+        {
+
+            <div class="content-list-card-item z-depth-1">
+                <div class="content-list-card-item__numeration">
+                    <span>@indice</span>
+                </div>
+                <div class="content-list-card-item__content">
+                    <div class="content-list-card-item__content___block">
+                        <span class="content-list-card-item__content___title">Curso</span>
+                        <p>@item.curso</p>
+                    </div>
+                    <div class="content-list-card-item__content___block">
+                        <span class="content-list-card-item__content___title">Disciplina</span>
+                        <p>@item.disciplina</p>
+                    </div>
+                    <div class="content-list-card-item__content___block">
+                        <span class="content-list-card-item__content___title">Habilidade</span>
+                        <p>@item.habilidade</p>
+                    </div>
+
+                    @if (item.descritor != null)
+                    {
+                        <div class="content-list-card-item__content___block">
+                            <span class="content-list-card-item__content___title">Descritor</span>
+                            <p>@item.descritor</p>
+                        </div>
+                    }
+                </div>
+                @if (!item.matrizliberadaua)
+                {
+                    <div class="content-list-card-item__delete">
+                        <i class="far fa-trash-alt excluir-item-matriz" data-coditemmatriz="@item.coditemmatriz" title="excluir"></i>
+                    </div>
+                }
+            </div>
+            indice = indice + 1;
+        }
+    }
+    else
+    {
+        <p><strong>Nenhum item cadastrado.</strong></p>
+    }
+
+</div>

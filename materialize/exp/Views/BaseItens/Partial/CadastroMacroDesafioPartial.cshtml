@@ -1,0 +1,58 @@
+﻿@model SLCONSTRUCT.UI.WEB.ViewModels.MacroDesafioVModel
+
+@using (Html.BeginForm("Salvar", "CadastroMacroDesafioPartial", FormMethod.Post, new { data_js = "form-validate", id = "frmCadastroMacroDesafio" }))
+{
+    @Html.HiddenFor(x => x.codbaseunidadeaprendizagem)
+
+    <div class="modal-header">
+        <h4 class="titulo-modal-default-sl">MACRODESAFIO</h4>
+        <span class="modal-close-default-sl modal-close">fechar <i class="fas fa-window-close" aria-hidden="true"></i></span>
+    </div>
+
+    <div class="modal-content">
+
+        <div class="col l3 iconmargin">
+            <i class="fas fa-pen-square icon-padrao circular items" aria-hidden="true"></i><h2 class="sl-titulo-default sl-navy-blue">MACRO</h2>
+        </div>
+
+        <div class="col l12">
+
+            <div class="panel-collapse">
+                <div class="collapsible-list">
+
+                    @if (Model.listaHabilidade.Count() > 0)
+                    {
+                        <ul class="collapsible dentro" data-collapsible="expandable">
+
+                            @for (int i = 0; i < Model.listaHabilidade.Count(); i++)
+                            {
+                                <li>
+                                    <div class="collapsible-header itemmacro" data-codcurso="@Model.listaHabilidade[i].CODIGOCURSO" 
+                                         data-curso="@Model.listaHabilidade[i].CURSO"  data-codhabilidade="@Model.listaHabilidade[i].CODIGOHABILIDADE"
+                                         data-coddisciplina="@Model.listaHabilidade[i].CODIGODISCIPLINA" data-disciplina="@Model.listaHabilidade[i].DISCIPLINA" 
+                                         data-codunidadeensino="@Model.listaHabilidade[i].CODIGOUNIDADEENSINO" >
+                                        @Model.listaHabilidade[i].HABILIDADE
+                                    </div>
+                                    <div class="collapsible-body">
+
+                                        <div class="griditem">
+                                            @* chama grid item *@
+                                        </div>
+
+                                    </div>
+                                </li>
+                              }
+
+                         </ul>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+      
+
+
+

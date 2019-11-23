@@ -3,71 +3,87 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>materialize</title>
-    <!--Import materialize.css-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
     <link type="text/css" rel="stylesheet" href="css/index.css" />
     <link type="text/css" rel="stylesheet" href="fontawesome-free-5.11.2-web/css/all.min.css" />
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Import fontawesome -->
-    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700|Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="./logo.jpg">
+    <link rel="icon" type="image/png" sizes="32x32" href="./logo.jpg">
+    <link rel="icon" type="image/png" sizes="16x16" href="./logo.jpg">
+    <link rel="manifest" href="./exp/Content/favicons/manifest.json">
+    <link rel="mask-icon" href="./exp/Content/favicons/safari-pinned-tab.svg" color="#5bbad5">
+
+    <title>Login</title>
 </head>
+    
 
 <body>
     
-    <nav><i class="fas fa-bars" data-activates="slide-out"></i></nav>
+    <div class="row" id="pwd-container">
+            <div id="bgLogin" class="col s12 m6 grey lighten-5">
+                <section style="display: flex; justify-content: center; align-items: center;">
+                    <img src="logo.jpg" alt="Softz" />
+                </section>
+            </div>
 
-    <ul id="slide-out" class="side-nav collapsible" data-collapsible="accordion">
-        <li>
-            <div class="user-view">
-                <div class="background">
-                    <img src="img/images.png">
-                </div>
-                <a href="#!user"><img class="circle" src="img/amaro.png"></a>
-                <a href="#!name"><span class="white-text name">Nome</span></a>
-                <a href="#!email"><span class="white-text email">Email@gmail.com</span></a>
-            </div>
-        </li>
-        <li>
-            <div class="collapsible-header">
-                Links
-            </div>
-            <div class="collapsible-body">
-                <a class="waves-effect" href="cracha.html" target="_blank">Formulario cadastro cracha</a>
-                <a class="waves-effect" href="dados-candidatos.html" target="_blank">dados candidatos</a>
-                <a class="waves-effect" href="formularioJS.html" target="_blank">formularioJS</a>
-                <a class="waves-effect" href="inscrição-realizada.html" target="_blank">inscrição</a>
-            </div>
-        </li>
+            <div id="box" class="col s12 m6">
+                <section id="divFormularioLogin">
+                    <div id="boxForm">
+                        <span>Softz</span>
+                        <span id="italico">Entre com seu usuário e senha</span>
 
-        <li>
-            <div class="collapsible-header">
-                Projetos
-            </div>
-            <div class="collapsible-body">
-                <a class="waves-effect" href="http://sitereact.herokuapp.com" target="_blank">React</a>
-                <a class="waves-effect" href="#!">Arduino</a>
-                <a class="waves-effect" href="#!">Node</a>
-            </div>
-        </li>
+                        <div id="divInputUser" class="row">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix fas fa-user-circle" aria-hidden="true"></i>
+                                <input type="text">
+                                <label for="">Usuário</label>
+                            </div>
+                        </div>
+                        <div id="divInputPassword" class="row">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix fas fa-lock" aria-hidden="true"></i>
+                                <input id="txtpsw" type="text" required="required" autocomplete="off" />
+                                <label for="">Senha</label>
 
-        <li>
-            <div class="collapsible-header">
-                Experimentos e testes
+                            </div>
+                        </div>
+                        
+                        <div class="btnControl">
+                            <button type="submit" id="go" name="go" class="btn blue darken-4" style="margin: 1rem;">Entrar</button>
+                            <button type="submit" id="go" name="go" class="btn blue-grey lighten-2" style="margin: 1rem;">Cadastrar</button>
+                        </div>
+                        
+                    </div>
+                </section>
             </div>
-            <div class="collapsible-body">
-                <a class="waves-effect" href="#!">materializecss</a>
-                <a class="waves-effect" href="bootstrap.html" target="_blank">Bootstrap</a>
-                <a class="waves-effect" href="#!">fontawesome</a>
-            </div>
-        </li>
-    </ul>
+        </div>
+        
+        <script>
+        $(function () {
+            $('#UserName').focus();
+        });
 
+        //Para evitar que o label da senha fique por cima do campo ao auto preencher
+        $(window).on("load", function () {
+            setTimeout(function () {
+                $('input:-webkit-autofill').each(function () {
+                    if ($(this).val().length !== "") {
+                        $(this).siblings('label').addClass('active');
+                    }
+                });
+
+            }, 100);
+        });
+    </script>
+    
+    <script src="./exp/Scripts/Conta/Login.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
+    
 </body>
 
 </html>

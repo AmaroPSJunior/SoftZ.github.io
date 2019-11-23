@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <link href="~/Content/unidadeAprendizagem/Disciplinas/unidadeaprendizagemindex.min.css" rel="stylesheet" />
+}
+
+@section Scripts {
+    <script>
+        var urlObterListaDisciplinaGrid = "@Url.Action("ObterListaDisciplinaGrid", "UnidadeAprendizagemLiberacao")";
+        var urlListarCursos = "@Url.Action("ListarCursos", "UnidadeAprendizagemLiberacao")";
+        var urlListarDisciplinas = "@Url.Action("ListarDisciplinas", "UnidadeAprendizagemLiberacao")"; 
+        var CarregarLiberacaoUlr = "@Url.Action("Liberacao", "UnidadeAprendizagemLiberacao")";
+        var CarregarCorrecaoUrl = "@Url.Action("Listagem", "CorrecaoMacrodesafio")";
+        var urlCancelarUa = "@Url.Action("CancelarUnidadeAprendizagem", "UnidadeAprendizagemLiberacao")";
+        var urlAtividadesIniciadasPelosAlunosUnidadeAprendizagem = "@Url.Action("AtividadesIniciadasPelosAlunosUnidadeAprendizagem", "UnidadeAprendizagemLiberacao")";
+        var urlListarAnoSemestre = "@Url.Action("ListarAnoSemestre", "UnidadeAprendizagemLiberacao")";
+        var urlDownloadArquivoAnexoConteudo = "@Url.Action("DownloadArquivoAnexoConteudo", "UnidadeAprendizagemLiberacao")";
+        @*var urlGetSituacaoEtapasWizard = "@Url.Action("GetSituacaoEtapasWizard", "UnidadeAprendizagem")";*@
+        @*var urlCadastro = "@Url.Action("Cadastro", "UnidadeAprendizagem")";*@
+        var formularioUA = '@ViewBag.formulario';
+    </script>
+
+    <script src="~/Scripts/UnidadeAprendizagemLiberacao/index.js"></script>
+}
+
+<div id="unidadeAprendizagem" class="principal">
+    <div class="row">
+        <div class="col s12 no-padding">
+            <div>
+                <i class="fas fa-home icon-padrao botao-home" aria-hidden="true"></i><h2 class="sl-titulo sl-navy-blue">Unidades de Aprendizagem</h2>
+                <i class="fas fa-angle-right" aria-hidden="true"></i><h2 class="sl-subtitulo sl-navy-blue">Liberação e Configuração</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="row filtragem-row">
+        <label>Filtrar UA</label>
+        
+        <div class="col s12 no-padding">
+            <div class="input-field col m2 s12">
+                <select id="listar-ano-semestre">
+                    <option value="" disabled selected>Ano / Semestre</option>
+                </select>
+            </div>
+            <div class="input-field col m3 s12">
+                <select id="listar-cursos">
+                    <option value="" disabled selected>Cursos</option>
+                </select>
+            </div>
+            <div class="input-field col m7 s12">
+                <select id="listar-disciplinas">
+                    <option value="" disabled selected>Disciplinas</option>
+                </select>
+            </div>
+        </div>
+    </div>
+  
+    <div class="row">
+        <div class="divPartial">
+            @Html.Partial("~/Views/UnidadeAprendizagem/Disciplinas/Partial/CollapseDisciplinasPartial.cshtml")
+        </div>
+    </div>
+</div>
+
+<div id="modal-visualiza-aluno" class="hide">
+    <div id="iframe-visualiza-aluno">
+        <button class="btn" id="fechar-visualizacao-aluno" type="button">Fechar Visualização de Aluno</button>
+    </div>
+    <div id="modal-visAluno-footer">
+        @*<i class="fas fa-times modal-close"></i>*@
+        <button class="btn" id="fechar-visualizacao-aluno" type="button">Fechar Visualização de Aluno</button>
+    </div>
+</div>

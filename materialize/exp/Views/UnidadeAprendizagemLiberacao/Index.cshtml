@@ -1,0 +1,95 @@
+﻿@model SLCONSTRUCT.UI.WEB.ViewModels.DadosTurmaLiberacaoVModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <link href="~/Content/UnidadeAprendizagemLiberacao/UnidadeAprendizagemLiberacao.min.css" rel="stylesheet" />
+}
+
+@section Scripts {
+    <script>
+        var CarregarPrazosUrl =  "@Url.Action("CarregarPrazos", "UnidadeAprendizagemLiberacao")";
+        var SalvarPrazosUrl =  "@Url.Action("SalvarPrazos", "UnidadeAprendizagemLiberacao")";
+        var SalvarOrganizacaoUrl = "@Url.Action("SalvarOrganizacao", "UnidadeAprendizagemLiberacao")";
+        var CarregarOrganizacaoUrl = "@Url.Action("CarregarOrganizacao", "UnidadeAprendizagemLiberacao")";
+        var SalvarWidgetUlr = "@Url.Action("SalvarWidget", "UnidadeAprendizagemLiberacao")";
+        var LiberarMaterialUlr = "@Url.Action("LiberarMaterial", "UnidadeAprendizagemLiberacao")";
+        var ListaAlunosTurma = "@Url.Action("ListaAlunosTurma", "UnidadeAprendizagemLiberacao")";
+        var carregarWidget = "@Url.Action("LoadWidget", "UnidadeAprendizagemLiberacao")";
+        var ExcluirWidget = "@Url.Action("ExcluirWidget", "UnidadeAprendizagemLiberacao")";
+        var salvarImagem = "@Url.Action("UploadImagem", "UnidadeAprendizagemLiberacao")";
+        var urlListarCursos = "@Url.Action("ListarCursos", "UnidadeAprendizagemLiberacao")";
+    </script>
+
+    <script src="~/Scripts/UnidadeAprendizagemLiberacao/index.js"></script>
+    <script src="~/Scripts/UnidadeAprendizagemLiberacao/Prazos.js"></script>
+    <script src="~/Scripts/UnidadeAprendizagemLiberacao/Organizacao.js"></script>
+    <script src="~/Scripts/UnidadeAprendizagemLiberacao/listagemalunos.js"></script>
+}
+
+@Html.Hidden("codunidadeaprendizagem", Model.codunidadeaprendizagem)
+@Html.Hidden("codcursocollege", Model.codcursocollege)
+@Html.Hidden("coddisciplinacollege", Model.coddisciplinacollege)
+@Html.Hidden("codturmacollege", Model.codturmacollege)
+@Html.Hidden("codunidadeaprendizagemturmadisciplina", Model.codunidadeaprendizagemturmadisciplina)
+
+<div class="row breadcrumbs-ua">
+    <div class="col l12 no-padding">
+        <div>
+            <i class="fas fa-home icon-padrao botao-home" aria-hidden="true"></i><h2 class="sl-titulo sl-navy-blue">Unidades de Aprendizagem</h2>
+            <i class="fas fa-angle-right" aria-hidden="true"></i><h2 class="sl-subtitulo sl-navy-blue">Prazos e Organização</h2>
+        </div>
+    </div>
+</div>
+<div class="row info-ua">
+    <div class="col s6">
+        <p>CURSO: <span>@Model.curso</span></p>
+        <p>DISCIPLINA: <span>@Model.disciplina</span></p>
+        <p>
+            STATUS:
+            <span class="ua-liberada">@Model.status</span>
+        </p>
+    </div>
+    <div class="col s6">
+        <p>TURMA: <span>@Model.turma</span></p>
+        <p>UA: <span>@Model.unidadeaprendizagem</span> </p>
+        @if (Model.integracao)
+        {
+            <p class="canvas">Canvas: <span>INTEGRADA</span> </p>
+        }
+        else
+        {
+
+            <p class="canvas">Canvas: <span>NÃO INTEGRADA</span> </p>
+        }
+
+        @{ var cls = Model.liberado ? "disabled" : ""; }
+        @*<p><button id="btnliberarmaterial" class="btn waves-effect waves-light avancar @cls">Liberar Material</button></p>*@
+    </div>
+</div>
+<div id="liberacaoUAs" class="row bloco-conteudo-padrao">
+    <div class="col s12">
+        <ul class="tabs listas">
+            <li class="tab col m2 s6"><a class="active" href="#prazos">Disponibilidade</a></li>
+            <li class="tab col m2 s6"><a href="#organizacao">Organização</a></li>
+            <li class="tab col m2 s6"><a class="lista-alunos" href="#listagem-turma-alunos" title="Listagem dos Alunos">Listagem dos Alunos</a></li>
+        </ul>
+    </div>
+    <div id="prazos" class="col s12">
+
+    </div>
+    <div id="organizacao" class="col s12">
+
+        @Html.Partial("~/Views/UnidadeAprendizagemLiberacao/Partial/OrganizacaoPartial.cshtml", ViewBag.somenteleitura != null ? (bool)ViewBag.somenteleitura : false)
+    </div>
+    <div id="listagem-turma-alunos" class="col s12">
+        @*@Html.Partial("~/Views/UnidadeAprendizagemLiberacao/Partial/ListagemAlunosPartial.cshtml")*@
+    </div>
+</div>
+
+<div id="modal-justificativa-liberacao" class="modal modal-fixed-footer default-sl-blue open">
+    @Html.Partial("~/Views/UnidadeAprendizagemLiberacao/Partial/ModalJustificativaLiberacaoPartial.cshtml")
+</div>

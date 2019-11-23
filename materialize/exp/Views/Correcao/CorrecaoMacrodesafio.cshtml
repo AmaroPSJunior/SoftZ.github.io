@@ -1,0 +1,95 @@
+﻿@model SLCONSTRUCT.UI.WEB.ViewModels.CorrecaoMacrodesafioVModel
+
+@{
+    ViewBag.Title = "CorrecaoMacrodesafio";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <link href="~/Content/Correcao/CorrecaoMacrodesafio.min.css" rel="stylesheet" />
+}
+
+@section Scripts {
+    <script>
+        var indexUrl = "@Url.Action("Index", "CorrecaoMacrodesafio")";
+        var Listagem = "@Url.Action("Listagem", "CorrecaoMacrodesafio")";
+        var RetornarRedacaoUrl = "@Url.Action("RetornarRedacao", "CorrecaoMacrodesafio")";
+        var SalvarFeedbackUrl = "@Url.Action("SalvarFeedback", "CorrecaoMacrodesafio")";
+        var SalvarNotaUrl = "@Url.Action("SalvarNota", "CorrecaoMacrodesafio")";
+        var SalvarArquivoFeedbackUrl = "@Url.Action("SalvarArquivoFeedback", "CorrecaoMacrodesafio")";
+        var FinalizaCorrecao = "@Url.Action("FinalizaCorrecao", "CorrecaoMacrodesafio")";
+        var ExcluirArquivoFeedbackUrl = "@Url.Action("ExcluirArquivoFeedback", "CorrecaoMacrodesafio")";
+        var LoadModalIgnorarTentativaUrl = "@Url.Action("LoadModalIgnorarTentativa", "CorrecaoMacrodesafio")";
+        var SalvarPrazosNovaTentativa = "@Url.Action("SalvarPrazosNovaTentativa", "CorrecaoMacrodesafio")";
+
+    </script>
+    <script src="~/Scripts/maskedinput.min.js"></script>
+    <script src="~/Scripts/Correcao/CorrecaoMacrodesafio.js"></script>
+}
+
+<input type="hidden" id="codunidadeaprendizagem" value="@Request.QueryString["codunidadeaprendizagem"]" />
+<input type="hidden" id="codcursocollege" value="@Request.QueryString["codcursocollege"]" />
+<input type="hidden" id="coddisciplinacollege" value="@Request.QueryString["coddisciplinacollege"]" />
+<input type="hidden" id="codturmacollege" value="@Request.QueryString["codturmacollege"]" />
+<input type="hidden" id="itematual" value="" />
+<input type="hidden" id="codpessoaitematual" value="" />
+
+<div class="correcao-principal">
+    <div class="row">
+
+        <div class="col l12">
+            <div>
+                <i class="fas fa-home icon-padrao botao-home" aria-hidden="true"></i><h2 class="sl-titulo sl-navy-blue">Disciplinas</h2>
+                <i class="fas fa-angle-right" aria-hidden="true"></i><h2 class="sl-subtitulo sl-navy-blue">Correção</h2>
+                <i class="fas fa-angle-right" aria-hidden="true"></i><h2 class="sl-subtitulo sl-navy-blue unidade">@Model.nomeunidade</h2>
+                <i class="fas fa-angle-right" aria-hidden="true"></i><h2 class="sl-subtitulo sl-navy-blue aluno">@((Model.listaAlunoCorrecao != null && Model.listaAlunoCorrecao.Count() > 0) ? Model.listaAlunoCorrecao.First().Text : "")</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col s12 no-padding">
+        <br />
+        <button class="btn waves-effect waves-light voltar-correcoes-pendentes left">Voltar</button>
+    </div>
+
+    <div class="col l12 no-padding">
+        <div class="divPartial">
+            <!--partial correcao macro-->
+            <div id="correcao-macro-partial" class="bloco-conteudo-padrao">
+                <div class="row correcaoMacro-cabecalho">
+                    <div class="col l8">
+                        <button class="btn waves-effect waves-light ignorar-tentativa right">Ignorar Tentativa</button>
+                        <div>
+                            @*<h6 id="titulo-arquivo">@*SLConstruct/AtividadeAluno/Macrodesafios/macro_35.pdf</h6>*@
+                            <span>Data de entrega: <span id="data-envio-cabecalho">@*19/03/2019 16:44:00*@</span></span>
+                        </div>
+                    </div>
+
+                    <div class="col l4 selecao-alunos">
+                        <button id="selecionar-alunoAnterior" class="acoes-selecao-alunos"><i class="fas fa-chevron-left"></i></button>
+                        <div class="input-field">
+                            <select id="codpessoa">
+                                @foreach (var item in Model.listaAlunoCorrecao)
+                                {
+                                    <option value="@item.Value" data-codpessoa="@item.codpessoa">@item.Text</option>
+                                }
+                            </select>
+                        </div>
+                        <button id="selecionar-proximoAluno" class="acoes-selecao-alunos"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+                <div id="arquivoCorrecao-partial"></div>
+                @*@Html.Partial("~/Views/Correcao/Partial/ArquivoCorrecaoPartial.cshtml");*@
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal ignorar tentativa Tela Correcao-->
+<div id="modal-ignorar-tentativa-tela-correcao" class="modal modal-fixed-footer default-sl-blue">
+    @Html.Partial("~/Views/Correcao/Partial/ModalIgnorarTentativaPartial.cshtml")
+</div>
+<!--Modal Configurar Nova Tentativas Tela Correcao-->
+<div id="modal-conf-tentativas-tela-correcao" class="modal modal-fixed-footer default-sl-blue">
+    @Html.Partial("~/Views/Correcao/Partial/ModalConfiguracaoNovaTentativasMacrodesafioPartial.cshtml")
+</div>

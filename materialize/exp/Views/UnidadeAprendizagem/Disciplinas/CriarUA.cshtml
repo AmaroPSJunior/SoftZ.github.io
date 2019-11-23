@@ -1,0 +1,99 @@
+﻿@model Tuple<int, int, int, string>
+
+@{
+                /**/
+
+                ViewBag.Title = "CriarUA";
+                Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+
+    <link href="~/Content/unidadeAprendizagem/wizard.min.css" rel="stylesheet" />
+    <link href="~/Content/unidadeAprendizagem/Disciplinas/unidadeAprendizagemCadastroUas.min.css" rel="stylesheet" />
+}
+
+@section Scripts {
+    <script>
+        //********************************************************************************************//
+        // Variáveis utilizadas no redirecionamento das parcias via Ajax
+        var urlDefinicoesGeraisLoad = "@Url.Action("LoadDefinicoesGerais", "UnidadeAprendizagem")";
+        var urlGuiaDeEstudoLoad = "@Url.Action("LoadGuiaEstudo", "UnidadeAprendizagem")";
+        var urlVideoLoad = "@Url.Action("LoadVideo", "UnidadeAprendizagem")";
+        var urlInfograficoLoad = "@Url.Action("LoadInfografico", "UnidadeAprendizagem")";
+        var urlMacroDesafioLoad = "@Url.Action("LoadMacrodesafio", "UnidadeAprendizagem")";
+        var urlMicroDesafioLoad = "@Url.Action("LoadMicrodesafio", "UnidadeAprendizagem")";
+        var urlOrganizacaoLoad = "@Url.Action("LoadOrganizacao", "UnidadeAprendizagem")";
+        var urlPrazosConfiguracoesLoad = "@Url.Action("LoadPrazosConfiguracoes", "UnidadeAprendizagem")";
+        var urlConclusaoLoad = "@Url.Action("LoadConclusao", "UnidadeAprendizagem")";
+        var urlGetGuiaHibrido = "@Url.Action("VisualizarGuiaHibrido", "UnidadeAprendizagem")";
+        // Fim Variáveis utilizadas no redirecionamento das parcias via Ajax
+        //********************************************************************************************//
+
+        var urlGetSituacaoEtapasWizard = "@Url.Action("GetSituacaoEtapasWizard", "UnidadeAprendizagem")";
+        var urlSalvarDefinicoesGerais = "@Url.Action("SalvarDefinicoesGerais", "UnidadeAprendizagem")";
+        var urlLoadHabilidadeUnidadeAprendizagem = "@Url.Action("LoadHabilidadeUnidadeAprendizagem", "UnidadeAprendizagem")";
+        var urlSalvarGuiaEstudo = "@Url.Action("SalvarGuiaEstudo", "UnidadeAprendizagem")";
+        var urlSalvarVideo = "@Url.Action("SalvarVideo", "UnidadeAprendizagem")";
+        var urlSalvarInfografico = "@Url.Action("SalvarInfografico", "UnidadeAprendizagem")";
+        var urlSalvarMacrodesafio = "@Url.Action("SalvarMacroDesafio", "UnidadeAprendizagem")";
+        var urlVisualizarMacrodesafio = "@Url.Action("VisualizarItemMacroDesafio", "UnidadeAprendizagem")";
+        var urlSalvarMicrodesafio = "@Url.Action("SalvarMicrodesafio", "UnidadeAprendizagem")";
+        var urlLoadMicrodesafioItem = "@Url.Action("LoadMicrodesafioItem", "UnidadeAprendizagem")";
+        var urlExcluirItensDesafio = "@Url.Action("ExcluirItensDesafio", "UnidadeAprendizagem")";
+        var urlListarQuestoesMicrodesafio = "@Url.Action("ListarQuestoesObjetivas", "UnidadeAprendizagem")";
+        var urlExcluirDesafio = "@Url.Action("ExcluirDesafio", "UnidadeAprendizagem")";
+        var urlListarMicrodesafioAnoSemestre = "@Url.Action("ListarMicrodesafioAnoSemestre", "UnidadeAprendizagem")";
+        var urlListarMacrodesafioAnoSemestre = "@Url.Action("ListarMacrodesafioAnoSemestre", "UnidadeAprendizagem")";
+        var urlVisualizarItemMicroDesafio = "@Url.Action("VisualizarItemMicroDesafio", "UnidadeAprendizagem")";
+        var urlLoadMacrodesafioItem = "@Url.Action("LoadMacrodesafioItem", "UnidadeAprendizagem")";
+        var urlListarQuestoesSubjetivas = "@Url.Action("ListarQuestoesSubjetivas", "UnidadeAprendizagem")";
+        var urlSalvarOrganizacao = "@Url.Action("SalvarOrganizacao", "UnidadeAprendizagem")";
+        var urlFinalizarEtapaWizard = "@Url.Action("FinalizarEtapaWizard", "UnidadeAprendizagem")";
+        var urlSalvarConclusao = "@Url.Action("SalvarConclusao", "UnidadeAprendizagem")";
+        var urlCancelarQuestaoMicro = "@Url.Action("CancelarQuestaoMicro", "UnidadeAprendizagem")";
+        var urlCancelarQuestaoMacro = "@Url.Action("CancelarQuestaoMacro", "UnidadeAprendizagem")";
+        var urlAlgumAlunoJaRespondeuAQuestao = "@Url.Action("AlgumAlunoJaRespondeuAQuestao", "UnidadeAprendizagem")";
+         var urlDownloadArquivoAnexoConteudo = "@Url.Action("DownloadArquivoAnexoConteudo", "UnidadeAprendizagem")";
+        var houveLiberacaoUA = "@ViewBag.HouveLiberacaoUA";
+
+    </script>
+    <script src="~/Scripts/libs/cropbox.js"></script>
+    <script src="~/Scripts/UnidadeAprendizagem/index.js"></script>
+    <script src="~/Scripts/UnidadeAprendizagem/definicoesGerais.js"></script>
+    <script src="~/Scripts/UnidadeAprendizagem/guiaEstudo.js"></script>
+    <script src="~/Scripts/UnidadeAprendizagem/Videos.js"></script>
+    <script src="~/Scripts/UnidadeAprendizagem/Microdesafio.js"></script>
+    <script src="~/Scripts/UnidadeAprendizagem/Macrodesafio.js"></script>
+    <script src="~/Scripts/UnidadeAprendizagem/Microdesafio.js"></script>
+    <script src="~/Scripts/UnidadeAprendizagem/Infografico.js"></script>
+    <script src="~/Scripts/UnidadeAprendizagem/PrazosConfiguracoes.js"></script>
+    <script src="~/Scripts/UnidadeAprendizagem/Organizacao.js"></script>
+    <script src="~/Scripts/UnidadeAprendizagem/Conclusao.js"></script>
+}
+
+@Html.Hidden("codcurso", Model.Item1)
+@Html.Hidden("coddisciplina", Model.Item2)
+@Html.Hidden("codunidadeaprendizagem", Model.Item3)
+
+<input type="hidden" name="uaestaliberada" id="uaestaliberada" value="false" />
+<input type="hidden" name="permissaoGravacao" id="permissaoGravacao" value="false" />
+
+<div id="unidadeAprendizagem" class="principal">
+
+    <div class="row">
+        <div class="col l12 no-padding principal--cabecalho">
+            <div>
+                <i class="fas fa-home icon-padrao botao-home" aria-hidden="true"></i><h2 class="sl-titulo sl-navy-blue">Disciplinas</h2>
+                <i class="fas fa-angle-right" aria-hidden="true"></i><h2 class="sl-subtitulo sl-navy-blue">@Model.Item4</h2>
+            </div>
+        </div>
+        @Html.Partial("~/Views/UnidadeAprendizagem/Disciplinas/Partial/wizard.cshtml")
+        <div class="col l12 no-padding">
+            <div class="divPartial">
+                @{ Html.RenderAction("LoadDefinicoesGerais", "UnidadeAprendizagem", new { codcurso = Model.Item1, coddisciplina = Model.Item2, codunidadeaprendizagem = Model.Item3 }); }
+            </div>
+        </div>
+    </div>
+</div>
+

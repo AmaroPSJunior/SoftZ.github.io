@@ -1,0 +1,78 @@
+﻿#listagem-perfis-principal {
+  padding: 1.5rem; }
+  #listagem-perfis-principal #listagem-perfis-header div h1 {
+    font-size: 25px;
+    float: left; }
+  #listagem-perfis-principal #listagem-perfis-header div a {
+    float: right;
+    margin: 10px 0; }
+  #listagem-perfis-principal #listagem-perfis-header #filtro-listagem-perfis {
+    background: #fff;
+    float: left;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 0;
+    padding: 10px 20px;
+    border-top: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    min-height: 200px; }
+    #listagem-perfis-principal #listagem-perfis-header #filtro-listagem-perfis .listagem-perfis-filtro-select {
+      padding: 0; }
+      #listagem-perfis-principal #listagem-perfis-header #filtro-listagem-perfis .listagem-perfis-filtro-select input {
+        border: 1px solid #ddd; }
+      #listagem-perfis-principal #listagem-perfis-header #filtro-listagem-perfis .listagem-perfis-filtro-select label {
+        color: #989b9d;
+        left: 0px;
+        font-weight: normal;
+        text-transform: inherit; }
+    #listagem-perfis-principal #listagem-perfis-header #filtro-listagem-perfis .listagem-perfis-filtro-select:nth-child(2) input {
+      border-left: none; }
+    #listagem-perfis-principal #listagem-perfis-header #filtro-listagem-perfis .listagem-perfis-filtro-input {
+      padding: 0; }
+      #listagem-perfis-principal #listagem-perfis-header #filtro-listagem-perfis .listagem-perfis-filtro-input input {
+        border: 1px solid #ddd;
+        border-left: none; }
+      #listagem-perfis-principal #listagem-perfis-header #filtro-listagem-perfis .listagem-perfis-filtro-input label {
+        color: #989b9d;
+        left: 0px;
+        font-weight: normal;
+        text-transform: inherit; }
+    #listagem-perfis-principal #listagem-perfis-header #filtro-listagem-perfis .btn-adicionar-filtro span {
+      float: right;
+      text-transform: uppercase;
+      font-weight: bold;
+      color: #3d7ae8;
+      cursor: pointer; }
+      #listagem-perfis-principal #listagem-perfis-header #filtro-listagem-perfis .btn-adicionar-filtro span i {
+        margin-left: 0; }
+    #listagem-perfis-principal #listagem-perfis-header #filtro-listagem-perfis .btn-pesquisa-perfis {
+      padding-top: 20px; }
+  #listagem-perfis-principal .redclass {
+    background-colo: red; }
+  #listagem-perfis-principal #listagem-perfis-partial-table #listagem-perfis-partial-content {
+    background: #fff;
+    padding: 10px 20px;
+    border-top: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    min-height: 200px; }
+    #listagem-perfis-principal #listagem-perfis-partial-table #listagem-perfis-partial-content table th {
+      background: #dedede; }
+    #listagem-perfis-principal #listagem-perfis-partial-table #listagem-perfis-partial-content table td {
+      text-transform: inherit !important; }
+    #listagem-perfis-principal #listagem-perfis-partial-table #listagem-perfis-partial-content table th.acao {
+      text-align: center; }
+    #listagem-perfis-principal #listagem-perfis-partial-table #listagem-perfis-partial-content table td.acao {
+      text-align: center; }
+      #listagem-perfis-principal #listagem-perfis-partial-table #listagem-perfis-partial-content table td.acao i {
+        font-size: 15px;
+        cursor: pointer; }
+    #listagem-perfis-principal #listagem-perfis-partial-table #listagem-perfis-partial-content .pagination {
+      float: right; }
+      #listagem-perfis-principal #listagem-perfis-partial-table #listagem-perfis-partial-content .pagination .btn {
+        padding: 0;
+        width: 40px;
+        height: 40px;
+        background-color: red;
+        margin: 0 2px; }

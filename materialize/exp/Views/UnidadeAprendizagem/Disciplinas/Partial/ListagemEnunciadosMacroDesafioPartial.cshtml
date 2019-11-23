@@ -1,0 +1,46 @@
+﻿@model  List<SLCONSTRUCT.UI.WEB.ViewModels.MacroDesafioUAItemVModel>
+
+
+@for (var i = 0; i < Model.Count(); i++)
+{
+    var canceladoEmAlgumaUnidade = Model.ToList()[i].canceladoEmAlgumaUnidade;
+    var cancelado = Model.ToList()[i].cancelado;
+    var selectedItem = "";
+    var selecionado = Model.ToList()[i].selecionado;
+    var desabilitaSeCancelado = (!Model.Any(x => x.selecionado) && ViewBag.UaEstaLiberada) || cancelado ? "disabled" : "";
+    var dataDesabilitaCanceladoLiberado = (!Model.Any(x => x.selecionado) && ViewBag.UaEstaLiberada) || (cancelado || (ViewBag.UaEstaLiberada && selecionado)) ? "desabilita-canc-lib" : "";
+    var styleSeCancelado = (!Model.Any(x => x.selecionado) && ViewBag.UaEstaLiberada) || (cancelado || (ViewBag.UaEstaLiberada && selecionado)) ? "pointer-events: none;" : "";
+    if (selecionado)
+    {
+        selectedItem = "checked";
+    }
+
+    <div class="list-enunciados" data-canceladoemalgumaunidade="@canceladoEmAlgumaUnidade" data-selecionado="@Model.ToList()[i].selecionado" data-coddesafioitem="@Model.ToList()[i].coddesafioitem" data-foicancelado="@cancelado" data-coditemmatriz="@Model.ToList()[i].coditemmatriz" data-codunidadeaprendizagemtrilha="@Model.ToList()[i].codunidadeaprendizagemtrilha" data-codigodescritor="@Model.ToList()[i].codunidadeaprendizagem">
+        <div class="list-enunciados--check">
+            <input type="checkbox" class="checkbox-enunciado-item filled-in @desabilitaSeCancelado @dataDesabilitaCanceladoLiberado" @desabilitaSeCancelado style="@styleSeCancelado" id="enunciado-@Model.ToList()[i].coditemmatriz" @selectedItem />
+            <label for="enunciado-@Model.ToList()[i].coditemmatriz"></label>
+        </div>
+    
+        <div class="list-enunciados--titulo">
+            <span>@Model.ToList()[i].titulo </span>
+        
+            @if (canceladoEmAlgumaUnidade)
+            {
+                <strong class="red-text"> (Questão já foi cancelada em alguma UA)</strong>
+            }
+        </div>
+    
+        <div class="visualiza-item">
+
+            @if (!cancelado && selecionado)
+            {
+                <span id="icon-cancelar"><i style="font-size: 20px;" class="fas fa-ban icon-padrao-fa5 icon-cancel-macro"></i></span>
+            }
+            <span class="icon-visualizar"><i class="fas fa-eye icon-padrao-fa5"></i></span>
+        </div>
+    </div>
+}
+
+<script>
+    $(".desabilita-canc-lib").prop("disabled", true);
+</script>

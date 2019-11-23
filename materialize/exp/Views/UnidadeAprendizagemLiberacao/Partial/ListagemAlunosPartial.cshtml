@@ -1,0 +1,65 @@
+﻿@model IEnumerable<SLCONSTRUCT.CORE.TipoUsuarioTurmaDisciplina>
+
+<div id="listagem-alunos-partial">
+    <table class="z-depth-1">
+        <thead>
+            <tr>
+                <th class="">Matrícula</th>
+                <th class="">Nome</th>
+                <th class="center">Material Disponibilizado</th>
+                @if (ViewBag.isDesenv)
+                {
+                    <th class="center">Visualizar Aluno</th>
+                }
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @if (Model.Count() > 0 && Model != null)
+            {
+                foreach (var item in Model)
+                {
+                <tr data-codpessoa="@item.codpessoa">
+                    <td class="">@item.matricula</td>
+                    <td class="">@item.nome</td>
+                    <td class="center">
+                        @if (item.materialliberado > 0)
+                        {
+                            <i class="fas fa-check-circle"></i>
+                        }
+                        else
+                        {
+                            <span>Não</span>
+                        }
+                    </td>
+                    @if (ViewBag.isDesenv)
+                    {
+                        <td class="center">
+                            <i class="center far fa-eye visualizar" style="font-size: 1.5rem; color: #039be5;"></i>
+                        </td>
+                    }                    
+                </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td class=""><strong>Nenhum registro encontrado.</strong></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div id="modal-visualiza-aluno" class="hide">
+    <div id="iframe-visualiza-aluno">
+        <button class="btn" id="fechar-visualizacao-aluno" type="button">Fechar Visualização de Aluno</button>
+    </div>
+    <div id="modal-visAluno-footer">
+        @*<i class="fas fa-times modal-close"></i>*@
+        <button class="btn" id="fechar-visualizacao-aluno" type="button">Fechar Visualização de Aluno</button>
+    </div>
+</div>

@@ -1,0 +1,108 @@
+﻿@model  SLCONSTRUCT.UI.WEB.ViewModels.MicroDesafioUAVModel
+
+<div id="cadastro-microdesafio" class="bloco-conteudo-padrao">
+    <input type="hidden" id="checkTrilha" /><!--verifica a codUAtrilha para edição do micro-->
+    <div class="titulo-section">
+        <i class="fas fa-check-double icon-padrao-fa5"></i><h2 class="sl-titulo-default sl-navy-blue">Microdesafio - Obs.: Você pode selecionar "um" ou "mais" descritores por microdesafio</h2>
+    </div>
+
+    <div class="row flex ano-semestre">
+        <div class="input-field col s5">
+            <select id="ano">
+                @if (Model.anosemestreatual != null)
+                {
+                    var tamanho = 1;
+
+                    for (int i = 0; i < tamanho; i++)
+                    {
+                        <option value="@(Model.anosemestreatual.ano - 1)">@(Model.anosemestreatual.ano - 1)</option>
+
+                    }
+                }
+                @if (Model.anosemestreatual != null)
+                {
+                    var tamanho = 6;
+                    var selected = "";
+                    for (int i = 0; i < tamanho; i++)
+                    {
+                        if ((Model.anosemestreatual.ano + i) == Model.anosemestreatual.ano)
+                        {
+                            selected = "selected";
+                            <option @selected value="@(Model.anosemestreatual.ano + i)">@(Model.anosemestreatual.ano + i)</option>
+                        }
+                        else
+                        {
+                            <option value="@(Model.anosemestreatual.ano + i)">@(Model.anosemestreatual.ano + i)</option>
+                        }
+                    }
+                }
+
+            </select>
+            <label>ANO</label>
+        </div>
+        <div class="input-field col s5">
+            <select id="semestre">
+
+                @if ((Model.anosemestreatual.semestre) == 1)
+                {
+                    var selected = "selected";
+                    <option @selected value="1">1º SEMESTRE</option>
+                    <option value="2">2º SEMESTRE</option>
+                }
+                else if ((Model.anosemestreatual.semestre) == 2)
+                {
+                    var selected = "selected";
+                    <option value="1">1º SEMESTRE</option>
+                    <option @selected value="2">2º SEMESTRE</option>
+                }
+
+            </select>
+            <label>SEMESTRE</label>
+        </div>
+        <div class="col s2 btnAddAnoSemestre">
+            <button class="btn"><i class="fas fa-plus" style="margin:0"></i></button>
+        </div>
+    </div>
+
+    <div class="row abas-vertical">
+        <div class="col s2" style="margin-left: 0!important;">
+            <ul class="tabs tabs-vertical">
+                @if (Model.listanosemestre != null && Model.listanosemestre.Count() > 0)
+                {
+
+                    foreach (var item in Model.listanosemestre)
+                    {
+                        <li class="tab col s3"><a data-ano="@item.ano" data-semestre="@item.semestre" href="#@item.ano-@item.semestre">@item.ano / @item.semestre</a></li>
+                    }
+                }
+            </ul>
+        </div>
+        <div class="col s10 divs-abas z-depth-1">
+            @if (Model.listanosemestre != null && Model.listanosemestre.Count() > 0)
+            {
+
+                foreach (var item in Model.listanosemestre)
+                {
+                    <div id="@item.ano-@item.semestre" class="col s12"></div>
+                }
+            }
+
+        </div>
+    </div>
+    <div class="center">
+        <button class="btn waves-effect waves-light avancar">Avançar</button>
+    </div>
+
+
+    @*MODAL MICRO*@
+    <div id="micro-modal" class="modal default-sl-blue modal-fixed-footer"></div>
+    <div id="micro-modal-visualiza" class="modal default-sl-blue modal-fixed-footer"></div>
+    <div id="modal-justificativa-cancelamento-questao-micro" class="modal modal-fixed-footer default-sl-blue">
+        @Html.Partial("~/Views/UnidadeAprendizagem/Disciplinas/Partial/ModalCancelamentoQuestaoMicroPartial.cshtml")
+    </div>
+    @*MODAL MICRO*@
+
+</div>
+<script>
+
+</script>

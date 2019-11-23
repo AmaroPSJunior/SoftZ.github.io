@@ -1,0 +1,44 @@
+﻿@model IEnumerable<SLCONSTRUCT.UI.WEB.ViewModels.MatrizAssociadaQuestaoVModel>
+
+
+<div class="matriz">
+    <p class="title-content">Matrizes associadas</p>
+
+    @{var numeroQuestao = 0; }
+    @foreach (var item in Model.ToList())
+    {
+        numeroQuestao++;
+
+        <div class="matrizes-associada">
+
+            <div class="primeiro-item">
+                <section class="numero"><p>@numeroQuestao</p></section>
+                <div class="item">
+                    <p class="descricao">@item.curso</p>
+                    <p>curso</p>
+                </div>
+            </div>
+
+            <div class="item">
+                <p class="descricao">@item.disciplina</p>
+                <p>Disciplina</p>
+            </div>
+
+            <div class="item">
+                <p class="descricao">@item.habilidade</p>
+                <p>habilidade</p>
+            </div>
+
+            @if (!String.IsNullOrEmpty(item.descritor))
+            {
+                <div class="item">
+                    <p class="descricao">@item.descritor</p>
+                    <p>Descritor</p>
+                </div>
+            }
+
+        </div>
+
+    }
+
+</div>

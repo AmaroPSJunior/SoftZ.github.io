@@ -1,0 +1,222 @@
+#cadastro-usuario-formulario {
+    padding: 20px;
+
+    #cadastro-header-wizard {
+        height: 150px;
+        padding-top: 20px;
+        margin-bottom: 0;
+
+        .wizard-col {
+            position: relative;
+            text-align: center;
+            padding: 0;
+            height: 100%;
+
+            i {
+                border: 1px solid #044dd1;
+                padding: 10px;
+                border-radius: 50%;
+                color: #044dd1;
+                transition: all 0.5s ease;
+            }
+
+            h4 {
+                font-size: 20px;
+                color: #044dd1;
+                transition: all 0.5s ease;
+            }
+
+            .wizard-progress {
+                position: absolute;
+                bottom: 0;
+                width: 0;
+                height: 10px;
+                background: #3d7ae8;
+                transition: all 0.5s ease;
+            }
+
+            .center-wizard-btn {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                position: absolute;
+                bottom: -13px;
+
+                .wizard-btn {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    background: #3d7ae8;
+                    border: 10px solid #fff;
+                    transition: all 0.5s ease;
+                    cursor: pointer;
+                }
+
+                .wizard-btn-disabled {
+                    background: #ccc;
+                }
+            }
+
+            .progress-dados-usuario {
+                width: 50%;
+            }
+        }
+
+        .col-wizard-login-color {
+            i {
+                color: #ccc;
+                border-color: #ccc;
+            }
+
+            h4 {
+                color: #ccc;
+            }
+        }
+
+        .col-wizard-usuario-color {
+            i {
+                color: #00cbb5;
+                border-color: #00cbb5;
+            }
+
+            h4 {
+                color: #00cbb5;
+            }
+        }
+    }
+
+    .wizard-cadastro-status {
+        display: none;
+    }
+
+    .wizard-cadastro-status.wizard-active {
+        display: block;
+        border-top: 1px solid #ccc;
+        top: 1rem;
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .wizard-content {
+        min-height: 200px;
+        padding: 20px;
+        background: #fff;
+
+        .image-input-wrapper {
+            float: left;
+
+            .image-input {
+                width: 100px;
+                height: 100px;
+                background: #eff3f6;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: #3d7ae8;
+                cursor: pointer;
+                position: relative;
+
+                input {
+                    width: 100%;
+                    height: 100%;
+                    opacity: 0;
+                    position: absolute;
+                    cursor: pointer;
+                }
+
+                #remover-foto-perfil {
+                    position: absolute;
+                    top: 0;
+                    right: -10px;
+                    cursor: pointer;
+                    display: none;
+                }
+
+                #alterar-foto-perfil {
+                    position: absolute;
+                    color: #fff;
+                    display: none;
+                    text-shadow: 1px 3px 0px #000;
+                }
+            }
+
+            .image-input-label {
+                float: left;
+                width: 100px;
+                text-align: center;
+            }
+        }
+
+        .dados-pessoais {
+            margin-top: 20px;
+
+            h5 {
+                font-size: 12px;
+                font-weight: bold;
+                color: #b3b3b3;
+            }
+
+            .input-field {
+                margin-bottom: 1rem;
+
+                input {
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                    margin-bottom: 0;
+                    padding: 0 0.5rem;
+                }
+
+                label {
+                    color: #a2a2a2;
+                }
+            }
+
+            .btn-avancar-cadastro-usuario {
+                float: right;
+            }
+        }
+    }
+
+    #cadastro-usuario-dados-login {
+
+        .cadastro-login-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+
+            .row {
+                width: 400px;
+                max-width: 500px;
+                border: 1px solid #e9eced;
+                padding: 20px;
+
+                .input-field {
+                    margin-bottom: 0;
+                }
+
+                .eye-senha {
+                    position: absolute;
+                    top: 33px;
+                    right: 20px;
+                    color: #777;
+                    cursor: pointer;
+                }
+
+                input {
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                }
+
+                .btn-salvar-login-senha {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+        }
+    }
+}

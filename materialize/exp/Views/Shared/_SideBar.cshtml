@@ -1,0 +1,162 @@
+﻿<ul id="slide-out" class="side-nav fixed collapsible">
+
+    <li class="-padrao">
+        @*<div class="backgroundLogocinza"></div>*@
+        <a href="#" id="botao" data-activates="slide-out" class="button-collapse"><i class="fas fa-bars" aria-hidden="true"></i></a>
+        <a href="#" id="botao" class="button-collapse-desktop hide-on-med-and-down"><i class="fas fa-bars" aria-hidden="true"></i></a>
+        <a href="#" class="hide-on-small-only"><img src="~/Content/img/header/logo-unisl.svg" width="130" height="50" alt="Logo São Lucas" /></a>
+        <a href="#" class="hide-on-med-and-up"><img src="~/Content/img/header/logo-unisl-mobile.svg" height="50" alt="Logo São Lucas" /></a>
+    </li>
+    <li class="li-foto-perfil-sidebar">
+
+
+        <input type="hidden" name="fotoperfilbase64" value="" />
+        <input type="hidden" name="formatofotoperfil" value="" />
+
+        @{
+            var fotoPerfil = @User.Identity.GetFotoPerfil();
+            var hide = !string.IsNullOrEmpty(fotoPerfil) ? "" : "hide";
+        }
+        <div class="foto-perfil-sidebar">
+            <div class="bord">
+                <div class="img-perfil-sidebar">
+                    <img class="@hide" id="imgperfil" src="@User.Identity.GetFotoPerfil()" />
+                    <label class="label-input"></label>
+                </div>
+                <i class="fas fa-camera sem-img sl-silver" aria-hidden="true"></i>
+                <img src="~/Content/img/header/logo-unisl-mobile.svg" class="logo-pequeno" height="50" alt="Logo São Lucas" />
+            </div>
+
+            <p>Olá,&nbsp;<span id="name-user">@User.Identity.Name</span></p>
+            <p style="font-size: 0.8em; font-style: italic; word-break: break-all;width: 90%;">@Helper.Email(User.Identity)</p>
+        </div>
+    </li>
+
+
+    @foreach (var item in User.Identity.GetFormulariosMenu().Where(x => x.codformulariopai == 0).OrderBy(x => x.ordem))
+    {
+        <li class="menu-pai">
+            <div class="collapsible-header navegacao"><i class="@item.icone" aria-hidden="true"></i><h6>@item.nome</h6></div>
+            <div class="collapsible-body">
+                <ul>
+                    @foreach (var subitem in User.Identity.GetFormulariosMenu().Where(x => x.codformulariopai == item.codformulario).OrderBy(x => x.ordem))
+                    {
+                        <li><a class="truncate" href="@Url.Action(subitem.action, subitem.controller)"><i class="@subitem.icone" aria-hidden="true"></i> @subitem.nome</a></li>
+                    }
+                </ul>
+            </div>
+        </li>
+    }
+
+    @*
+        <li class="menu-pai">
+            <a class="truncate" href="@Url.Action(" Index","ExportacaoNotas")"><i class="fas fa-angle-right" aria-hidden="true"></i> Exportação</a>
+        </li>*@
+
+    @*<li class="menu-pai">
+            <a class="truncate" href="@Url.Action("Index","UnificacaoQuestoes")"><i class="fas fa-angle-right" aria-hidden="true"></i> Unificação de questões</a>
+    </li>*@
+
+
+    @*<li class="menu-pai">
+                <div class="collapsible-header navegacao">
+                    <i class="fas fa-angle-right" aria-hidden="true"></i><h6>Usuários</h6>
+                </div>
+
+                <div class="collapsible-body">
+                    <ul>
+                        <li><a class="truncate" href="@Url.Action("CadastrarUsuario","Usuarios")"><i class="fas fa-circle" aria-hidden="true"></i> Cadastrar Usuário</a></li>
+                        <li><a class="truncate" href="@Url.Action("Index","Usuarios")"><i class="fas fa-circle" aria-hidden="true"></i> Listagem de Usuários</a></li>
+                    </ul>
+                </div>
+
+            </li>
+
+        <li class="menu-pai">
+                <div class="collapsible-header navegacao">
+                    <i class="fas fa-angle-right" aria-hidden="true"></i><h6>PERFIS DE ACESSO</h6>
+                </div>
+
+                <div class="collapsible-body">
+                    <ul>
+                        <li><a class="truncate" href="@Url.Action("CadastroPerfil","Perfis")"><i class="fas fa-circle" aria-hidden="true"></i>  Cadastrar Perfil</a></li>
+                        <li><a class="truncate" href="@Url.Action("Index","Perfis")"><i class="fas fa-circle" aria-hidden="true"></i> Perfis Acesso</a></li>
+                    </ul>
+                </div>
+            </li>*@
+
+    @*
+        <li class="menu-pai" style="position: absolute;width: 100%;bottom: 60px;text-align: left;">
+            <ul>
+                <li><a class="truncate" href="@Url.Action(" Logoff","Conta")"><i class="fas fa-power-off" aria-hidden="true"></i> Sair</a></li>
+            </ul>
+        </li>*@
+
+</ul>
+<div class="menu-pai sair">
+    <a class="truncate" href="@Url.Action("Logoff","Conta")"><i class="fas fa-power-off" aria-hidden="true"></i> Sair</a>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--<aside id="sidebar" class="sidebar c-overflow">
+        <ul class="main-menu">
+            <li class="active">
+                <a href="@Url.Action("Index","Home")"><i class="zmdi zmdi-home"></i> Home</a>
+            </li>
+            <li class="sub-menu">
+                <a href="#" data-ma-action="submenu-toggle"><i class="zmdi zmdi-view-compact"></i> Tabelas Auxiliares</a>
+
+            <ul>
+                <li><a href="@Url.Action("Index","Usuario")">Usuários</a></li>
+                <li><a href="@Url.Action("Index","DadosCurso")">Informações dos Cursos</a></li>
+                <li><a href="@Url.Action("Index", "CargoCurso")">Cargos dos Cursos</a></li>
+                <li><a href="@Url.Action("Index","DiferencialCurso")">Diferenciais dos Cursos</a></li>
+                <li><a href="@Url.Action("Index","LocalProva")">Locais de Provas</a></li>
+                <li><a href="@Url.Action("Index","TabelaPrecoCurso")">Tabela de Preços dos Cursos</a></li>
+                <li><a href="@Url.Action("Index", "SituacaoCandidatos")">Situação Candidatos</a></li>
+                <li><a href="@Url.Action("Index", "OrigemLead")">Origem LEAD´S</a></li>
+            </ul>
+        </li>
+            <li><a href="@Url.Action("Index", "VW_AcompanhamentoInscricao")"><i class="zmdi zmdi-view-compact"></i>Acompanhamento Inscrições</a></li>
+            <li class="sub-menu">
+                <a href="#" data-ma-action="submenu-toggle"><i class="zmdi zmdi-view-compact"></i> Admin Graduação</a>
+
+                <ul>
+                    <li><a href="@Url.Action("Index","Usuario")">Usuários</a></li>
+                    <li><a href="@Url.Action("Index","DadosCurso")">Informações dos Cursos</a></li>
+                    <li><a href="@Url.Action("Index", "CargoCurso")">Cargos dos Cursos</a></li>
+                    <li><a href="@Url.Action("Index","DiferencialCurso")">Diferenciais dos Cursos</a></li>
+                    <li><a href="@Url.Action("Index","LocalProva")">Locais de Provas</a></li>
+                    <li><a href="@Url.Action("Index","TabelaPrecoCurso")">Tabela de Preços dos Cursos</a></li>
+                    <li><a href="@Url.Action("Index", "VW_AcompanhamentoInscricao")">Acompanhamento Inscrições</a></li>
+                    <li><a href="@Url.Action("Index", "SituacaoCandidatos")">Situação Candidatos</a></li>
+                </ul>
+            </li>
+            <li><a href="@Url.Action("Index","GeoMarketing")"><i class="zmdi zmdi-image"></i> Geo-Processamento</a></li>
+        </ul>
+    </aside>-->

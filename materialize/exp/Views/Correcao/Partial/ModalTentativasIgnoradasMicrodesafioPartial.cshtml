@@ -1,0 +1,92 @@
+﻿@model SLCONSTRUCT.UI.WEB.ViewModels.TentativaMicrodesafioVModel
+<div class="modal-nome">
+    <div class="modal-header">
+        <span class="modal-close-default-sl modal-close">fechar <i class="fas fa-window-close" aria-hidden="true"></i></span>
+    </div>
+    <div class="modal-content">
+
+        @if (Model.tentativasMicrodesafio.Count() > 0)
+        {
+            foreach (var coddesafio in Model.tentativasMicrodesafio.Select(x => x.coddesafio).Distinct())
+            {
+                <div class="tentativa-microdesafio">
+                    <div>
+                        <div>
+                            <span class="aluno hide"></span>
+                            <span>@Model.tentativasMicrodesafio.Where(y => y.coddesafio == coddesafio).FirstOrDefault().descricao</span>
+                        </div>
+                        <a class="dropdown-button btn right hide voltar" href="#" data-activates="criar-questao-drop">Voltar</a>
+                    </div>
+                    <ul class="collapsible" data-collapsible="accordion">
+                        @foreach (var tentativa in Model.tentativasMicrodesafio.Where(y => y.coddesafio == coddesafio))
+                        {
+                            <li>
+                                <div class="collapsible-header" data-codpessoadesafiotentativa="@tentativa.codPessoaDesafioTentativa" data-numerotentativa="@tentativa.numerotentativa">
+                                    <span class="subtitulo-tentativa">Tentativa @tentativa.numerotentativa</span>
+                                    @*<div>Nota<span class="nota"> @tentativa.nota</span></div>*@
+                                    <div><strong>Data de Entrega: </strong><span class="data-entrega">@tentativa.dataatualizacao</span></div>
+                                </div>
+
+                                <div class="collapsible-body" data-justificativa="@tentativa.justificativa">
+                                    @*@Html.Partial("~/Views/Correcao/Partial/ModalTentativasMicrodesafioRespostasPartial.cshtml")*@
+                                </div>
+
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
+        }
+        else
+        {
+            <a class="dropdown-button btn right voltar" href="#" data-activates="criar-questao-drop">Voltar</a>
+            <p style="margin-top: 0;font-weight:600;color: #333;font-size: 1.3rem;text-transform: uppercase;">Não foi encontrado nenhum microdesafio ignorado.</p>
+            <i class="far fa-folder-open" style="font-size: 5rem;color: #3D7AE8;margin-left: 12rem;"></i>
+        }
+
+
+        <!-- Aqui começa o foreach-->
+        @*<div class="tentativa-microdesafio">
+                <div>
+                    <div>
+                        <span class="aluno"> Aluno teste 01</span>
+                        <span>TENTATIVAS MICRODESAFIO 01</span>
+                    </div>
+                    <a class="dropdown-button btn right voltar" href="#" data-activates="criar-questao-drop">Voltar</a>
+                </div>
+
+                <ul class="collapsible" data-collapsible="accordion">
+                    <li>
+                        <div class="collapsible-header">
+                            <span class="subtitulo-tentativa">Tentativa 01</span><span class="data-entrega">Data de Entrega 05/11/18</span>
+
+                        </div>
+                        <div class="collapsible-body row">
+
+                            <div class="opcoes row">
+                                <div class="col s12"><label>01.</label> A coluna da esquerda apresenta Funções Administrativas e a da direita, caracteristicas de cada função. Marque a opções de ordem exata.</div>
+                                <div class="col s2">1 -  Organização</div><div class="col s10">() Estabelece padrões, monitora e avalia o desenpenho como um todo no final do processo.</div>
+                                <div class="col s2">2 -  Planejamento</div><div class="col s10">() Influencia a morivação dos colaboradors a alcançarem os resultados organizacionais desejados.</div>
+                                <div class="col s2">3 -  Controle</div><div class="col s10">() Indica tarefas, agrupa em departamentos e aloca recursos para os departamentos.</div>
+                                <div class="col s2">4 -  Liberação</div><div class="col s10">() Define os objetivos para o desenpenho futuro da organização e decide sobre as tarefas e a utilização de recursos para atingil-los.</div>
+                            </div>
+
+                            <div class="quiz">
+                                <div class="quiz-content">
+                                    <div class="quiz-block um">
+                                        <span class="link-feedback"> </span>
+                                        <span class="alternative">
+                                            <p>2,1,3,4</p>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>*@
+        <!-- Aqui termina o foreach-->
+
+
+    </div>
+</div>

@@ -1,0 +1,15 @@
+﻿@model SLCONSTRUCT.UI.WEB.ViewModels.ListagemMatrizVModel
+
+@if (Model.listaSidebar != null)
+{
+    foreach (var item in Model.listaSidebar)
+    {
+        var modal_referencia = item.nome_display == "Disciplina" ? "#modal-disciplinas" : "#modal-habilidades";
+        <div class="item-sidebar">
+            <span>@item.nome_display</span><a href="#" class="link-sidebar" data-url="@item.url" data-modal_referencia="@modal_referencia">Editar</a>
+            <span>@item.descricao</span>
+        </div>
+    }
+}
+
+

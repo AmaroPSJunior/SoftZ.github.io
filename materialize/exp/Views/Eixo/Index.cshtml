@@ -1,0 +1,87 @@
+﻿@model SLCONSTRUCT.UI.WEB.ViewModels.EixoVModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <link href="~/Content/Eixo/Listagem.min.css" rel="stylesheet" />
+}
+
+@section Scripts {
+
+    <script>
+        var urlListaEixos = "@Url.Action("ListaEixos", "Eixo")";
+        var urlExcluirEixo = "@Url.Action("ExcluirEixo", "Eixo")";
+        var urlListaDisciplinasFiltro = "@Url.Action("ListaDisciplinasFiltro", "Eixo")";
+        var urlListaHabilidadeFiltro = "@Url.Action("ListaHabilidadeFiltro", "Eixo")";
+        var urlListaDescritoresFiltro = "@Url.Action("ListaDescritoresFiltro", "Eixo")";
+    </script>
+
+    <script src="~/Scripts/Eixo/index.js"></script>
+}
+
+<div id="eixos-estruturantes" class="">
+
+    <div class="titulo">
+        <i class="fas fa-home icon-padrao botao-home" aria-hidden="true"></i><h2 class="sl-titulo sl-navy-blue">Eixos Estruturantes</h2>
+        <i class="fas fa-angle-right" aria-hidden="true"></i><h2 class="sl-subtitulo sl-navy-blue">Cadastro de Eixo</h2>
+        <a href="@Url.Action("CadastroEixo", "Eixo") " class="waves-effect waves-blue btn right ">criar eixo</a>
+    </div>
+
+    <div class="filtros center row">
+        <span class="col s12 subtitle">Pesquisar</span>
+        <div class="col s12 palavra-chave">
+            <label for="busca">busca rápida</label>
+            <input name="busca" placeholder="O que você procura?" type="text" class="validate campoObrigatorio busca" maxlength="100">
+            <i class="fas fa-search icone-busca"></i>
+        </div>
+
+        <div class="input-field col s6 lista-curso">
+            @*<select>
+            <option value="" disabled selected>Selecione um curso</option>
+
+            @foreach (var item in Model.listacursos)
+            {
+                <option value="@item.Value">@item.Text</option>
+            }
+            </select>*@
+
+            @Html.DropDownList("listacurso", Model.listacursos, new { @required = "required" })
+            <label>curso</label>
+        </div>
+
+        <div class="input-field col s6 lista-disciplina">
+            <select>
+                <option value="" disabled selected>Selecione</option>
+            </select>
+            <label>disciplina</label>
+        </div>
+
+        <div class="input-field col s6 lista-habilidade">
+            <select>
+                <option value="" disabled selected>Selecione</option>
+            </select>
+            <label>habilidade</label>
+        </div>
+
+        <div class="input-field col s6 lista-descritor">
+            <select>
+                <option value="" disabled selected>Selecione</option>
+            </select>
+            <label>descritor</label>
+        </div>
+
+        <button class="waves-effect waves-light btn pesquisar">Pesquisar</button>
+    </div>
+
+
+    <div class="listagem row">
+        <span class="col s12 subtitle resultados">Resultados: @Html.Raw(Model.countRegistros.ToString()) registros encontrados</span>
+
+        <div class="grid">
+            @Html.Partial("~/Views/Eixo/Partial/GridIndexPartial.cshtml", Model.listaeixos)
+        </div>
+
+    </div>
+</div>
