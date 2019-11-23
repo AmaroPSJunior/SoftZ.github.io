@@ -1,0 +1,183 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700|Source+Sans+Pro:300,400,600,700");
+#boxForm #italico {
+  margin-bottom: 20px;
+  /* color: #cfcfcf; */ }
+
+input[type=password].invalid:not(.browser-default), input[type=password].invalid:not(.browser-default):focus, input[type=password]:not(.browser-default):not([readonly]), input[type=text].invalid:not(.browser-default), input[type=text].invalid:not(.browser-default):focus, input[type=text]:not(.browser-default):not([readonly]) {
+  margin-bottom: 0;
+  background-color: #fff; }
+
+div#boxForm {
+  text-align: center; }
+
+#divInputLembre {
+  text-align: left;
+  padding-left: 10px;
+  padding-top: 10px; }
+
+body, html {
+  height: 100%; }
+
+#pwd-container {
+  height: 100%;
+  margin-bottom: 0; }
+
+#bgLogin {
+  background: url("img/login/bg-login.jpg");
+  background-size: cover;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-position: center; }
+  #bgLogin img {
+    width: 300px;
+    height: 100px; }
+
+#divInputPassword {
+  margin-bottom: 0; }
+
+#box {
+  position: relative;
+  height: 100%; }
+
+#boxForm span {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 300;
+  font-size: 42px;
+  color: #263238;
+  text-transform: uppercase; }
+#boxForm #italico {
+  font-family: 'Open Sans', sans-serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 16px;
+  color: #B0BEC5;
+  text-transform: none;
+  display: block; }
+
+#go {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 180px;
+  height: 50px;
+  background-color: #0D47A1;
+  text-transform: none; }
+
+#divInputUser {
+  margin-bottom: 0px; }
+
+.input-field .prefix {
+  top: 13px;
+  left: 19px;
+  font-size: 18px;
+  color: rgba(0, 0, 0, 0.5); }
+  .input-field .prefix ~ input {
+    margin-left: 0px; }
+  .input-field .prefix.active {
+    color: #0D47A1; }
+.input-field label:not(.label-icon).active {
+  transform: translateY(-5px) scale(0.8);
+  font-weight: 500; }
+
+/*Input password*/
+input[type=password].invalid:not(.browser-default), input[type=password].invalid:not(.browser-default):focus,
+input[type=password]:not(.browser-default):not([readonly]),
+input[type=text].invalid:not(.browser-default), input[type=text].invalid:not(.browser-default):focus,
+input[type=text]:not(.browser-default):not([readonly]) {
+  padding-left: 35px; }
+
+input[type=password]:not(.browser-default):focus:not([readonly]) + label,
+input[type=text]:not(.browser-default):focus:not([readonly]) + label {
+  color: #0D47A1; }
+
+#divFormularioLogin {
+  width: 450px;
+  height: 350px;
+  position: absolute;
+  top: 53%;
+  left: 50%;
+  transform: translate(-50%, -50%); }
+  #divFormularioLogin input:not(.browser-default):not([readonly]) {
+    padding-left: 43px; }
+  #divFormularioLogin .row {
+    margin-left: -0.75rem;
+    margin-right: -0.75em; }
+
+input:not([type]):focus:not([readonly]) + label,
+input[type=text]:not(.browser-default):focus:not([readonly]) + label,
+input[type=password]:not(.browser-default):focus:not([readonly]) + label,
+input[type=email]:not(.browser-default):focus:not([readonly]) + label,
+input[type=url]:not(.browser-default):focus:not([readonly]) + label,
+input[type=time]:not(.browser-default):focus:not([readonly]) + label,
+input[type=date]:not(.browser-default):focus:not([readonly]) + label,
+input[type=datetime]:not(.browser-default):focus:not([readonly]) + label,
+input[type=datetime-local]:not(.browser-default):focus:not([readonly]) + label,
+input[type=tel]:not(.browser-default):focus:not([readonly]) + label,
+input[type=number]:not(.browser-default):focus:not([readonly]) + label,
+input[type=search]:not(.browser-default):focus:not([readonly]) + label,
+textarea.materialize-textarea:focus:not([readonly]) + label {
+  color: #0D47A1; }
+
+input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):focus:not([readonly]), input[type=password]:not(.browser-default):focus:not([readonly]), input[type=email]:not(.browser-default):focus:not([readonly]), input[type=url]:not(.browser-default):focus:not([readonly]), input[type=time]:not(.browser-default):focus:not([readonly]), input[type=date]:not(.browser-default):focus:not([readonly]), input[type=datetime]:not(.browser-default):focus:not([readonly]), input[type=datetime-local]:not(.browser-default):focus:not([readonly]), input[type=tel]:not(.browser-default):focus:not([readonly]), input[type=number]:not(.browser-default):focus:not([readonly]), input[type=search]:not(.browser-default):focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
+  border-bottom: 1px solid #0D47A1;
+  -webkit-box-shadow: 0 1px 0 0 #0D47A1;
+  box-shadow: 0 1px 0 0 #0D47A1; }
+
+.btnControl {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem; }
+
+@media only screen and (max-width: 900px) {
+  #divFormularioLogin {
+    width: 301px; } }
+@media only screen and (max-width: 600px) {
+  #divFormularioLogin {
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    transform: translate(0%, 0%);
+    position: static; }
+
+  #bgLogin img {
+    width: 220px; }
+
+  #bgLogin {
+    height: 281px; }
+
+  #box {
+    height: auto; }
+
+  #boxForm span {
+    font-size: 32px;
+    padding-left: 10px; }
+
+  #go {
+    width: 54%; }
+
+  #boxForm #italico {
+    margin-bottom: 20px;
+    color: #cfcfcf; }
+
+  input[type=password].invalid:not(.browser-default),
+  input[type=password].invalid:not(.browser-default):focus,
+  input[type=password]:not(.browser-default):not([readonly]),
+  input[type=text].invalid:not(.browser-default),
+  input[type=text].invalid:not(.browser-default):focus,
+  input[type=text]:not(.browser-default):not([readonly]) {
+    margin-bottom: 0;
+    background-color: #fff; }
+
+  div#boxForm {
+    text-align: center; }
+
+  #divInputLembre {
+    text-align: left;
+    padding-left: 10px;
+    padding-top: 10px; } }
+
+/*# sourceMappingURL=login.css.map */
