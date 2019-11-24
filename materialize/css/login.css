@@ -56,14 +56,17 @@ body, html {
   text-transform: none;
   display: block; }
 
-#go {
+#go, #cadastrar {
   display: block;
   margin-left: auto;
   margin-right: auto;
   width: 180px;
-  height: 50px;
-  background-color: #0D47A1;
+  height: 36px !important;
+  background-color: #2440a0;
   text-transform: none; }
+
+#cadastrar {
+  background-color: #a6aaad; }
 
 #divInputUser {
   margin-bottom: 0px; }
@@ -76,7 +79,7 @@ body, html {
   .input-field .prefix ~ input {
     margin-left: 0px; }
   .input-field .prefix.active {
-    color: #0D47A1; }
+    color: #2440a0; }
 .input-field label:not(.label-icon).active {
   transform: translateY(-5px) scale(0.8);
   font-weight: 500; }
@@ -90,7 +93,7 @@ input[type=text]:not(.browser-default):not([readonly]) {
 
 input[type=password]:not(.browser-default):focus:not([readonly]) + label,
 input[type=text]:not(.browser-default):focus:not([readonly]) + label {
-  color: #0D47A1; }
+  color: #2440a0; }
 
 #divFormularioLogin {
   width: 450px;
@@ -118,12 +121,12 @@ input[type=tel]:not(.browser-default):focus:not([readonly]) + label,
 input[type=number]:not(.browser-default):focus:not([readonly]) + label,
 input[type=search]:not(.browser-default):focus:not([readonly]) + label,
 textarea.materialize-textarea:focus:not([readonly]) + label {
-  color: #0D47A1; }
+  color: #2440a0; }
 
 input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):focus:not([readonly]), input[type=password]:not(.browser-default):focus:not([readonly]), input[type=email]:not(.browser-default):focus:not([readonly]), input[type=url]:not(.browser-default):focus:not([readonly]), input[type=time]:not(.browser-default):focus:not([readonly]), input[type=date]:not(.browser-default):focus:not([readonly]), input[type=datetime]:not(.browser-default):focus:not([readonly]), input[type=datetime-local]:not(.browser-default):focus:not([readonly]), input[type=tel]:not(.browser-default):focus:not([readonly]), input[type=number]:not(.browser-default):focus:not([readonly]), input[type=search]:not(.browser-default):focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
-  border-bottom: 1px solid #0D47A1;
-  -webkit-box-shadow: 0 1px 0 0 #0D47A1;
-  box-shadow: 0 1px 0 0 #0D47A1; }
+  border-bottom: 1px solid #2440a0;
+  -webkit-box-shadow: 0 1px 0 0 #2440a0;
+  box-shadow: 0 1px 0 0 #2440a0; }
 
 .btnControl {
   display: flex;
@@ -131,6 +134,11 @@ input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):
   justify-content: center;
   align-items: center;
   margin-top: 2rem; }
+  .btnControl .btn {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin: 1rem; }
 
 @media only screen and (max-width: 900px) {
   #divFormularioLogin {

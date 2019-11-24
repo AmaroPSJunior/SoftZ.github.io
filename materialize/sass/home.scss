@@ -1,0 +1,43 @@
+
+$colors: ( branco: #fff, preto: #131A1D, azul: #2440a0, cinza: #a6aaad, varde:#00CBB5, varmelho:#D22E2E );
+
+
+body {
+    height: 100vh;
+}
+
+.side-nav {
+    
+    .collapsible-body .waves-effect{
+        width: 100%; 
+        padding-left: 2rem;
+        border-bottom: 1px solid rgba(204, 204, 204, 0.25);
+    }
+    
+    .collapsible-header {
+        border-bottom: 1px solid rgba(204, 204, 204, 0.5);;
+    }
+}
+
+nav {
+    background-color: rgb(85, 189, 180);
+    
+    i{
+        padding-left: 1rem;
+    }
+}
+
+#home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 80%;
+
+    span {
+        font-size: 2rem;
+        strong {
+            color: map-get($colors, azul);
+        }
+    }
+}

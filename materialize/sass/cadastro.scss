@@ -1,4 +1,28 @@
-$colors: ( branco: #fff, preto: #131A1D, azul: #0D47A1, cinza: #84A6BD, varde:#00CBB5, varmelho:#D22E2E );
+$colors: ( branco: #fff, preto: #131A1D, azul: #2440a0, cinza: #a6aaad, varde:#00CBB5, varmelho:#D22E2E );
+
+
+.tabs {
+    height: 134px;
+    
+    .tab {
+        height: 134px;
+        width: 50% !important;
+        a {
+            padding: 0;
+        }
+    }
+    
+    .active {
+
+    }
+
+    .indicator {
+        background: map-get($colors, azul);
+        opacity: 0.1;
+        height: 100%;
+        top: -36px;
+    }
+}
 
 
 #cadastro-usuario-formulario {
@@ -13,7 +37,8 @@ $colors: ( branco: #fff, preto: #131A1D, azul: #0D47A1, cinza: #84A6BD, varde:#0
             position: relative;
             text-align: center;
             padding: 0;
-            height: 100%;
+            height: 90%;
+            width: 100% !important;
 
             i {
                 border: 1px solid map-get($colors, azul);
@@ -32,9 +57,9 @@ $colors: ( branco: #fff, preto: #131A1D, azul: #0D47A1, cinza: #84A6BD, varde:#0
             .wizard-progress {
                 position: absolute;
                 bottom: 0;
-                width: 0;
+                width: 100%;
                 height: 10px;
-                background: map-get($colors, azul);
+                background: map-get($colors, cinza);
                 transition: all 0.5s ease;
             }
 
@@ -56,24 +81,35 @@ $colors: ( branco: #fff, preto: #131A1D, azul: #0D47A1, cinza: #84A6BD, varde:#0
                 }
 
                 .wizard-btn-disabled {
-                    background: #ccc;
+                    background: map-get($colors, cinza);
                 }
             }
 
             .progress-dados-usuario {
-                width: 50%;
-                background-color: map-get($colors, azul);
+                border-left: 20rem solid map-get($colors, azul);
+            }
+
+            .progress-dados-login {
+                border-left: 0;
+            }
+
+            .progress-iniciado {
+                border-left: 20rem solid map-get($colors, azul) !important;
+            }
+
+            .progress-concluido {
+                border-left: 40rem solid map-get($colors, azul) !important;
             }
         }
 
         .col-wizard-login-color {
             i {
-                color: #ccc;
-                border-color: #ccc;
+                color: map-get($colors, cinza);
+                border-color: map-get($colors, cinza);
             }
 
             h4 {
-                color: #ccc;
+                color: map-get($colors, cinza);
             }
         }
 
@@ -100,11 +136,12 @@ $colors: ( branco: #fff, preto: #131A1D, azul: #0D47A1, cinza: #84A6BD, varde:#0
     }
 
     .wizard-cadastro-status.wizard-active {
-        display: block;
-        border-top: 1px solid #ccc;
+        //border-top: 1px solid map-get($colors, cinza);
         top: 1rem;
         position: relative;
         display: flex;
+        flex-direction: column;
+        justify-content: center;
         align-items: center;
     }
 
@@ -114,12 +151,13 @@ $colors: ( branco: #fff, preto: #131A1D, azul: #0D47A1, cinza: #84A6BD, varde:#0
         background: #fff;
 
         .image-input-wrapper {
-            float: left;
+            //float: left;
+            margin: 2rem;
 
             .image-input {
                 width: 100px;
                 height: 100px;
-                background: #eff3f6;
+                background: #e9ecf5;
                 border-radius: 50%;
                 display: flex;
                 justify-content: center;
@@ -159,7 +197,14 @@ $colors: ( branco: #fff, preto: #131A1D, azul: #0D47A1, cinza: #84A6BD, varde:#0
             }
         }
 
+        .divfoto {
+            display: flex;
+            justify-content: center;
+            margin-left: 0;
+        }
+
         .dados-pessoais {
+            margin: 0;
             margin-top: 20px;
 
             h5 {
@@ -172,7 +217,7 @@ $colors: ( branco: #fff, preto: #131A1D, azul: #0D47A1, cinza: #84A6BD, varde:#0
                 margin-bottom: 1rem;
 
                 input {
-                    border: 1px solid #ccc;
+                    border: 1px solid map-get($colors, cinza);
                     border-radius: 5px;
                     margin-bottom: 0;
                     padding: 0 0.5rem;
@@ -183,10 +228,39 @@ $colors: ( branco: #fff, preto: #131A1D, azul: #0D47A1, cinza: #84A6BD, varde:#0
                 }
             }
 
-            .btn-avancar-cadastro-usuario {
-                float: right;
-                background-color: map-get($colors, azul);
+            .btnControl {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                .btn {
+                    margin: 1rem;
+                }
+
+                .btn-avancar-cadastro-usuario {
+                    float: right;
+                    background-color: map-get($colors, azul);
+                }
+    
+                .btn-cancelar-cadastro-usuario {
+                    float: right;
+                    background-color: map-get($colors, cinza);
+                }
             }
+        }
+    }
+
+    .caixa {
+        border: 1px solid #e9eced;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        width: 50%;
+        
+        .divfoto, .dados-pessoais {
+            width: 100%;
         }
     }
 
@@ -198,6 +272,7 @@ $colors: ( branco: #fff, preto: #131A1D, azul: #0D47A1, cinza: #84A6BD, varde:#0
             align-items: center;
             width: 100%;
             height: 100%;
+            padding: 20px;
 
             .row {
                 width: 400px;
@@ -215,11 +290,17 @@ $colors: ( branco: #fff, preto: #131A1D, azul: #0D47A1, cinza: #84A6BD, varde:#0
                     right: 20px;
                     color: #777;
                     cursor: pointer;
+
+                    i {
+                        position: relative;
+                        top: -19px;
+                    }
                 }
 
                 input {
-                    border: 1px solid #ccc;
+                    border: 1px solid map-get($colors, cinza);
                     border-radius: 5px;
+                    padding: 0 0.5rem;
                 }
 
                 .btn-salvar-login-senha {
@@ -230,4 +311,35 @@ $colors: ( branco: #fff, preto: #131A1D, azul: #0D47A1, cinza: #84A6BD, varde:#0
             }
         }
     }
+}
+
+.picker__date-display {
+    text-align: left;
+    background-color: map-get($colors, azul);
+    color: #fff;
+    padding: 18px;
+    font-weight: 300;
+}
+
+.picker__day--selected, .picker__day--selected:hover, .picker--focused .picker__day--selected {
+    border-radius: 50%;
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+    background-color: map-get($colors, azul);
+    color: #ffffff;
+}
+
+.picker__day.picker__day--today {
+    color: map-get($colors, azul);
+}
+
+.picker__close, .picker__today {
+    font-size: 1.1rem;
+    padding: 0 1rem;
+    color: map-get($colors, azul);
+}
+
+.picker__clear {
+    color: #f44336;
+    float: left;
 }

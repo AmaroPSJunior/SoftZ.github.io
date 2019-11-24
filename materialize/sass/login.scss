@@ -1,4 +1,4 @@
-$colors: ( branco: #fff, preto: #131A1D, azul: #0D47A1, cinza: #84A6BD, varde:#00CBB5, varmelho:#D22E2E );
+$colors: ( branco: #fff, preto: #131A1D, azul: #2440a0, cinza: #a6aaad, varde:#00CBB5, varmelho:#D22E2E );
 
 #boxForm #italico {
   margin-bottom: 20px;
@@ -39,7 +39,6 @@ div#boxForm {
 
 body, html {
     height: 100%;
-    
 }
 
 #pwd-container {
@@ -91,14 +90,18 @@ body, html {
     }
 }
 
-#go {
+#go, #cadastrar {
   display: block;
   margin-left: auto;
   margin-right: auto;
   width: 180px;
-  height: 50px;
+  height: 36px !important;
   background-color: map-get($colors, azul);
   text-transform: none;
+}
+
+#cadastrar {
+    background-color: map-get($colors, cinza);
 }
 
 #divInputUser {
@@ -191,6 +194,13 @@ input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):
   justify-content: center; 
   align-items: center;
   margin-top: 2rem;
+
+  .btn {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin: 1rem;
+  }
 }
 
 @media only screen and (max-width:900px) {
