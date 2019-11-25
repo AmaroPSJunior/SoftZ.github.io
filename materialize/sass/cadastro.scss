@@ -24,6 +24,17 @@ $colors: ( branco: #fff, preto: #131A1D, azul: #2440a0, cinza: #a6aaad, varde:#0
     }
 }
 
+.disabled {
+
+    * {
+        color: map-get($colors, cinza) !important;
+        border-color: map-get($colors, cinza) !important;
+
+        .wizard-btn {
+            border: 10px solid #fff !important;
+        }
+    }
+}
 
 #cadastro-usuario-formulario {
     padding: 20px;
@@ -61,6 +72,14 @@ $colors: ( branco: #fff, preto: #131A1D, azul: #2440a0, cinza: #a6aaad, varde:#0
                 height: 10px;
                 background: map-get($colors, cinza);
                 transition: all 0.5s ease;
+
+                .progress {
+                    position: relative;
+                    height: 100%;
+                    width: 0;
+                    top: -7px;
+                    background: map-get($colors, azul) !important;
+                }
             }
 
             .center-wizard-btn {
@@ -85,35 +104,12 @@ $colors: ( branco: #fff, preto: #131A1D, azul: #2440a0, cinza: #a6aaad, varde:#0
                 }
             }
 
-            .progress-dados-usuario {
-                border-left: 20rem solid map-get($colors, azul);
-            }
-
             .progress-dados-login {
                 border-left: 0;
             }
-
-            .progress-iniciado {
-                border-left: 20rem solid map-get($colors, azul) !important;
-            }
-
-            .progress-concluido {
-                border-left: 40rem solid map-get($colors, azul) !important;
-            }
         }
 
-        .col-wizard-login-color {
-            i {
-                color: map-get($colors, cinza);
-                border-color: map-get($colors, cinza);
-            }
-
-            h4 {
-                color: map-get($colors, cinza);
-            }
-        }
-
-        .col-wizard-usuario-color {
+        #col-wizard-login {
             i {
                 color: map-get($colors, azul);
                 border-color: map-get($colors, azul);
@@ -122,6 +118,18 @@ $colors: ( branco: #fff, preto: #131A1D, azul: #2440a0, cinza: #a6aaad, varde:#0
             h4 {
                 color: map-get($colors, azul);
             }
+        }
+    }
+
+    .progress-iniciado {
+        .progress {
+            width: 50% !important;
+        }
+    }
+
+    .progress-concluido {
+        .progress {
+            width: 100% !important;
         }
     }
 
@@ -213,21 +221,6 @@ $colors: ( branco: #fff, preto: #131A1D, azul: #2440a0, cinza: #a6aaad, varde:#0
                 color: #b3b3b3;
             }
 
-            .input-field {
-                margin-bottom: 1rem;
-
-                input {
-                    border: 1px solid map-get($colors, cinza);
-                    border-radius: 5px;
-                    margin-bottom: 0;
-                    padding: 0 0.5rem;
-                }
-
-                label {
-                    color: #a2a2a2;
-                }
-            }
-
             .btnControl {
                 display: flex;
                 justify-content: center;
@@ -235,6 +228,7 @@ $colors: ( branco: #fff, preto: #131A1D, azul: #2440a0, cinza: #a6aaad, varde:#0
 
                 .btn {
                     margin: 1rem;
+                    min-width: 160px;
                 }
 
                 .btn-avancar-cadastro-usuario {
@@ -247,6 +241,25 @@ $colors: ( branco: #fff, preto: #131A1D, azul: #2440a0, cinza: #a6aaad, varde:#0
                     background-color: map-get($colors, cinza);
                 }
             }
+        }
+    }
+
+    .input-field {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1rem;
+
+        input {
+            border: 1px solid map-get($colors, cinza);
+            border-radius: 5px;
+            margin-bottom: 0;
+            padding: 0 0.5rem;
+            position: relative;
+            width: 100%;
+        }
+
+        label {
+            color: #a2a2a2;
         }
     }
 
@@ -281,7 +294,13 @@ $colors: ( branco: #fff, preto: #131A1D, azul: #2440a0, cinza: #a6aaad, varde:#0
                 padding: 20px;
 
                 .input-field {
+                    margin-top: 2rem;
                     margin-bottom: 0;
+                }
+    
+                .btn {
+                    margin: 3rem 0 !important;
+                    min-width: auto !important;
                 }
 
                 .eye-senha {
@@ -342,4 +361,140 @@ $colors: ( branco: #fff, preto: #131A1D, azul: #2440a0, cinza: #a6aaad, varde:#0
 .picker__clear {
     color: #f44336;
     float: left;
+}
+
+
+@media only screen and (max-width:900px) {
+    #cadastro-usuario-formulario {
+        padding: 0 !important;
+
+        .wizard-cadastro-status.wizard-active {
+            top: 0;
+        }
+    }
+
+    .tabs, .tab, .tab a {
+        height: 50px !important;
+    }
+
+    .tabs {
+        display: flex;
+        //flex-direction: column;
+        justify-content: center;
+
+        .tab {
+            position: relative;
+            width: 100% !important;
+            margin: 0 !important;
+            padding: 0 2rem;
+
+            .header-content-wizard {
+                display: flex;
+                align-items: center;
+
+                i {
+                    margin-right: 1rem;
+                }
+            }
+
+            a div {
+                justify-content: center;
+                display: flex;
+            }
+        }
+    }
+
+    .cadastro-login-wrapper {
+        padding: 0 !important;
+
+        .row {
+            max-width: 100% !important;
+            width: 100% !important;
+            margin: 0;
+
+            .btn {
+                width: 100%;
+            }
+        }
+    }
+
+    #cadastro-header-wizard {
+        height: auto !important;
+        margin: 0;
+        padding: 0;
+
+        >div {
+            padding: 0;
+        }
+    }
+
+    .progress-dados-usuario, .progress-dados-login, .center-wizard-btn, .indicator {
+        display: none !important;
+    }
+
+    .caixa {
+        width: 100% !important;
+    }
+}
+
+@media only screen and (max-width:600px) {
+    #cadastro-usuario-formulario {
+        
+        #cadastro-usuario-dados-usuario {
+            padding: 0 !important;
+            
+            div {
+                padding: 0 !important;
+            }
+            
+            .caixa {
+                padding: 1.5rem !important;
+                border: 0 !important;
+
+                .divfoto {
+                    border: 1px solid #a6aaad;
+                    border-radius: 5px;
+                }
+
+                .btnControl {
+                    justify-content: space-between;
+                    margin-top: 2rem;
+
+                    .btn {
+                        padding: 0 14px;
+                        margin: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    .cadastro-login-wrapper {
+
+        .row {
+            border: 0 !important;
+            padding: 0 !important;
+        }
+    }
+
+    .tabs, .tab, .tab a {
+        height: auto !important;
+    }
+
+    .tabs {
+        flex-direction: column;
+        width: 300px;
+
+        .tab {
+
+            a div {
+                justify-content: start;
+                display: flex;
+            }
+        }
+    }
+
+    .input-field {
+        width: 100% !important;
+    }
 }

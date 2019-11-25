@@ -61,6 +61,22 @@ body, html {
     }
 }
 
+#bgLogin {
+    background-color: rgba(0, 0, 0, 0.1) !important;
+    padding: 0;
+
+    section {
+        display: flex; 
+        justify-content: center; 
+        align-items: center;
+        background-color: #fafafa;
+        position: relative;
+        height: 100%;
+        width: 100%;
+        z-index: -1;
+    }
+}
+
 #divInputPassword {
     margin-bottom: 0;
 }
