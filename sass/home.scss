@@ -1,0 +1,116 @@
+
+$colors: ( branco: #fff, preto: #131A1D, azul: #2440a0, cinza: #a6aaad, varde:#00CBB5, varmelho:#D22E2E );
+
+
+body {
+    height: 100vh;
+}
+
+.collapsible {
+    border-top: 1px solid map-get($colors, azul ) !important;
+    border-right: 1px solid map-get($colors, azul ) !important;
+    border-left: 1px solid map-get($colors, azul ) !important;
+    margin: .5rem 0 1rem 0;
+}
+
+.side-nav {
+    height: 100vh;
+
+
+    .collapsible-body .waves-effect{
+        width: 100%; 
+        padding-left: 2rem;
+        border-bottom: 1px solid rgba(204, 204, 204, 0.25);
+    }
+    
+    li{
+        
+        .user-view {
+            background-color: rgba(36, 64, 160, 0.9);
+            
+            .background {
+                
+                img {   
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    .collapsible-header {
+        border-bottom: 1px solid rgba(204, 204, 204, 0.5);
+        padding: 0;
+
+        a {
+            width: 100%;
+            height: 100%;
+            color: map-get($colors, preto );
+        }
+        
+        span {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            left: 1rem;
+        }
+    }
+
+    li:nth-last-child( -n + 1 ) {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        
+        .collapsible-header {
+            border-top: 1px solid rgba(204, 204, 204, 0.5);
+            padding: 0;
+
+            a {
+                //color: map-get($colors, cinza);
+            }
+        }
+    }
+}
+
+nav {
+    background-color: map-get($colors, azul);
+    
+    i{
+        padding-left: 1rem;
+    }
+}
+
+#home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 80%;
+
+    span {
+        font-size: 2rem;
+        p {
+            color: map-get($colors, azul);
+            font-weight: bold;;
+
+            &::first-letter {
+                text-transform: uppercase !important;
+            }
+
+            margin: 0;
+            display: inline-block;
+        }
+    }
+}
+
+
+@media only screen and (max-width:900px) {
+    #home, #cadastro-usuario-formulario {
+        background-color: red;
+    }
+}
+
+@media only screen and (max-width:600px) {
+    #home, #cadastro-usuario-formulario {
+        background-color: blue;
+    }
+}

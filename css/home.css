@@ -1,0 +1,68 @@
+body {
+  height: 100vh; }
+
+.collapsible {
+  border-top: 1px solid #2440a0 !important;
+  border-right: 1px solid #2440a0 !important;
+  border-left: 1px solid #2440a0 !important;
+  margin: .5rem 0 1rem 0; }
+
+.side-nav {
+  height: 100vh; }
+  .side-nav .collapsible-body .waves-effect {
+    width: 100%;
+    padding-left: 2rem;
+    border-bottom: 1px solid rgba(204, 204, 204, 0.25); }
+  .side-nav li .user-view {
+    background-color: rgba(36, 64, 160, 0.9); }
+    .side-nav li .user-view .background img {
+      width: 100%; }
+  .side-nav .collapsible-header {
+    border-bottom: 1px solid rgba(204, 204, 204, 0.5);
+    padding: 0; }
+    .side-nav .collapsible-header a {
+      width: 100%;
+      height: 100%;
+      color: #131A1D; }
+    .side-nav .collapsible-header span {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      left: 1rem; }
+  .side-nav li:nth-last-child(-n + 1) {
+    position: fixed;
+    bottom: 0;
+    width: 100%; }
+    .side-nav li:nth-last-child(-n + 1) .collapsible-header {
+      border-top: 1px solid rgba(204, 204, 204, 0.5);
+      padding: 0; }
+
+nav {
+  background-color: #2440a0; }
+  nav i {
+    padding-left: 1rem; }
+
+#home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 80%; }
+  #home span {
+    font-size: 2rem; }
+    #home span p {
+      color: #2440a0;
+      font-weight: bold;
+      margin: 0;
+      display: inline-block; }
+      #home span p::first-letter {
+        text-transform: uppercase !important; }
+
+@media only screen and (max-width: 900px) {
+  #home, #cadastro-usuario-formulario {
+    background-color: red; } }
+@media only screen and (max-width: 600px) {
+  #home, #cadastro-usuario-formulario {
+    background-color: blue; } }
+
+/*# sourceMappingURL=home.css.map */
