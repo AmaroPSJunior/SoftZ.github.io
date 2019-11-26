@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang=”pt-br”>
+
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        
+        <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+        <link type="text/css" rel="stylesheet" href="css/login.css" />
+        <link type="text/css" rel="stylesheet" href="fontawesome-free-5.11.2-web/css/all.min.css" />
+        <link type="text/css" rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700|Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+        <link rel="apple-touch-icon" sizes="180x180" href="img/logo2.jpg">
+        <link rel="icon" type="image/png" sizes="32x32" href="img/logo2.jpg">
+        <link rel="icon" type="image/png" sizes="16x16" href="img/logo2.jpg">
+        <link rel="manifest" href="./exp/Content/favicons/manifest.json">
+        <link rel="mask-icon" href="./exp/Content/favicons/safari-pinned-tab.svg" color="#5bbad5">
+
+        <title>Login</title>
+    </head>
+        
+
+    <body>
+        
+        <div class="row" id="pwd-container">
+                <div id="bgLogin" class="col s12 m6 grey lighten-5">
+                    <section style="display: flex; justify-content: center; align-items: center;">
+                        <img src="img/logo.jpg" alt="Softz" />
+                    </section>
+                </div>
+
+                <div id="box" class="col s12 m6">
+                    <section id="divFormularioLogin">
+                        <div id="boxForm">
+                            <span>Login</span>
+                            <span id="italico">Entre com seu usuário e senha</span>
+
+                            <div id="divInputUser" class="row">
+                                <div class="input-field col s12">
+                                    <i class="material-icons prefix fas fa-user-circle" aria-hidden="true"></i>
+                                    <input type="text">
+                                    <label for="">Usuário</label>
+                                </div>
+                            </div>
+                            <div id="divInputPassword" class="row">
+                                <div class="input-field col s12">
+                                    <i class="material-icons prefix fas fa-lock" aria-hidden="true"></i>
+                                    <input id="txtpsw" type="text" required="required" autocomplete="off" />
+                                    <label for="">Senha</label>
+
+                                </div>
+                            </div>
+                            
+                            <div class="btnControl">
+                                <button id="go" name="go" class="btn blue darken-4">Entrar</button>
+                                <a href="cadastro.html" id="cadastrar" name="cadastrar" class="btn">Cadastrar</a>
+
+                            </div>
+                            
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+        
+        <script>
+            // $(function () {
+            //     $('#UserName').focus();
+            // });
+
+            // //Para evitar que o label da senha fique por cima do campo ao auto preencher
+            // $(window).on("load", function () {
+            //     setTimeout(function () {
+            //         $('input:-webkit-autofill').each(function () {
+            //             if ($(this).val().length !== "") {
+            //                 $(this).siblings('label').addClass('active');
+            //             }
+            //         });
+
+            //     }, 100);
+            // });
+        </script>
+        
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+        <script src="js/login.js"></script>
+        
+    </body>
+
+</html>
