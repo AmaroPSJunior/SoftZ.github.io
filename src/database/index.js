@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 //mongoose.connect('mongodb://localhost/noderest', { useMongoClient: true });
-mongoose.connect('mongodb://localhost/noderest');
+mongoose.connect('mongodb://localhost/teste');
 mongoose.Promise = global.Promise;
 
 module.exports = mongoose;

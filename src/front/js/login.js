@@ -26,92 +26,20 @@ var Login = (function () {
         var data3 = JSON.stringify({ data });
         
 
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: data,
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                console.log(data);
-                alert(data);
-            },
-            error: function (request, status, errorThrown) {
-                alert(status);
-            }
-        });
-
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: data1,
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                console.log(data);
-                alert(data);
-            },
-            error: function (request, status, errorThrown) {
-                alert(status);
-            }
-        });
-
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: data2,
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                console.log(data);
-                alert(data);
-            },
-            error: function (request, status, errorThrown) {
-                alert(status);
-            }
-        });
-
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: data3,
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                console.log(data);
-                alert(data);
-            },
-            error: function (request, status, errorThrown) {
-                alert(status);
-            }
-        });
-
-    
-
-
-        // new GCS().setObj({
-        //     type: 'GET',
-        //     processData: true,
-        //     contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-        //     url: url,
-        //     data: {
-        //         "email": "leandro@leandro",
-        //         "password": "123"
-        //     },
-        //     showLoad: false,
-        //     success: function (data) {
-
-        //        console.log(data);
-        //        alert(data);
-                
-        //     }
-        // }).executar();
-
-
-        // $.post( "ajax/test.html", function( data ) {
-        //     $( ".result" ).html( data );
-        // });
-
-        
+        // // $.ajax({
+        // //     type: "POST",
+        // //     url: url,
+        // //     data: data,
+        // //     dataType: "json",
+        // //     contentType: "application/json; charset=utf-8",
+        // //     success: function (data) {
+        // //         console.log(data);
+        // //         alert(data);
+        // //     },
+        // //     error: function (request, status, errorThrown) {
+        // //         alert(status);
+        // //     }
+        // // });
     }
 
     return {
