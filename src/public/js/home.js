@@ -1,5 +1,3 @@
-
-
 "use strict";
 
 let Home = (function () {
@@ -10,31 +8,44 @@ let Home = (function () {
 
     function bindFunctions() {
 
-        // let
-        //     email = window.location.hash,
-        //     email = window.location.hash
-        // ;
-        //authenticate();
-        $('body').show();
-        loadPage();
+        let 
+            url = window.location.href,
+            email = url.substring(url.lastIndexOf('password'), url.lastIndexOf('email=') + 'email='.length),
+            password = url.substring(url.lastIndexOf('password=') + 'password='.length)
+        ;
+        authenticate(email, password);
     }
 
-    function loadPage() {
-
-        $(document).ready(function(){
-            let 
-                nome = window.location.hash.replace('#','');
-                result = nome.lastIndexOf('.')
-            ;
-
-            nome = nome.replace(nome.substr(result), '');	
-            console.log(nome);
-
-            $("nav i").sideNav();
+    function authenticate(email = '', password = '') {
     
+        axios.post('http://localhost:3001/auth/authenticate', {
+            email,
+	        password
+        })
+
+        .then(function (response) {
+            let nome = response.data.user.name;
+            
+            $('body').show();
+            loadData(nome);
+        })
+        
+        .catch(function (error) {
+            window.location.href = "login"
+        });   
+    }
+
+    const loadData = (nome = 'usuário') => {
+
+        $(document).ready(() => {
+         
+            $('.nome').html(nome)
+            $("nav i").sideNav();
+            console.log('nome: ', nome);
+
             $('#img_perfil').change(function () {
                 let 
-                    img = this.files[0];
+                    img = this.files[0],
                     reader = new FileReader()
                 ;
     
@@ -46,24 +57,6 @@ let Home = (function () {
                 reader.readAsDataURL(img);
             });
         });
-    }
-
-    function authenticate(email = '', password = '') {
-    
-        axios.post('http://localhost:3001/auth/authenticate', {
-            email,
-	        password
-        })
-        
-        .then(function (response) {
-            console.log(response);
-            $('body').show();
-            loadPage();
-        })
-        
-        .catch(function (error) {
-            window.location.href = "erro"
-        });   
     }
       
 

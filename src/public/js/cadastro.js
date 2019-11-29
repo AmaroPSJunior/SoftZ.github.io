@@ -6,15 +6,13 @@ var Cadastro = (function () {
     }
 
     function bindFunctions() {
-        carregarDadosUsuario();
         wizard();
-        carregaExistente();
         maskInputs();
         sugestaoUsuario();
         visualizarSenha();
         acoesFormulario();
         enviarDados();
-        enviarDadosLogin();
+        sendDataLogin();
 
         
         $(document).ready(function(){
@@ -32,21 +30,22 @@ var Cadastro = (function () {
     }
 
     function validaFormulario() {
-        var retornoValidaForumlario;
-        var nome = $("#nome").val();
-        var nomeSplit = nome.split(' ');
-        var lengthNome = nomeSplit.length;
-        var email = $("#email").val();
+        let
+            retornoValidaForumlario,
+            nome = $("#nome").val(),
+            nomeSplit = nome.split(' '),
+            lengthNome = nomeSplit.length,
+            email = $("#email").val(),
+            camposObrigatorios = $('.campoObrigatorio').length,
+            valoresCamposObrigatorio = $('.campoObrigatorio').filter(function () {
+                return this.value != '';
+            })
+        ;
 
         function validarEmail(email) {
-            var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+            let emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
             return emailReg.test(email);
         }
-
-        var camposObrigatorios = $('.campoObrigatorio').length;
-        var valoresCamposObrigatorio = $('.campoObrigatorio').filter(function () {
-            return this.value != '';
-        });
 
         if (valoresCamposObrigatorio.length >= 0 && (valoresCamposObrigatorio.length !== camposObrigatorios)) {
             retornoValidaForumlario = "Error-CamposObrigatorios";
@@ -70,28 +69,28 @@ var Cadastro = (function () {
                     $(this).attr("style", "border-bottom: 2px solid #f00;");
                 }
             });
-            Helper.OpenAlert({ title: "Ops", msg: 'Preencha os campos obrigatórios!', classtitle: "font-vermelho-claro", iconclass: "dissatisfaction", icon: "fa-exclamation-triangle" });
+
             alert('Preencha os campos obrigatórios!');
         } else if (validaFormulario() == "Error-CPFInvalido") {
             $("#cpf").attr("style", "border-bottom: 2px solid #f00;");
-            Helper.OpenAlert({ title: "Ops", msg: 'CPF inválido!', classtitle: "font-vermelho-claro", iconclass: "dissatisfaction", icon: "fa-exclamation-triangle" });
             alert('CPF inválido!');
         } else if (validaFormulario() == "Error-EmailInvalido") {
             $("#email").attr("style", "border-bottom: 2px solid #f00;");
-            Helper.OpenAlert({ title: "Ops", msg: 'E-mail inválido!', classtitle: "font-vermelho-claro", iconclass: "dissatisfaction", icon: "fa-exclamation-triangle" });
             alert('E-mail inválido!');
         } else if (validaFormulario() == "Error-NomeCompleto") {
             $("#nome").attr("style", "border-bottom: 2px solid #f00;");
-            Helper.OpenAlert({ title: "Ops", msg: 'Informe o nome completo', classtitle: "font-vermelho-claro", iconclass: "dissatisfaction", icon: "fa-exclamation-triangle" });
             alert('Informe o nome completo');
         }
     }
 
     function validaLogin() {
-        var retornoValidaLogin;
-        var usuario = $("#usuario").val();
-        var novaSenha = $("#nova-senha").val();
-        var confSenha = $("#confirmar-senha").val();
+        let
+            retornoValidaLogin,
+            usuario = $("#usuario").val(),
+            novaSenha = $("#nova-senha").val(),
+            confSenha = $("#confirmar-senha").val()
+        ;
+
         if (usuario == "" || novaSenha == "" || confSenha == "") {
             retornoValidaLogin = "Error-CamposLogin";
         } else if (novaSenha != confSenha) {
@@ -104,37 +103,15 @@ var Cadastro = (function () {
 
     function MSGerroValidacaoLogin() {
         if (validaLogin() == "Error-CamposLogin") {
-            Helper.OpenAlert({ title: "Ops", msg: 'Prreencha os dados de login!', classtitle: "font-vermelho-claro", iconclass: "dissatisfaction", icon: "fa-exclamation-triangle" });
             alert('Prreencha os dados de login!');
         } else if (validaLogin() == "Error-SenhasError") {
-            Helper.OpenAlert({ title: "Ops", msg: 'Senhas não coincidem!', classtitle: "font-vermelho-claro", iconclass: "dissatisfaction", icon: "fa-exclamation-triangle" });
             alert('Senhas não coincidem!');
         }
     }
- 
-    function carregaExistente() {
-        $("#cpf").on("keyup", function () {
-            if (!$("#meuperfil").val()) {
-                if ($(this).val().length == 14 && $(this).val().indexOf('_') == -1) {
-                    var cpf = $("#cpf").val().replace(/\./g, "").replace("-", "");
-                    $.getJSON(ExisteUsuario + "?cpf=" + cpf, function (data) {
-                        if (data['status'] == true) {
-                            var codpessoa = data['codpessoa'];
-                            window.location.replace("?codpessoa=" + codpessoa);
-                        }
-                    });
-                } else {
-
-                }
-            }
-        });
-    }
 
     function maskInputs() {
-        //$.mask.definitions['~'] = "[+-]";
         $("#nascimento").mask("99/99/9999");
         $("#telefone").mask("(99) 9999-9999");
-
 
         $(".masked-inputs").on("focus click", function () {
             if ($(this).val().indexOf('_') > -1) {
@@ -145,10 +122,13 @@ var Cadastro = (function () {
     
     function sugestaoUsuario() {
         $(".acao-avancar-toLogin").on("click", function () {
-            var nome = $('#nome').val().split(' ');
-            var length = nome.length;
-            var last = length - 1;
-            var login = "" + nome[0] + "." + nome[last] + "";
+            let 
+                nome = $('#nome').val().split(' '),
+                length = nome.length,
+                last = length - 1,
+                login = "" + nome[0] + "." + nome[last] + ""
+            ;
+
             login = login.toLowerCase();
             $("#usuario").val(login);
         });
@@ -161,18 +141,6 @@ var Cadastro = (function () {
                 if (status == 'usuario') {
                     if (validaFormulario() == true) {
                         status = 'login';
-                        // $("#col-wizard-usuario").addClass("col-wizard-usuario-color");
-                        // $(".wizard-cadastro-status").removeClass("wizard-active");
-                        // $("#cadastro-usuario-dados-login").addClass("wizard-active");
-                        // //
-                        // $(".progress-dados-usuario").attr("style", "width: 100%; background: #00CBB5;");
-                        // $(".dados-usuario-wizard-btn").attr("style", "background: #00CBB5;");
-                        //
-                        // setTimeout(function () {
-                        //     $("#col-wizard-login").removeClass("col-wizard-login-color");
-                        //     $(".progress-dados-login").attr("style", "width: 50%;");
-                        //     $(".dados-login-wizard-btn").removeClass("wizard-btn-disabled");
-                        // }, 500);
                     } else {
                         MSGerroValidacaoForumulario();
                     }
@@ -326,40 +294,21 @@ var Cadastro = (function () {
         });
     }
 
-    function enviarDadosLogin() {
+    function sendDataLogin() {
         $("#salvar-usuario").on("click", function () {
             if (validaLogin() == true) {
-                var obj = {
-                    login: $("#usuario").val(),
-                    senha: $("#nova-senha").val()
+
+                let params = {
+                    img: 'teste', //$('.image-input').data('base64'),
+                    name: $("#nome").val(),
+                    email: $("#email").val(),
+                    date: $("#nascimento").val(),
+                    telephone: $("#telefone").val(),
+                    user: $("#usuario").val(),
+                    password: $("#nova-senha").val()
                 };
 
-                window.location.href = `home.html#${obj.login}`;
-
-                //ajax
-                // new GCS().setObj({
-                //     type: 'POST',
-                //     contentType: 'application/json',
-                //     data: JSON.stringify(obj),
-                //     url: SalvarDadosLogin,
-                //     success: function (data) {
-                //         console.log(data);
-                //         if (data['status'] == true) {
-                //             if (window.location.href.toUpperCase().indexOf("MEUPERFIL") != -1) {
-                //                 window.location.replace("MeuPerfil");
-                //             } else if (!data.permissaoListagemPerfil) {
-                //                 window.location.replace("CadastrarUsuario");
-                //             } else {
-                //                 window.location.replace("index");
-                //             } 
-                //         } else if (data['status'] == false) {
-                //             if (data['messageUser'] == 'O login não pode ser alterado pois já está cadastrado.') {
-                //                 Helper.OpenAlert({ title: "Ops", msg: 'Nome de usuário já existe.', classtitle: "font-vermelho-claro", iconclass: "dissatisfaction", icon: "fa-exclamation-triangle" });
-                //             }
-                //         }
-                //         //
-                //     }
-                // }).executar();
+                register(params);
 
             } else {
                 MSGerroValidacaoLogin();
@@ -367,82 +316,34 @@ var Cadastro = (function () {
         });
     }
 
-    function carregarDadosUsuario() {
-        if ($("#cadastro-usuario-formulario").attr("data-codpessoa") > 0) {
-            var codpessoa = $("#cadastro-usuario-formulario").attr("data-codpessoa");
-            $.getJSON(LoadDadosUsuario + "?codpessoa=" + codpessoa, function (data) {
-                var fotoPerfil = data['dadosUsuario']['arquivo'];
-                var cpf = data['dadosUsuario']['cpf'];
-                var datanascimento = data['dadosUsuario']['datanascimentoformatada'];
-                var nomecompleto = data['dadosUsuario']['nomecompleto'];
-                var nomesocial = data['dadosUsuario']['nomesocial'];
-                var rg = data['dadosUsuario']['identidade'];
-                var sexo = data['dadosUsuario']['sexo'];
-                var email = data['dadosUsuario']['email'];
-                var dddtelefone = data['dadosUsuario']['dddtelefone'];
-                var telefone = data['dadosUsuario']['telefone'];
-                var dddcelular = data['dadosUsuario']['dddcelular'];
-                var celular = data['dadosUsuario']['celular'];
-                var cep = data['dadosUsuario']['cep'];
-                var rua = data['dadosUsuario']['logradouro'];
-                var numerocasa = data['dadosUsuario']['numerocasa'];
-                var complemento = data['dadosUsuario']['complemento'];
-                var bairro = data['dadosUsuario']['bairro'];
-                var uf = data['dadosUsuario']['uf'];
-                var cidade = data['dadosUsuario']['cidade'];
+    function register(params) {
 
+        const {img, name, email, date, telephone, user, password} = params;
 
-                if (fotoPerfil != "") {
-                    $("#cam-i-foto-perfil").hide();
-                    $("#alterar-foto-perfil").show();
-                    $("#remover-foto-perfil").show();
-                    $('.image-input').attr('data-base64', fotoPerfil);
-                    $('.image-input').attr('style', 'background: url(' + fotoPerfil + '); background-size: cover;');
-                }
+        axios.post('http://localhost:3001/auth/register', 
+            {
+                img,
+                name,
+                email,
+                date,
+                telephone,
+                user,
+                password
+            }
+        )
 
-                $("#cpf").val(cpf);
-                $("#nome").val(nomecompleto);
-                $("#nomesocial").val(nomesocial);
-                $("#rg").val(rg);
-                $("#nascimento").val(datanascimento);
+        .then(function (response) {
 
-                if (sexo == "M") {
-                    $(".with-gap").removeAttr("checked");
-                    $("#masculino").attr("checked", "checked");
-                } else if(sexo == "F") {
-                    $(".with-gap").removeAttr("checked");
-                    $("#feminino").attr("checked", "checked");
-                }
+            window.location.href = `home?email=${params.email}password=${params.password}`
+        })
+        
+        .catch(function (error) {
+            window.location.href = "login"
+        });   
+    }
+
+    function loadDate() {
                 
-
-                $("#email").val(email);
-                if (telefone != "") {
-                    telefone = dddtelefone + telefone;
-                    $("#telefone").val(telefone);
-                }
-                $("#celular").val(dddcelular+celular);
-                $("#cep").val(cep);
-                $("#rua").val(rua);
-                $("#numero").val(numerocasa);
-                $("#complemento").val(complemento);
-                $("#bairro").val(bairro);
-                $("#uf").val(uf);
-                $("#cidade").val(cidade);
-  
-                maskInputs();
-
-
-                $(".acao-avancar-toLogin").on("click", function () {
-                    $.getJSON(LoadDadosLogin + "?codpessoa=" + codpessoa, function (data) {
-                        console.log(data);
-                        var login = data['dadosLoginVModel']['login'];
-                        $("#usuario").val(login);
-                    });
-                });
-
-
-            });
-        }
     }
 
 

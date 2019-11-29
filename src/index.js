@@ -15,6 +15,10 @@ app.get('/', (req, res) => {
     res.sendfile(path.join(__dirname, '/public/login.html'));
 }); 
 
+app.get('/login', (req, res) => {
+    res.sendfile(path.join(__dirname, '/public/login.html'));
+}); 
+
 app.get('/cadastro', (req, res) => {
     res.sendfile(path.join(__dirname, '/public/cadastro.html'));
 }); 
