@@ -13,15 +13,75 @@
     <link rel="icon" type="image/png" sizes="32x32" href="img/logo2.jpg">
     <link rel="icon" type="image/png" sizes="16x16" href="img/logo2.jpg">
 
-    <title>Erro</title>
+    <title>teste</title>
 </head>
 
 <body>
+    <h2>teste</h2>
 
-    <h2>Erro</h2>
+    
+
+    <input type="file" id="arquivoInput" />
+    <button onclick="enviar()">Enviar</button> 
+    <br>
+    Retorno JSON: 
+    <span id="mensagem"></span>
+    <br><hr>
+    <img id="imagem" alt="teste" style="width: 100px; height: 100px;" src="">
+    
+    <script>
+
+        function enviar(){
+            var 
+                formData = new FormData(),
+                arquivo = document.getElementById("arquivoInput").files[0]
+            ;
+
+            formData.append("file", arquivo);
+
+            var data = 'junior';
+
+            axios.post(`http://localhost:3001/api/upload/?data=${data}`, formData )
+            .then(function (response) {
+
+                let nomeArquivo = response.data.file;
+                nomeArquivo = nomeArquivo.substr(nomeArquivo.lastIndexOf('/') + 1);
+
+                $('#mensagem').text(response);
+
+                $('#imagem').prop('src', `../uploads/${nomeArquivo}`);
+                $('#imagem').attr('src', `../uploads/${nomeArquivo}`);
+                console.log('nomeArquivo: ', nomeArquivo);
+
+            })
+            .catch(function (error) {
+                alert('error: ', error)
+            });   
+
+
+            // var xhr = new XMLHttpRequest();
+            // xhr.onreadystatechange = function() {
+            //     if (xhr.readyState == 4) {
+            //         var div = document.getElementById('mensagem');
+            //         var resposta = xhr.responseText;
+            //         div.innerHTML += resposta;
+            //         console.log(`resposta: ${resposta}`);
+            //     }
+            // }
+            // xhr.open("POST", "http://localhost:3001/api/upload?teste2=teste2");
+            // xhr.send(formData);
+            // console.log(`formData: ${formData}`);
+        }
+
+    </script>
+
+
+
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 
 </body>
 

@@ -1,36 +1,31 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const path = require('path');
-const app = express();
-//const axios = require('axios');
+const 
+    express = require('express'),
+    bodyParser = require('body-parser'),
+    path = require('path'),
+    mag = require('./msgLog'),
+    app = express(),
+    multiparty = require('connect-multiparty'),
+    router = express.Router()
+;
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 require('./app/controllers')(app);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', (req, res) => {
-    res.sendfile(path.join(__dirname, '/public/login.html'));
-}); 
+app.get('/', (req, res) => {res.sendfile(path.join(__dirname, '/public/login.html'))}); 
+app.get('/login', (req, res) => {res.sendfile(path.join(__dirname, '/public/login.html'))}); 
+app.get('/cadastro', (req, res) => {res.sendfile(path.join(__dirname, '/public/cadastro.html'))}); 
+app.get('/home', (req, res) => {res.sendfile(path.join(__dirname, '/public/home.html'))}); 
+app.get('/erro', (req, res) => {res.sendfile(path.join(__dirname, '/public/erro.html'))}); 
 
-app.get('/login', (req, res) => {
-    res.sendfile(path.join(__dirname, '/public/login.html'));
-}); 
+app.use('/api', router);
 
-app.get('/cadastro', (req, res) => {
-    res.sendfile(path.join(__dirname, '/public/cadastro.html'));
-}); 
+router.route('/upload').post(multiparty(), require('./app/upload/index'));
 
-app.get('/home', (req, res) => {
-    //res.sendfile(`${__dirname}/public/home.html`);
-    res.sendfile(path.join(__dirname, '/public/home.html'));
-}); 
 
-app.get('/erro', (req, res) => {
-    res.sendfile(path.join(__dirname, '/public/erro.html'));
-}); 
-
+mag(); 
 
 app.listen(3001);

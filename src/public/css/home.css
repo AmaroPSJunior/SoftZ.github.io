@@ -58,11 +58,4 @@ nav {
       #home span p::first-letter {
         text-transform: uppercase !important; }
 
-@media only screen and (max-width: 900px) {
-  #home, #cadastro-usuario-formulario {
-    background-color: red; } }
-@media only screen and (max-width: 600px) {
-  #home, #cadastro-usuario-formulario {
-    background-color: blue; } }
-
 /*# sourceMappingURL=home.css.map */

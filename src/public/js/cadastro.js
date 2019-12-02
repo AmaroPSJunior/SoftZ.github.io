@@ -1,4 +1,5 @@
 "use strict";
+
 var Cadastro = (function () {
 
     function init() {
@@ -7,6 +8,7 @@ var Cadastro = (function () {
 
     function bindFunctions() {
         wizard();
+        loadDate();
         maskInputs();
         sugestaoUsuario();
         visualizarSenha();
@@ -20,12 +22,17 @@ var Cadastro = (function () {
 
             $('.datepicker').pickadate({
                 selectMonths: true,
-                selectYears: 15,
-                today: 'Today',
-                clear: 'Clear',
+                selectYears: 200,
+                f: 'sex',
+                today: 'Hoje',
+                clear: 'Limpar',
                 close: 'Ok',
-                closeOnSelect: false 
-              });
+                closeOnSelect: false,
+                weekdaysAbbrev:	['D','S','T','Q','Q','S','S'],
+                weekdaysShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sab'],
+                monthsShort: ['Jan','Fev','Mar','Abr','Pos','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+                months:	['Janeiro','Fevereiro','Março','Abril','Posso','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro']
+            });
         });
     }
 
@@ -193,7 +200,6 @@ var Cadastro = (function () {
                 reader.onload = function (e) {
                     $('.image-input').attr('data-base64', e.target.result);
                     $('.image-input').attr('style', 'background: url(' + e.target.result + '); background-size: cover;');
-
                 }
                 reader.readAsDataURL(input.files[0]);
             }
@@ -210,7 +216,6 @@ var Cadastro = (function () {
                 $("#cam-i-foto-perfil").show();
                 $("#remover-foto-perfil").hide();
                 $("#alterar-foto-perfil").hide();
-                Helper.OpenAlert({ title: "Ops", msg: 'Arquivo não permitido.', classtitle: "font-vermelho-claro", iconclass: "dissatisfaction", icon: "fa-exclamation-triangle" });
             } else {
                 readURL(this);
                 $("#cam-i-foto-perfil").hide();
@@ -233,22 +238,28 @@ var Cadastro = (function () {
         
         $("#salvar-dados").on("click", function () {
 
-            var fotoPerfil = $("#foto-perfil").val();
-            var extensao = fotoPerfil.substr((fotoPerfil.lastIndexOf('.') + 1));
-            var fotoBase64 = $(".image-input").attr("data-base64");
+            let 
+                fotoPerfil = $("#foto-perfil").val(),
+                extensao = fotoPerfil.substr((fotoPerfil.lastIndexOf('.') + 1)),
+                fotoBase64 = $(".image-input").attr("data-base64")
+            ;
+
             if (fotoBase64) {
-                var fotoBase64split = fotoBase64.split('base64,');
-                var base64type = fotoBase64split[0];
+
+                let fotoBase64split = fotoBase64.split('base64,');
+                let base64type = fotoBase64split[0];
                 base64type = base64type + "base64,";
                 fotoBase64 = fotoBase64.replace(base64type, "");
             }
 
-            var dataNascimento = $("#nascimento").val();
-            var telefone = $("#telefone").val();
-            var regExp = /\(([^)]+)\)/;
+            let 
+                dataNascimento = $("#nascimento").val(),
+                telefone = $("#telefone").val(),
+                regExp = /\(([^)]+)\)/
+            ;
 
             if (telefone != "") {
-                var dddtelefone = regExp.exec(telefone);
+                let dddtelefone = regExp.exec(telefone);
                 dddtelefone = dddtelefone[1];
                 telefone = telefone.substring(5).replace("-","");
             }
@@ -299,7 +310,7 @@ var Cadastro = (function () {
             if (validaLogin() == true) {
 
                 let params = {
-                    img: 'teste', //$('.image-input').data('base64'),
+                    img: 'img teste', //$('.image-input').attr('data-base64'),
                     name: $("#nome").val(),
                     email: $("#email").val(),
                     date: $("#nascimento").val(),
@@ -318,32 +329,82 @@ var Cadastro = (function () {
 
     function register(params) {
 
-        const {img, name, email, date, telephone, user, password} = params;
+        const 
+            { img, name, email, date, telephone, user, password } = params,
+            formData = new FormData(),
+            arquivo = document.getElementById("foto-perfil").files[0]
+        ;
 
-        axios.post('http://localhost:3001/auth/register', 
-            {
-                img,
-                name,
-                email,
-                date,
-                telephone,
-                user,
-                password
-            }
-        )
+        formData.append("file", arquivo);
 
+        axios.post(`http://localhost:3001/api/upload/?data=${ user }`, formData )
         .then(function (response) {
 
-            window.location.href = `home?email=${params.email}password=${params.password}`
+            let nomeArquivo = response.data.file;
+            nomeArquivo = nomeArquivo.substr(nomeArquivo.lastIndexOf('/') + 1);
+            
+            send(nomeArquivo); 
+        })
+        .catch(function (error) {
+            alert('error: ', error)
+        });  
+
+        function send(nomeArquivo) {
+            
+            axios.post('http://localhost:3001/auth/register', 
+                { img: nomeArquivo, name, email, date, telephone, user, password }
+            )
+
+        .then(function (response) {
+            alert('response: ', response);
+
+            window.location.href = `home?email=${ params.email }password=${ params.password }`
         })
         
         .catch(function (error) {
-            window.location.href = "login"
+            alert(error);
         });   
+        }
     }
 
     function loadDate() {
-                
+
+        let 
+            url = window.location.href,
+            email = url.substring(url.lastIndexOf('password'), url.lastIndexOf('email=') + 'email='.length),
+            password = url.substring(url.lastIndexOf('password=') + 'password='.length)
+        ;
+        
+        axios.post('http://localhost:3001/auth/authenticate', {
+            email,
+	        password
+        })
+
+        .then(function (response) {
+            let 
+                { img, name, email, date, telephone, user, password } = response.data.user,
+                linkImg = `/img/${img}`;
+            ;
+             
+
+            $(".center-wizard-btn span").removeClass('wizard-btn-disabled');
+            $(".progress-dados-login").addClass('progress-concluido');
+            $('.image-input').attr('style', 'background: url(' + linkImg + '); background-size: cover;');
+            $('.image-input').data('data-base64', img);
+            $('.image-input').attr('data-base64', img);
+            $("#nome").val(name);
+            $("#email").val(email);
+            $("#nascimento").val(date);
+            $("#telefone").val(telephone);
+            $("#usuario").val(user);
+            $("#nova-senha").val(password);
+            $("#confirmar-senha").val(password);
+            $('#salvar-dados').click();
+        })
+        
+        .catch(function (error) {
+            console.log(error);
+        });   
     }
 
 

@@ -174,7 +174,8 @@
     justify-content: center;
     align-items: center;
     padding: 20px;
-    width: 50%; }
+    width: 50%;
+    background: url(../../app/upload/files/junior-amaro.png); }
     #cadastro-usuario-formulario .caixa .divfoto, #cadastro-usuario-formulario .caixa .dados-pessoais {
       width: 100%; }
   #cadastro-usuario-formulario #cadastro-usuario-dados-login .cadastro-login-wrapper {

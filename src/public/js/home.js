@@ -14,6 +14,14 @@ let Home = (function () {
             password = url.substring(url.lastIndexOf('password=') + 'password='.length)
         ;
         authenticate(email, password);
+
+        $('#Dados-Pessoais').click(function () {
+            window.location.href = `cadastro?email=${email}password=${password}`
+        });
+
+        $('#Dados-Login').click(function () {
+            window.location.href = `cadastro?email=${email}password=${password}`
+        });
     }
 
     function authenticate(email = '', password = '') {
@@ -38,8 +46,11 @@ let Home = (function () {
     const loadData = (nome = 'usuário') => {
 
         $(document).ready(() => {
-         
-            $('.nome').html(nome)
+            
+            nome = nome.toLowerCase();
+            let user = nome.substring(nome[0], nome.indexOf(' '));
+
+            $('.nome').html(user)
             $("nav i").sideNav();
             console.log('nome: ', nome);
 
