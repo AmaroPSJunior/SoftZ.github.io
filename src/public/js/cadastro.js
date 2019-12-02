@@ -358,7 +358,7 @@ var Cadastro = (function () {
         .then(function (response) {
             alert('response: ', response);
 
-            window.location.href = `home?email=${ params.email }password=${ params.password }`
+            window.location.href = `home?email=${ params.email }&password=${ params.password }`
         })
         
         .catch(function (error) {
@@ -371,7 +371,8 @@ var Cadastro = (function () {
 
         let 
             url = window.location.href,
-            email = url.substring(url.lastIndexOf('password'), url.lastIndexOf('email=') + 'email='.length),
+            type = url.substring(url.indexOf('=') + 1, url.indexOf('&')),
+            email = url.substring(url.lastIndexOf('&'), url.lastIndexOf('email=') + 'email='.length),
             password = url.substring(url.lastIndexOf('password=') + 'password='.length)
         ;
         
@@ -387,8 +388,12 @@ var Cadastro = (function () {
             ;
              
 
+            $("a[href='#cadastro-usuario-dados-login']").parent().removeClass('disabled');
+            $(".progress-dados-login").removeClass('progress-iniciado');
+            $(".progress-dados-usuario").removeClass('progress-iniciado');
             $(".center-wizard-btn span").removeClass('wizard-btn-disabled');
             $(".progress-dados-login").addClass('progress-concluido');
+            $(".progress-dados-usuario").addClass('progress-concluido');
             $('.image-input').attr('style', 'background: url(' + linkImg + '); background-size: cover;');
             $('.image-input').data('data-base64', img);
             $('.image-input').attr('data-base64', img);
@@ -399,7 +404,8 @@ var Cadastro = (function () {
             $("#usuario").val(user);
             $("#nova-senha").val(password);
             $("#confirmar-senha").val(password);
-            $('#salvar-dados').click();
+
+            if (type === 'login') { $('#salvar-dados').click() }
         })
         
         .catch(function (error) {

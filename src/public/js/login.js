@@ -36,7 +36,7 @@ const Login = (function () {
             // $(hashEmail).$.MD5($(email));
             // $(hashPassword).$.MD5($(password));
 
-            window.location.href = `home?email=${email}password=${password}`
+            window.location.href = `home?email=${email}&password=${password}`
         })
         .catch(function (error) {
             console.log(error);

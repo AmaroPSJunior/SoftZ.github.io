@@ -22,7 +22,6 @@ app.get('/home', (req, res) => {res.sendfile(path.join(__dirname, '/public/home.
 app.get('/erro', (req, res) => {res.sendfile(path.join(__dirname, '/public/erro.html'))}); 
 
 app.use('/api', router);
-
 router.route('/upload').post(multiparty(), require('./app/upload/index'));
 
 
