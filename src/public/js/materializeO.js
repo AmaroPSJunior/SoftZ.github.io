@@ -4968,9 +4968,7 @@ if (Vel) {
             $(window).off('click.select');
           }
           if (!options.is(':visible')) {
-
-            // Solução possível bug atualização do Chrome linha 4971//
-            //$(this).trigger('open', ['focus']);
+            $(this).trigger('open', ['focus']);
             var label = $(this).val();
             if (multiple && label.indexOf(',') >= 0) {
               label = label.split(',')[0];
@@ -6555,7 +6553,7 @@ if (Vel) {
 
               // If the target was the holder that covers the screen,
               // keep the element focused to maintain tabindex.
-              //P.close(target === P.$root.children()[0]);
+              P.close(target === P.$root.children()[0]);
             }
           }).on('keydown.' + STATE.id, function (event) {
 
@@ -8917,111 +8915,88 @@ if (Vel) {
 
   // Show popover
   ClockPicker.prototype.show = function (e) {
-var _this = this;
-
-setTimeout(function () {
-// Not show again
-if (_this.isShown) {
-return;
-}
-
-raiseCallback(_this.options.beforeShow);
-$(':input').each(function () {
-  $(this).attr('tabindex', -1);
-});
-var self = _this; // Initialize
-
-_this.input.blur();
-
-_this.popover.addClass('picker--opened');
-
-_this.input.addClass('picker__input picker__input--active');
-
-$(document.body).css('overflow', 'hidden'); // Get the time
-
-var value = ((_this.input.prop('value') || _this.options['default'] || '') + '').split(':');
-
-if (_this.options.twelvehour && !(typeof value[1] === 'undefined')) {
-  if (value[1].indexOf("AM") > 0) {
-    _this.amOrPm = 'AM';
-  } else {
-    _this.amOrPm = 'PM';
-  }
-
-  value[1] = value[1].replace("AM", "").replace("PM", "");
-}
-
-if (value[0] === 'now') {
-  var now = new Date(+new Date() + _this.options.fromnow);
-  value = [now.getHours(), now.getMinutes()];
-
-  if (_this.options.twelvehour) {
-    _this.amOrPm = value[0] >= 12 && value[0] < 24 ? 'PM' : 'AM';
-  }
-}
-
-_this.hours = +value[0] || 0;
-_this.minutes = +value[1] || 0;
-
-_this.spanHours.html(_this.hours);
-
-_this.spanMinutes.html(leadingZero(_this.minutes));
-
-if (!_this.isAppended) {
-  // Append popover to input by default
-  var containerEl = document.querySelector(_this.options.container);
-
-  if (_this.options.container && containerEl) {
-    containerEl.appendChild(_this.popover[0]);
-  } else {
-    _this.popover.insertAfter(_this.input);
-  }
-
-  if (_this.options.twelvehour) {
-    if (_this.amOrPm === 'PM') {
-      _this.spanAmPm.children('#click-pm').addClass("text-primary");
-
-      _this.spanAmPm.children('#click-am').removeClass("text-primary");
-    } else {
-      _this.spanAmPm.children('#click-am').addClass("text-primary");
-
-      _this.spanAmPm.children('#click-pm').removeClass("text-primary");
+    // Not show again
+    if (this.isShown) {
+      return;
     }
-  } // Reset position when resize
-
-
-  $win.on('resize.clockpicker' + _this.id, function () {
-    if (self.isShown) {
-      self.locate();
+    raiseCallback(this.options.beforeShow);
+    $(':input').each(function () {
+      $(this).attr('tabindex', -1);
+    });
+    var self = this;
+    // Initialize
+    this.input.blur();
+    this.popover.addClass('picker--opened');
+    this.input.addClass('picker__input picker__input--active');
+    $(document.body).css('overflow', 'hidden');
+    // Get the time
+    var value = ((this.input.prop('value') || this.options['default'] || '') + '').split(':');
+    if (this.options.twelvehour && !(typeof value[1] === 'undefined')) {
+      if (value[1].indexOf("AM") > 0) {
+        this.amOrPm = 'AM';
+      } else {
+        this.amOrPm = 'PM';
+      }
+      value[1] = value[1].replace("AM", "").replace("PM", "");
     }
-  });
-  _this.isAppended = true;
-} // Toggle to hours view
+    if (value[0] === 'now') {
+      var now = new Date(+new Date() + this.options.fromnow);
+      value = [now.getHours(), now.getMinutes()];
+      if (this.options.twelvehour) {
+        this.amOrPm = value[0] >= 12 && value[0] < 24 ? 'PM' : 'AM';
+      }
+    }
+    this.hours = +value[0] || 0;
+    this.minutes = +value[1] || 0;
+    this.spanHours.html(this.hours);
+    this.spanMinutes.html(leadingZero(this.minutes));
+    if (!this.isAppended) {
 
+      // Append popover to input by default
+      var containerEl = document.querySelector(this.options.container);
+      if (this.options.container && containerEl) {
+        containerEl.appendChild(this.popover[0]);
+      } else {
+        this.popover.insertAfter(this.input);
+      }
 
-_this.toggleView('hours'); // Set position
-
-
-_this.locate();
-
-_this.isShown = true; // Hide when clicking or tabbing on any element except the clock and input
-
-$doc.on('click.clockpicker.' + _this.id + ' focusin.clockpicker.' + _this.id, function (e) {
-  var target = $(e.target);
-
-  if (target.closest(self.popover.find('.picker__wrap')).length === 0 && target.closest(self.input).length === 0) {
-    self.hide();
-  }
-}); // Hide when ESC is pressed
-
-$doc.on('keyup.clockpicker.' + _this.id, function (e) {
-  if (e.keyCode === 27) {
-    self.hide();
-  }
-});
-raiseCallback(_this.options.afterShow);
-}, 200);
-};
+      if (this.options.twelvehour) {
+        if (this.amOrPm === 'PM') {
+          this.spanAmPm.children('#click-pm').addClass("text-primary");
+          this.spanAmPm.children('#click-am').removeClass("text-primary");
+        } else {
+          this.spanAmPm.children('#click-am').addClass("text-primary");
+          this.spanAmPm.children('#click-pm').removeClass("text-primary");
+        }
+      }
+      // Reset position when resize
+      $win.on('resize.clockpicker' + this.id, function () {
+        if (self.isShown) {
+          self.locate();
+        }
+      });
+      this.isAppended = true;
+    }
+    // Toggle to hours view
+    this.toggleView('hours');
+    // Set position
+    this.locate();
+    this.isShown = true;
+    // Hide when clicking or tabbing on any element except the clock and input
+    $doc.on('click.clockpicker.' + this.id + ' focusin.clockpicker.' + this.id, function (e) {
+      var target = $(e.target);
+      if (target.closest(self.popover.find('.picker__wrap')).length === 0 && target.closest(self.input).length === 0) {
+        self.hide();
+      }
+    });
+    // Hide when ESC is pressed
+    $doc.on('keyup.clockpicker.' + this.id, function (e) {
+      if (e.keyCode === 27) {
+        self.hide();
+      }
+    });
+    raiseCallback(this.options.afterShow);
+  };
   // Hide popover
   ClockPicker.prototype.hide = function () {
     raiseCallback(this.options.beforeHide);
