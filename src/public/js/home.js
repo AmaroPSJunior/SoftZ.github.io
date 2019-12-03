@@ -49,11 +49,11 @@ let Home = (function () {
 
         .then(function (response) {
             let 
-                { img, name } = response.data.user
+                { img, name, email } = response.data.user
             ;
             
             $('body').show()
-            loadData(name, img)
+            loadData(img, name, email)
         })
         
         .catch(function (error) {
@@ -61,7 +61,7 @@ let Home = (function () {
         })
     }
 
-    const loadData = (nome = 'usuário', img) => {
+    const loadData = (img, nome = 'usuário', email) => {
 
         $(document).ready(() => {
             
@@ -69,6 +69,7 @@ let Home = (function () {
             let user = nome.substring(nome[0], nome.indexOf(' '))
 
             $('.nome').html(user)
+            $('.email').html(email)
             $("nav i").sideNav()
             $('.foto-perfil').attr('src', `/img/${img}`)
 

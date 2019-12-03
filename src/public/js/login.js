@@ -1,9 +1,11 @@
-"use strict";
+"use strict"
+
+//import Helper from './Helper';
 
 const Login = (function () {
 
     function init() {
-        bindFunctions();
+        bindFunctions()
     }
 
     function bindFunctions() {
@@ -13,9 +15,12 @@ const Login = (function () {
                 email = $('#email').val(),
                 password = $('#txtpsw').val()
             ;
-            
-            authenticate(email, password);
-        });
+            authenticate(email, password)
+        })
+
+        $('#cadastrar').click(function () { window.location.href = `cadastro` })
+        //Helper.OpenAlert({ title: "Ops", msg: 'Preencha os campos obrigatórios!', classtitle: "font-vermelho-claro", iconclass: "dissatisfaction", icon: "fa-exclamation-triangle" });
+      
     }
     
     function authenticate(email = '', password = '') {
@@ -26,7 +31,7 @@ const Login = (function () {
         })
     
         .then((response) => {
-            console.log(response);
+            console.log(response)
 
             let 
                 hashEmail,
@@ -39,16 +44,16 @@ const Login = (function () {
             window.location.href = `home?email=${email}&password=${password}`
         })
         .catch(function (error) {
-            console.log(error);
-            alert('erro: ', error);
-        });   
+            console.log(error.response.data.error)
+            alert(error.response.data.error)
+        })
     }
 
     return {
         init: init
-    };
+    }
 
-})();
+})()
 
-$(Login.init);
+$(Login.init)
 

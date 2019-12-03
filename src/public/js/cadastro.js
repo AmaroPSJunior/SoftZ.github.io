@@ -16,7 +16,8 @@ const Cadastro = (function () {
         enviarDados()
         sendDataLogin()
 
-        
+        $('#cancelar').click(function () { window.location.href = `login` })
+
         $(document).ready(function(){
             $("a[href='#cadastro-usuario-dados-usuario']").click()
 
@@ -280,7 +281,7 @@ const Cadastro = (function () {
                 $(".center-wizard-btn span").removeClass('wizard-btn-disabled')
                 
             } else {
-                MSGerroValidacaoForumulario()
+                //MSGerroValidacaoForumulario()
             }
         })
     }
@@ -290,7 +291,7 @@ const Cadastro = (function () {
             if (validaLogin() == true) {
 
                 let params = {
-                    img: 'img teste', //$('.image-input').attr('data-base64'), //'user-default.png'
+                    img: '', 
                     name: $("#nome").val(),
                     email: $("#email").val(),
                     date: $("#nascimento").val(),
@@ -324,7 +325,7 @@ const Cadastro = (function () {
             send(nomeArquivo) 
         })
         .catch(function (error) { 
-            console.log('error: ', error) 
+            console.log(error.response.data.error);
             
             if ( !formData.length > 0 ) {
                 
@@ -338,10 +339,15 @@ const Cadastro = (function () {
                 { img: nomeArquivo, name, email, date, telephone, user, password }
             )
             .then(function (response) {
-                alert('Cadastrado com Sucesso: ', img, name, email, date, telephone, user, password)
+                let { img, name, email, date, telephone, user, password } = response.data.user;
+
+                alert(`Cadastrado com Sucesso! \nNome: ${name}, \nEmail: ${email}, \nDNS: ${date}, \nTelefone: ${telephone}`)
                 window.location.href = `home?email=${ params.email }&password=${ params.password }`
             })  
-            .catch(function (error) { alert(error) })   
+            .catch(function (error) {
+                console.log(error.response.data.error);
+                alert(error.response.data.error);
+            })   
         }
     }
 
@@ -383,7 +389,10 @@ const Cadastro = (function () {
 
                 if (type === 'login') { $('#salvar-dados').click() }
             })
-            .catch(function (error) { console.log(error) })
+            .catch(function (error) {
+                console.log(error.response.data.error);
+                alert(error.response.data.error);
+            })
 
         }
         else{
