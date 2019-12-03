@@ -34,6 +34,10 @@ body {
                     width: 100%;
                 }
             }
+
+            .nome {
+                text-transform: capitalize;
+            }
         }
     }
 
@@ -104,13 +108,16 @@ nav {
 
 
 @media only screen and (max-width:900px) {
-    #home, #cadastro-usuario-formulario {
+    #home {
         //background-color: red;
     }
 }
 
 @media only screen and (max-width:600px) {
-    #home, #cadastro-usuario-formulario {
-        //background-color: blue;
+    #home {
+        
+        span {
+            font-size: 140% !important;
+        }
     }
 }

@@ -436,6 +436,10 @@ $colors: ( branco: #fff, preto: #131A1D, azul: #2440a0, cinza: #a6aaad, varde:#0
 
     .caixa {
         width: 100% !important;
+
+        .btnControl{
+            justify-content: center !important;
+        }
     }
 }
 
@@ -464,7 +468,7 @@ $colors: ( branco: #fff, preto: #131A1D, azul: #2440a0, cinza: #a6aaad, varde:#0
 
                     .btn {
                         padding: 0 14px;
-                        margin: 0;
+                        min-width: 47%!important;
                     }
                 }
             }

@@ -2,23 +2,7 @@ $colors: ( branco: #fff, preto: #131A1D, azul: #2440a0, cinza: #a6aaad, varde:#0
 
 #boxForm #italico {
   margin-bottom: 20px;
-  /* color: #cfcfcf; */
 }
-
-// input[type=text]:not(.browser-default), 
-// input[type=password]:not(.browser-default), 
-// input[type=email]:not(.browser-default), 
-// input[type=url]:not(.browser-default), 
-// input[type=time]:not(.browser-default), 
-// input[type=date]:not(.browser-default), 
-// input[type=datetime]:not(.browser-default), 
-// input[type=datetime-local]:not(.browser-default), 
-// input[type=tel]:not(.browser-default), 
-// input[type=number]:not(.browser-default), 
-// input[type=search]:not(.browser-default), 
-// textarea.materialize-textarea {
-//   border-bottom: 1px solid #000000;
-// }
   
 input[type=password].invalid:not(.browser-default),input[type=password].invalid:not(.browser-default):focus,input[type=password]:not(.browser-default):not([readonly]),input[type=text].invalid:not(.browser-default),input[type=text].invalid:not(.browser-default):focus,input[type=text]:not(.browser-default):not([readonly]) {
   margin-bottom: 0;
@@ -149,10 +133,9 @@ body, html {
         }
     }
 }
-/*Input password*/
+
 input[type=password].invalid:not(.browser-default), input[type=password].invalid:not(.browser-default):focus,
 input[type=password]:not(.browser-default):not([readonly]),
-/*Input text*/
 input[type=text].invalid:not(.browser-default), input[type=text].invalid:not(.browser-default):focus,
 input[type=text]:not(.browser-default):not([readonly]) {
     padding-left: 35px;
@@ -276,6 +259,15 @@ input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):
 
     div#boxForm {
         text-align: center;
+
+        .btnControl {
+            justify-content: center;
+            .btn {
+                padding: 0 14px;
+                min-width: 47%!important;
+                margin: 0.7rem;
+            }
+        }
     }
 
     #divInputLembre {

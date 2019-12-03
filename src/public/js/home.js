@@ -32,11 +32,12 @@ let Home = (function () {
     function renderIframe(element) {
         
         let 
-            html = `<iframe class="" src=${element} frameborder="0" style="width: 100% !important;height: 100% !important;position: relative;"></iframe>`
+            html = `<iframe class="" src=${element} frameborder="0" style="width: 100% !important;height: 100vh!important;position: relative;top: 10%;"></iframe>`
         ;
 
         $('#home').html(html)
         $('.button-collapse').sideNav('destroy')
+        $('body').css('overflow', 'hidden')
     }
 
     function authenticate(email = '', password = '') {

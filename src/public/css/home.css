@@ -17,6 +17,8 @@ body {
     background-color: rgba(36, 64, 160, 0.9); }
     .side-nav li .user-view .background img {
       width: 100%; }
+    .side-nav li .user-view .nome {
+      text-transform: capitalize; }
   .side-nav .collapsible-header {
     border-bottom: 1px solid rgba(204, 204, 204, 0.5);
     padding: 0; }
@@ -57,5 +59,9 @@ nav {
       display: inline-block; }
       #home span p::first-letter {
         text-transform: uppercase !important; }
+
+@media only screen and (max-width: 600px) {
+  #home span {
+    font-size: 140% !important; } }
 
 /*# sourceMappingURL=home.css.map */

@@ -286,7 +286,9 @@
     display: none !important; }
 
   .caixa {
-    width: 100% !important; } }
+    width: 100% !important; }
+    .caixa .btnControl {
+      justify-content: center !important; } }
 @media only screen and (max-width: 600px) {
   #cadastro-usuario-formulario #cadastro-usuario-dados-usuario {
     padding: 0 !important; }
@@ -303,7 +305,7 @@
         margin-top: 2rem; }
         #cadastro-usuario-formulario #cadastro-usuario-dados-usuario .caixa .btnControl .btn {
           padding: 0 14px;
-          margin: 0; }
+          min-width: 47% !important; }
 
   .cadastro-login-wrapper .row {
     border: 0 !important;
